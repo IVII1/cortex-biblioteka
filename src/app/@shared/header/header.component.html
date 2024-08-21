@@ -1,0 +1,127 @@
+<header id="siteHeader"
+    class="z-20 small:hidden flex items-center text-white justify-between justify-content-around w-full h-[71px] pr-[30px] mx-auto bg-[#4558BE]">
+  
+    <!-- logo -->
+    <div class="logo-font inline-flex py-[18px] px-[30px]">
+        <a class="_o6689fn" routerLink="/">
+            <div class="block">
+                <div class="flex">
+                    <img src="assets/img/logo.svg" alt="Logo" width="35px" height="35px">
+                    <p class="text-[20px] mt-[5px]">&nbsp;&nbsp;Online Biblioteka</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <!-- end logo -->
+
+    <!-- live search -->
+    <div id="searchWrapper" class="inline-flex" style="margin-right: auto; font-size: 20px;">
+        <span id="searchIcon" style="cursor: pointer" (click)="toggleSearchForm()">
+            <i class="fas fa-magnifying-glass pt-[10px] pr-[10px]"></i>
+        </span>
+
+        <form (submit)="onSearchSubmit()" id="searchForm" *ngIf="isSearchFormVisible">
+            <input id="searchBar" autofocus autocomplete="off" name="searchWord" type="search"
+                placeholder="Pretraži sve, npr. 'loop'"
+                class="w-[500px] flex-1 w-full px-4 py-2 text-sm text-gray-700 placeholder-gray-400 bg-white border-[1px] border-[#e4dfdf] rounded-lg shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+            <a id="filterDropdown" style="padding-left: 10px" (click)="toggleFilters()">Filteri <i
+                    class="pl-[4px] fas fa-caret-down"></i></a>
+        </form>
+
+        <!-- Results and Filters -->
+        <div id="info" *ngIf="showInfo" style="top: 75px; position: absolute; margin-left: 30px; z-index: 999"
+            class="scrolly w-[500px] flex-1 w-full px-4 py-2 text-gray-700 bg-white border-[1px] border-[#e4dfdf] rounded-lg shadow-sm appearance-none">
+            <ul>
+                <!-- Add search results here -->
+            </ul>
+        </div>
+
+        <div id="resultWrapper" *ngIf="showResults" style="top: 75px; position: absolute; margin-left: 30px; z-index: 999; height: 300px; background-color: #eff3f6"
+            class="scrolly w-[500px] flex-1 w-full px-4 py-2 text-gray-700 bg-white border-[1px] border-[#e4dfdf] rounded-lg shadow-sm appearance-none">
+            <div id="knjigaWrapper">
+                Knjige
+                <ul id="knjige" class="search">
+                    <!-- Add book search results here -->
+                </ul>
+            </div>
+            <div id="autorWrapper" class="search">
+                Autori
+                <ul id="autori">
+                    <!-- Add author search results here -->
+                </ul>
+            </div>
+            <div id="ucenikWrapper" class="search">
+                Učenici
+                <ul id="ucenici">
+                    <!-- Add student search results here -->
+                </ul>
+            </div>
+            <div id="bibliotekarWrapper" class="search">
+                Bibliotekari
+                <ul id="bibliotekari">
+                    <!-- Add librarian search results here -->
+                </ul>
+            </div>
+        </div>
+
+        <div id="searchFilter" *ngIf="showFilters" style="top: 75px; position: absolute; margin-left: 540px; z-index: 999; background-color: #eff3f6"
+            class="max-w-[304px] flex-1 w-full px-4 py-2 text-gray-700 bg-white border-[1px] border-[#e4dfdf] rounded-lg shadow-sm appearance-none">
+            <ul>
+                <li (click)="toggleFilter('knjigeFilter')" style="cursor: pointer">
+                    <input type="checkbox" id="knjigeFilter"  checked> Knjige
+                </li>
+                <li (click)="toggleFilter('autorFilter')" style="padding-top: 5px; cursor: pointer">
+                    <input type="checkbox" id="autorFilter"  checked> Autori
+                </li>
+                <li (click)="toggleFilter('ucenikFilter')" style="padding-top: 5px; cursor: pointer">
+                    <input type="checkbox" id="ucenikFilter"  checked> Učenici
+                </li>
+                <li (click)="toggleFilter('bibliotekarFilter')" style="padding-top: 5px; cursor: pointer">
+                    <input type="checkbox" id="bibliotekarFilter"  checked> Bibliotekari
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- end live search -->
+
+    <!-- login -->
+    <div class="flex-initial">
+        <div class="relative flex items-center justify-end">
+            <div class="flex items-center" style="z-index: 1111">
+                <!-- Notification Icon -->
+                <div class="relative block">
+                    <a routerLink="/activity" class="relative inline-block px-3 py-2 focus:outline-none" aria-label="Notification">
+                        <div class="flex items-center h-5">
+                            <div class="_xpkakx">
+                                <span class="transition duration-300 ease-in bg-[#606FC7] text-[25px] rounded-full px-[11px] py-[7px]">
+                                    <i class="far fa-bell"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!-- Add Icon -->
+                <a class="inline-block border-l-[1px] border-gray-300 px-3" href="#" aria-label="Add something" id="dropdownCreate">
+                    <span class="transition duration-300 ease-in bg-[#606FC7] text-[25px] rounded-full px-[11px] py-[7px]">
+                        <i class="fas fa-plus"></i>
+                    </span>
+                </a>
+                <!-- Add dropdown content here if needed -->
+
+                <!-- User Profile Icon -->
+                <div class="ml-[10px] relative block">
+                    <a href="#" class="relative inline-block px-3 py-2 focus:outline-none" id="dropdownProfile"
+                        aria-label="User profile">
+                        <div class="flex items-center h-5">
+                            <div class="w-[40px] h-[40px] mt-[15px]">
+                                <img class="rounded-full" [src]="user.photoPath" alt="">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!-- Profile dropdown content here if needed -->
+            </div>
+        </div>
+    </div>
+    <!-- end login -->
+</header>
