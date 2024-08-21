@@ -19,6 +19,10 @@ const routes: Routes = [
       {
         path: 'author',
         loadChildren: () => import('./@modules/author/author.module').then(m => m.AuthorModule)
+      },
+      {
+        path: 'book',
+        loadChildren: () => import('./@modules/book/book.module').then(m => m.BookModule)
       }
     ]
   },
@@ -28,4 +32,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,4 +1,6 @@
 import { NgModule } from "@angular/core";
+import { RouterModule } from "@angular/router";
+import { BookRoutingModule } from "./book-routing.module";
 import { BookDetailComponent } from './components/book-detail/book-detail.component';
 import { BookListComponent } from './components/book-list/book-list.component';
 
@@ -7,7 +9,10 @@ import { BookListComponent } from './components/book-list/book-list.component';
         BookListComponent,
         BookDetailComponent
   ],
-    imports: [],
+    imports: [
+        RouterModule,
+        BookRoutingModule
+    ],
   })
   export class BookModule {
   

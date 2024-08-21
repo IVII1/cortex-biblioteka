@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, ResolveStart, Router } from '@angular/router';
 import { GlobalService } from './@shared/services/global.service';
 
 @Component({
@@ -13,15 +13,15 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
 
-      // if (event instanceof ResolveStart && this.globalService.is404.value === true) {
-      //   this.globalService.is404.next(false);
-      // }
+      if (event instanceof ResolveStart && this.globalService.is404.value === true) {
+        this.globalService.is404.next(false);
+      }
 
-      // if (event instanceof NavigationEnd) {
-      //   if (this.globalService.isDenied.value === true) {
-      //     this.globalService.isDenied.next(false);
-      //   }
-      // }
+      if (event instanceof NavigationEnd) {
+        if (this.globalService.isDenied.value === true) {
+          this.globalService.isDenied.next(false);
+        }
+      }
     });
   }
 }
