@@ -6,6 +6,9 @@ import { AuthLayoutComponent } from './@shared/layouts/auth-layout/auth-layout.c
 import { SidebarComponent } from './@shared/sidebar/sidebar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LibrariansComponent } from './@modules/librarians/components/librarians/librarians.component';
+import { StudentsComponent } from './@modules/students/components/students/students.component';
+import { AdminComponent } from './@modules/admin/components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -14,12 +17,12 @@ import { AppComponent } from './app.component';
     AuthLayoutComponent,
     HeaderComponent,
     SidebarComponent,
+    LibrariansComponent,
+    StudentsComponent,
+    AdminComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
