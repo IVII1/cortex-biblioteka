@@ -11,12 +11,13 @@ import { RecordsComponent } from './@modules/records/components/records/records.
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashb',
+    redirectTo: '',
     pathMatch: 'full',
   },
   {
     path: '',
     component: AppLayoutComponent,
+
     children: [
       {
         path: 'dashboard',
@@ -27,21 +28,19 @@ const routes: Routes = [
       },
       {
         path: 'authors',
-        component: AuthorListComponent,
 
         loadChildren: () =>
           import('./@modules/author/author.module').then((m) => m.AuthorModule),
       },
       {
         path: 'books',
-        component: BookListComponent,
 
         loadChildren: () =>
           import('./@modules/book/book.module').then((m) => m.BookModule),
       },
       {
         path: 'librarians',
-        component: LibrariansComponent,
+
         loadChildren: () =>
           import('./@modules/librarians/librarians.module').then(
             (m) => m.LibrariansModule
@@ -49,7 +48,7 @@ const routes: Routes = [
       },
       {
         path: 'students',
-        component: StudentsComponent,
+
         loadChildren: () =>
           import('./@modules/students/students.module').then(
             (m) => m.StudentsModule
@@ -58,7 +57,7 @@ const routes: Routes = [
 
       {
         path: 'records',
-        component: RecordsComponent,
+
         loadChildren: () =>
           import('./@modules/records/records.module').then(
             (m) => m.RecordsModule
@@ -66,7 +65,7 @@ const routes: Routes = [
       },
       {
         path: 'admins',
-        component: AdminComponent,
+
         loadChildren: () =>
           import('./@modules/admin/admin.module').then((m) => m.AdminModule),
       },
