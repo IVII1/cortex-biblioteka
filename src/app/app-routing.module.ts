@@ -5,8 +5,8 @@ import { AuthorListComponent } from './@modules/author/components/author-list/au
 import { BookListComponent } from './@modules/book/components/book-list/book-list.component';
 import { LibrariansComponent } from './@modules/librarians/components/librarians/librarians.component';
 import { StudentsComponent } from './@modules/students/components/students/students.component';
-import { IssuedBooksComponent } from './@modules/book/components/issued-books/issued-books.component';
 import { AdminComponent } from './@modules/admin/components/admin/admin.component';
+import { RecordsComponent } from './@modules/records/components/records/records.component';
 
 const routes: Routes = [
   {
@@ -26,7 +26,7 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'author',
+        path: 'authors',
         component: AuthorListComponent,
 
         loadChildren: () =>
@@ -42,19 +42,33 @@ const routes: Routes = [
       {
         path: 'librarians',
         component: LibrariansComponent,
+        loadChildren: () =>
+          import('./@modules/librarians/librarians.module').then(
+            (m) => m.LibrariansModule
+          ),
       },
       {
         path: 'students',
         component: StudentsComponent,
+        loadChildren: () =>
+          import('./@modules/students/students.module').then(
+            (m) => m.StudentsModule
+          ),
       },
-      { path: 'authors', component: AuthorListComponent },
+
       {
-        path: 'record/issued',
-        component: IssuedBooksComponent,
+        path: 'records',
+        component: RecordsComponent,
+        loadChildren: () =>
+          import('./@modules/records/records.module').then(
+            (m) => m.RecordsModule
+          ),
       },
       {
         path: 'admins',
         component: AdminComponent,
+        loadChildren: () =>
+          import('./@modules/admin/admin.module').then((m) => m.AdminModule),
       },
     ],
   },

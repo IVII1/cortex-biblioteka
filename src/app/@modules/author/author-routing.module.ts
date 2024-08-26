@@ -1,16 +1,17 @@
-import { NgModule } from "@angular/core";
-import { RouterModule } from "@angular/router";
-import { AuthorDetailComponent } from "./components/author-detail/author-detail.component";
-import { AuthorListComponent } from "./components/author-list/author-list.component";
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { AuthorDetailComponent } from './components/author-detail/author-detail.component';
+import { AuthorListComponent } from './components/author-list/author-list.component';
+import { AuthorNewComponent } from './components/author-new/author-new.component';
 
-const routes = [ 
-    {
+const routes = [
+  {
     path: '',
     component: AuthorListComponent,
   },
   {
     path: 'new',
-    component: AuthorDetailComponent,
+    component: AuthorNewComponent,
   },
   {
     path: ':id',
@@ -22,6 +23,6 @@ const routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-  })
+  imports: [RouterModule.forChild(routes)],
+})
 export class AuthorRoutingModule {}
