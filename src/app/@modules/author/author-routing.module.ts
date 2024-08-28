@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthorDetailComponent } from './components/author-detail/author-detail.component';
 import { AuthorListComponent } from './components/author-list/author-list.component';
-import { AuthorNewComponent } from './components/author-new/author-new.component';
 
 const routes = [
   {
@@ -11,7 +10,7 @@ const routes = [
   },
   {
     path: 'new',
-    component: AuthorNewComponent,
+    component: AuthorDetailComponent,
   },
   {
     path: ':id',
