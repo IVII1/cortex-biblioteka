@@ -11,7 +11,9 @@
       alt=""
     />
     <a href="autorProfile.php">
-      <span class="mr-2 font-medium text-center">Bubalo Zivkovic</span>
+      <span class="mr-2 font-medium text-center"
+        >{{ author()?.name }} {{ author()?.surname }}
+      </span>
     </a>
   </td>
   <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
@@ -42,7 +44,7 @@
             role="menuitem"
           >
             <i class="far fa-file mr-[5px] ml-[5px] py-1"></i>
-            <span class="px-4 py-0">Pogledaj detalje</span>
+            <span class="px-4 py-0">View Details</span>
           </a>
           <a
             href="editAutor.php"
@@ -51,7 +53,7 @@
             role="menuitem"
           >
             <i class="fas fa-edit mr-[1px] ml-[5px] py-1"></i>
-            <span class="px-4 py-0">Izmijeni autora</span>
+            <span class="px-4 py-0">Edit Author</span>
           </a>
           <a
             href="#"
@@ -60,7 +62,7 @@
             role="menuitem"
           >
             <i class="fa fa-trash mr-[5px] ml-[5px] py-1"></i>
-            <span class="px-4 py-0">Izbrisi autora</span>
+            <span class="px-4 py-0">Delete Author</span>
           </a>
         </div>
       </div>

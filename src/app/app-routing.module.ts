@@ -1,12 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppLayoutComponent } from './@shared/layouts/app-layout/app-layout.component';
-import { AuthorListComponent } from './@modules/author/components/author-list/author-list.component';
-import { BookListComponent } from './@modules/book/components/book-list/book-list.component';
-import { LibrariansComponent } from './@modules/librarians/components/librarians/librarians.component';
-import { StudentsComponent } from './@modules/students/components/students/students.component';
-import { AdminComponent } from './@modules/admin/components/admin/admin.component';
-import { RecordsComponent } from './@modules/records/components/records/records.component';
 
 const routes: Routes = [
   {

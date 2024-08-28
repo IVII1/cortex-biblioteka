@@ -1,5 +1,4 @@
 <section class="w-screen h-screen pl-[80px] py-4 text-gray-700">
-  <!-- Heading of content -->
   <app-author-header></app-author-header>
   <div class="height-autori pb-[30px] scroll">
     <app-search-add-new></app-search-add-new>
@@ -12,14 +11,9 @@
       >
         <app-table-head></app-table-head>
         <tbody class="bg-white">
-          <app-author-row></app-author-row>
-          <app-author-row></app-author-row>
-          <app-author-row></app-author-row>
-          <app-author-row></app-author-row>
-          <app-author-row></app-author-row>
-          <app-author-row></app-author-row>
-          <app-author-row></app-author-row>
-          <app-author-row></app-author-row>
+          @for (author of authors; track author.id) {
+          <app-author-row [author]="author"></app-author-row>
+          }
         </tbody>
       </table>
 

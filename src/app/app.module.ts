@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { LibrariansComponent } from './@modules/librarians/components/librarians/librarians.component';
 import { StudentsComponent } from './@modules/students/components/students/students.component';
 import { AdminComponent } from './@modules/admin/components/admin/admin.component';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { AdminComponent } from './@modules/admin/components/admin/admin.componen
     AdminComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -9,6 +9,8 @@ import { AuthorHeaderComponent } from './components/author-header/author-header.
 import { TableHeadComponent } from './components/table-head/table-head.component';
 import { SearchAddNewComponent } from './components/search-add-new/search-add-new.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,6 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     SearchAddNewComponent,
     PaginationComponent,
   ],
-  imports: [RouterModule, AuthorRoutingModule],
+  imports: [RouterModule, AuthorRoutingModule, CommonModule],
 })
 export class AuthorModule {}
