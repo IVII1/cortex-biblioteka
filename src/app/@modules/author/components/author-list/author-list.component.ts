@@ -12,6 +12,7 @@ export class AuthorListComponent implements OnInit {
   private httpClient = inject(HttpClient);
   private destroyRef = inject(DestroyRef);
   authors: Author[] = [];
+  isOpen = true;
 
   ngOnInit(): void {
     const url = 'https://biblioteka.simonovicp.com/api/authors';
@@ -30,5 +31,14 @@ export class AuthorListComponent implements OnInit {
     this.destroyRef.onDestroy(() => {
       subscription.unsubscribe();
     });
+  }
+  openMenuId: number | null = null;
+
+  toggleMenu(authorId: number) {
+    if (this.openMenuId === authorId) {
+      this.openMenuId = null;
+    } else {
+      this.openMenuId = authorId;
+    }
   }
 }

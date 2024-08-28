@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 import { IssuedComponent } from './components/issued/issued.component';
 
 const routes: Routes = [
   {
-    path: 'issued',
-    component: IssuedComponent,
+    path: '',
+    children: [
+      {
+        path: 'issued',
+        component: IssuedComponent,
+      },
+    ],
   },
 ];
 

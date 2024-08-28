@@ -10,6 +10,7 @@ import { LibrariansComponent } from './@modules/librarians/components/librarians
 import { StudentsComponent } from './@modules/students/components/students/students.component';
 import { AdminComponent } from './@modules/admin/components/admin/admin.component';
 import { provideHttpClient } from '@angular/common/http';
+import { PageHeaderComponent } from './@shared/page-header/page-header.component';
 
 @NgModule({
   declarations: [
