@@ -1,7 +1,7 @@
 <section class="w-screen h-screen pl-[80px] py-4 text-gray-700">
   <app-page-header title></app-page-header>
   <div class="height-autori pb-[30px] scroll">
-    <app-search-add-new title></app-search-add-new>
+    <app-search-add-new></app-search-add-new>
     <div
       class="inline-block min-w-full px-[30px] pt-3 align-middle bg-white rounded-bl-lg rounded-br-lg shadow-dashboard"
     >
@@ -79,10 +79,11 @@
                       <span class="px-4 py-0">Edit Author</span>
                     </a>
                     <a
-                      href="#"
+                      (click)="deleteAuthor(author.id)"
                       tabindex="0"
-                      class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                      class=" clickable flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                       role="menuitem"
+                      
                     >
                       <i class="fa fa-trash mr-[5px] ml-[5px] py-1"></i>
                       <span class="px-4 py-0">Delete Author</span>

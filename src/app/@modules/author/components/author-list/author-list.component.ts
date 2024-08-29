@@ -41,4 +41,15 @@ export class AuthorListComponent implements OnInit {
       this.openMenuId = authorId;
     }
   }
+  deleteAuthor(id: number) {
+    const url = `https://biblioteka.simonovicp.com/api/authors/${id}`;
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer 59|ZUqOsQYkMuPrYvfWtu44fnu3oeWi85f2XN2Coolo`
+    );
+    this.httpClient.delete<{ data: Author[] }>(url, { headers }).subscribe({
+      next: (response) => console.log('Deletion successful', response),
+    });
+    this.ngOnInit();
+  }
 }
