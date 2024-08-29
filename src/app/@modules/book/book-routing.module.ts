@@ -1,10 +1,10 @@
-import { NgModule } from "@angular/core";
-import { RouterModule } from "@angular/router";
-import { BookDetailComponent } from "./components/book-detail/book-detail.component";
-import { BookListComponent } from "./components/book-list/book-list.component";
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { BookDetailComponent } from './components/book-detail/book-detail.component';
+import { BookListComponent } from './components/book-list/book-list.component';
 
-const routes = [ 
-    {
+const routes = [
+  {
     path: '',
     component: BookListComponent,
   },
@@ -22,6 +22,6 @@ const routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-  })
+  imports: [RouterModule.forChild(routes)],
+})
 export class BookRoutingModule {}

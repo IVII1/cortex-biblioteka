@@ -9,6 +9,7 @@ import { SearchAddNewComponent } from '../../@shared/search-add-new/search-add-n
 import { PaginationComponent } from '../../@shared/pagination/pagination.component';
 import { CommonModule } from '@angular/common';
 import { PageHeaderComponent } from 'src/app/@shared/page-header/page-header.component';
+import { AuthorEditAddComponent } from './components/author-edit-add/author-edit-add.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { PageHeaderComponent } from 'src/app/@shared/page-header/page-header.com
     SearchAddNewComponent,
     PaginationComponent,
     PageHeaderComponent,
+    AuthorEditAddComponent,
   ],
   imports: [RouterModule, AuthorRoutingModule, CommonModule],
 })

@@ -18,7 +18,7 @@ export class AuthorListComponent implements OnInit {
     const url = 'https://biblioteka.simonovicp.com/api/authors';
     const headers = new HttpHeaders().set(
       'Authorization',
-      `Bearer 59|ZUqOsQYkMuPrYvfWtu44fnu3oeWi85f2XN2Coolo`
+      `Bearer 59|ZUqOsQYkMuPrYvfWtu44fnu3oeWi85f2XN2Coolo`,
     );
     const subscription = this.httpClient
       .get<{ data: Author[] }>(url, { headers })
@@ -45,11 +45,14 @@ export class AuthorListComponent implements OnInit {
     const url = `https://biblioteka.simonovicp.com/api/authors/${id}`;
     const headers = new HttpHeaders().set(
       'Authorization',
-      `Bearer 59|ZUqOsQYkMuPrYvfWtu44fnu3oeWi85f2XN2Coolo`
+      `Bearer 59|ZUqOsQYkMuPrYvfWtu44fnu3oeWi85f2XN2Coolo`,
     );
-    this.httpClient.delete<{ data: Author[] }>(url, { headers }).subscribe({
-      next: (response) => console.log('Deletion successful', response),
-    });
+    const delRequest = this.httpClient
+      .delete<{ data: Author[] }>(url, { headers })
+      .subscribe({
+        next: (response) => console.log('Deletion successful', response),
+      });
+    // unsubscribe
     this.ngOnInit();
   }
 }

@@ -17,7 +17,7 @@ const routes: Routes = [
         path: 'dashboard',
         loadChildren: () =>
           import('./@modules/dashboard/dashboard.module').then(
-            (m) => m.DashboardModule
+            (m) => m.DashboardModule,
           ),
       },
       {
@@ -37,7 +37,7 @@ const routes: Routes = [
 
         loadChildren: () =>
           import('./@modules/librarians/librarians.module').then(
-            (m) => m.LibrariansModule
+            (m) => m.LibrariansModule,
           ),
       },
       {
@@ -45,7 +45,7 @@ const routes: Routes = [
 
         loadChildren: () =>
           import('./@modules/students/students.module').then(
-            (m) => m.StudentsModule
+            (m) => m.StudentsModule,
           ),
       },
 
@@ -54,7 +54,7 @@ const routes: Routes = [
 
         loadChildren: () =>
           import('./@modules/records/records.module').then(
-            (m) => m.RecordsModule
+            (m) => m.RecordsModule,
           ),
       },
       {

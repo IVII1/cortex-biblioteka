@@ -7,13 +7,15 @@ import { GlobalService } from './@shared/services/global.service';
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
-  private readonly router = inject(Router)
-  private readonly globalService = inject(GlobalService)
+  private readonly router = inject(Router);
+  private readonly globalService = inject(GlobalService);
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
-
-      if (event instanceof ResolveStart && this.globalService.is404.value === true) {
+      if (
+        event instanceof ResolveStart &&
+        this.globalService.is404.value === true
+      ) {
         this.globalService.is404.next(false);
       }
 

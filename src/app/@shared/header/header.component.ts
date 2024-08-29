@@ -16,11 +16,11 @@ export class HeaderComponent {
     knjige: true,
     autori: true,
     ucenici: true,
-    bibliotekari: true
+    bibliotekari: true,
   };
 
   user = {
-    photoPath: 'path_to_user_photo'
+    photoPath: 'path_to_user_photo',
   };
 
   toggleSearchForm() {

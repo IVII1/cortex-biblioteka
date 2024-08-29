@@ -5,15 +5,8 @@ import { RecordsRoutingModule } from './records-routing.module';
 import { IssuedComponent } from './components/issued/issued.component';
 import { RecordsComponent } from './components/records/records.component';
 
-
 @NgModule({
-  declarations: [
-    IssuedComponent,
-    RecordsComponent
-  ],
-  imports: [
-    CommonModule,
-    RecordsRoutingModule
-  ]
+  declarations: [IssuedComponent, RecordsComponent],
+  imports: [CommonModule, RecordsRoutingModule],
 })
-export class RecordsModule { }
+export class RecordsModule {}
