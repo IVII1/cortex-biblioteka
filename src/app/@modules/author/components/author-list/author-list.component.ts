@@ -47,11 +47,9 @@ export class AuthorListComponent implements OnInit {
       'Authorization',
       `Bearer 59|ZUqOsQYkMuPrYvfWtu44fnu3oeWi85f2XN2Coolo`,
     );
-    const delRequest = this.httpClient
-      .delete<{ data: Author[] }>(url, { headers })
-      .subscribe({
-        next: (response) => console.log('Deletion successful', response),
-      });
+    this.httpClient.delete<{ data: Author[] }>(url, { headers }).subscribe({
+      next: (response) => console.log('Deletion successful', response),
+    });
     // unsubscribe
     this.ngOnInit();
   }
