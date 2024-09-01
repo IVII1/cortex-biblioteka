@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-page-header',
+  standalone: true,
+  imports: [],
   templateUrl: './page-header.component.html',
-  styleUrl: './page-header.component.scss',
+  styleUrls: ['./page-header.component.scss'],
 })
 export class PageHeaderComponent {
-  title: string = 'Author';
+  title = input<string>();
 }

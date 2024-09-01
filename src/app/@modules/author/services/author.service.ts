@@ -1,0 +1,36 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { DestroyRef, inject, Injectable } from '@angular/core';
+import { Author } from '../models/author.model';
+import { environment } from 'src/environments/environment.development';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthorService {
+  authors: Author[] = [];
+  httpClient = inject(HttpClient);
+  destroyRef = inject(DestroyRef);
+
+  deleteAuthor(id: number) {
+    const url = `${environment.apiUrl}/api/authors/${id}`;
+    const headers = new HttpHeaders().set('Authorization', environment.token);
+    this.httpClient.delete<{ data: Author[] }>(url, { headers }).subscribe({
+      next: (response) => console.log('Deletion successful', response),
+    });
+  }
+  saveAuthor(id?: number) {
+    if (id) {
+      const url = `${environment.apiUrl}/api/authors/${id}`;
+      const headers = new HttpHeaders().set('Authorization', environment.token);
+      this.httpClient.put<{ data: Author[] }>(url, { headers }).subscribe({
+        next: (response) => console.log(response),
+      });
+    } else {
+      const url = `${environment.apiUrl}/api/authors/store`;
+      const headers = new HttpHeaders().set('Authorization', environment.token);
+      this.httpClient.post<{ data: Author[] }>(url, { headers }).subscribe({
+        next: (response) => console.log(response),
+      });
+    }
+  }
+}

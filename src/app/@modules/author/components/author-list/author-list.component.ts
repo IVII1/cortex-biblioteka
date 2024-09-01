@@ -1,7 +1,10 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DestroyRef } from '@angular/core';
-import { Author } from '../../author.model';
+import { Author } from '../../models/author.model';
+import { AuthorService } from '../../services/author.service';
+import { environment } from 'src/environments/environment.development';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-author-list',
@@ -9,16 +12,18 @@ import { Author } from '../../author.model';
   styleUrls: ['./author-list.component.scss'],
 })
 export class AuthorListComponent implements OnInit {
+  private router = inject(Router);
   private httpClient = inject(HttpClient);
   private destroyRef = inject(DestroyRef);
   authors: Author[] = [];
   isOpen = true;
+  authorService = inject(AuthorService);
 
   ngOnInit(): void {
-    const url = 'https://biblioteka.simonovicp.com/api/authors';
+    const url = `${environment.apiUrl}/api/authors`;
     const headers = new HttpHeaders().set(
       'Authorization',
-      `Bearer 59|ZUqOsQYkMuPrYvfWtu44fnu3oeWi85f2XN2Coolo`,
+      `${environment.token}`,
     );
     const subscription = this.httpClient
       .get<{ data: Author[] }>(url, { headers })
@@ -42,15 +47,11 @@ export class AuthorListComponent implements OnInit {
     }
   }
   deleteAuthor(id: number) {
-    const url = `https://biblioteka.simonovicp.com/api/authors/${id}`;
-    const headers = new HttpHeaders().set(
-      'Authorization',
-      `Bearer 59|ZUqOsQYkMuPrYvfWtu44fnu3oeWi85f2XN2Coolo`,
-    );
-    this.httpClient.delete<{ data: Author[] }>(url, { headers }).subscribe({
-      next: (response) => console.log('Deletion successful', response),
-    });
-    // unsubscribe
+    this.authorService.deleteAuthor(id);
     this.ngOnInit();
+  }
+  saveAuthor(id: number) {
+    this.router.navigate(['authors/edit', id]);
+    this.authorService.saveAuthor(id);
   }
 }
