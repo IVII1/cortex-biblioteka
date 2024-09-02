@@ -20,7 +20,7 @@ export class AuthorListComponent implements OnInit {
   authorService = inject(AuthorService);
 
   ngOnInit(): void {
-    const url = `${environment.apiUrl}/api/authors`;
+    const url = `${environment.apiAuthorsUrl}`;
     const headers = new HttpHeaders().set(
       'Authorization',
       `${environment.token}`,

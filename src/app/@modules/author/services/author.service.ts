@@ -12,7 +12,7 @@ export class AuthorService {
   destroyRef = inject(DestroyRef);
 
   deleteAuthor(id: number) {
-    const url = `${environment.apiUrl}/api/authors/${id}`;
+    const url = `${environment.apiAuthorsUrl}${id}`;
     const headers = new HttpHeaders().set('Authorization', environment.token);
     this.httpClient.delete<{ data: Author[] }>(url, { headers }).subscribe({
       next: (response) => console.log('Deletion successful', response),
@@ -20,13 +20,13 @@ export class AuthorService {
   }
   saveAuthor(id?: number) {
     if (id) {
-      const url = `${environment.apiUrl}/api/authors/${id}`;
+      const url = `${environment.apiAuthorsUrl}/${id}`;
       const headers = new HttpHeaders().set('Authorization', environment.token);
       this.httpClient.put<{ data: Author[] }>(url, { headers }).subscribe({
         next: (response) => console.log(response),
       });
     } else {
-      const url = `${environment.apiUrl}/api/authors/store`;
+      const url = `${environment.apiStoreAuthors}`;
       const headers = new HttpHeaders().set('Authorization', environment.token);
       this.httpClient.post<{ data: Author[] }>(url, { headers }).subscribe({
         next: (response) => console.log(response),
