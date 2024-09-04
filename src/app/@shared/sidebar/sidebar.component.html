@@ -181,7 +181,12 @@
           </a>
         </li>
 
-        <li><hr class="border-t border-[#e4dfdf]" /></li>
+        <li>
+          <hr
+            class="border-t border-[#e4dfdf]"
+            [ngClass]="{ hidden: !isExpanded }"
+          />
+        </li>
 
         <!-- Documentation Icon -->
         <li class="group hover:bg-[#EAEAEA] pl-[30px]">
