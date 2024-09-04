@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DestroyRef, inject, Injectable } from '@angular/core';
 import { Author } from '../models/author.model';
 import { environment } from 'src/environments/environment.development';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -32,5 +33,12 @@ export class AuthorService {
         next: (response) => console.log(response),
       });
     }
+  }
+  getAuthor(id: string): Observable<Author> {
+    const headers = new HttpHeaders().set(`Authorization`, environment.token);
+
+    return this.httpClient
+      .get<{ data: Author }>(`${environment.apiAuthorsUrl}/${id}`, { headers })
+      .pipe(map((response) => response.data));
   }
 }

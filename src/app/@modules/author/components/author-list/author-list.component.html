@@ -27,7 +27,7 @@
                   src="img/profileStudent.jpg"
                   alt=""
                 />
-                <a href="autorProfile.php">
+                <a [routerLink]="[author.id]">
                   <span class="mr-2 font-medium text-center"
                     >{{ author.name }} {{ author.surname }}</span
                   >
@@ -71,7 +71,6 @@
                         tabindex="0"
                         class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                         role="menuitem"
-                        (click)="saveAuthor(author.id)"
                       >
                         <i class="fas fa-edit mr-[1px] ml-[5px] py-1"></i>
                         <span class="px-4 py-0">Edit Author</span>

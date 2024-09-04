@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { AuthorDetailComponent } from './components/author-detail/author-detail.component';
 import { AuthorListComponent } from './components/author-list/author-list.component';
 import { AuthorEditAddComponent } from './components/author-edit-add/author-edit-add.component';
+import { AuthorResolver } from './resolvers/author.resolver';
 
 const routes = [
   {
@@ -23,6 +24,7 @@ const routes = [
   {
     path: ':id',
     component: AuthorDetailComponent,
+    resolve: { author: AuthorResolver },
   },
 ];
 
