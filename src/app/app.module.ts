@@ -10,6 +10,9 @@ import { LibrariansComponent } from './@modules/librarians/components/librarians
 import { StudentsComponent } from './@modules/students/components/students/students.component';
 import { AdminComponent } from './@modules/admin/components/admin/admin.component';
 import { provideHttpClient } from '@angular/common/http';
+import { PaginationComponent } from './@shared/pagination/pagination.component';
+import { SearchAddNewComponent } from './@shared/search-add-new/search-add-new.component';
+import { PageHeaderComponent } from './@shared/page-header/page-header.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,13 @@ import { provideHttpClient } from '@angular/common/http';
     StudentsComponent,
     AdminComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    PaginationComponent,
+    SearchAddNewComponent,
+    PageHeaderComponent,
+  ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent],
 })

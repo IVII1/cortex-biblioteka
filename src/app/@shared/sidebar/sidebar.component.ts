@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,5 +6,11 @@ import { Component, signal } from '@angular/core';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
-  public isAdmin = signal(false);
+  public isAdmin = false;
+  public isExpanded = false;
+
+  expandSidebar() {
+    this.isExpanded = !this.isExpanded;
+    console.log(this.isExpanded);
+  }
 }

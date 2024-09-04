@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthorService } from 'src/app/@modules/author/services/author.service';
 
@@ -12,6 +12,7 @@ import { AuthorService } from 'src/app/@modules/author/services/author.service';
 export class SearchAddNewComponent {
   router = inject(Router);
   authorService = inject(AuthorService);
+  buttonName = input<string>();
 
   newAuthor() {
     this.router.navigate(['/authors/new']);

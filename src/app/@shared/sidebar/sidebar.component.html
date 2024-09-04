@@ -1,212 +1,211 @@
 <nav
   id="sidebar"
-  class="fixed z-10 flex flex-col justify-between overflow-x-hidden overflow-y-auto bg-[#EFF3F6] sidebar nav-height"
+  class="fixed z-10 flex flex-col justify-between overflow-x-hidden overflow-y-auto bg-[#EFF3F6] sidebar nav-height pr-[20px]"
+  [ngClass]="{ 'sidebar-active': isExpanded }"
 >
   <div>
     <!-- Hamburger Icon -->
     <div
-      class="cursor-pointer text-[#707070] pl-[28px] pt-[28px] pb-[27px] text-[25px] border-b-[1px] border-[#e4dfdf]"
+      class="cursor-pointer text-[#707070] pt-[28px] pb-[27px] text-[25px] border-b-[1px] border-[#e4dfdf] pl-[30px]"
+      (click)="expandSidebar()"
     >
       <i id="hamburger" class="hamburger-btn fas fa-bars"></i>
     </div>
     <div class="mt-[30px]">
       <ul class="text-[#2D3B48] sidebar-nav">
         <!-- Dashboard Icon -->
-        <li class="pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA]">
-          <div class="ml-[25px]">
+        <li class="group hover:bg-[#EAEAEA] pl-[30px]">
+          <a
+            routerLinkActive="text-[#576cdf]"
+            [routerLink]="['/dashboard']"
+            aria-label="Dashboard"
+            class="flex items-center py-[18px] px-[25px] w-full"
+          >
+            <i
+              class="text-[25px] text-[#707070] fas fa-tachometer-alt transition duration-300 ease-in group-hover:text-[#576cdf]"
+              routerLinkActive="text-[#576cdf]"
+            ></i>
             <span
-              class="flex justify-between w-full fill-current whitespace-nowrap"
+              class="ml-[20px] text-[15px] whitespace-nowrap transition-all duration-300 ease-in"
+              [ngClass]="{
+                'opacity-0 w-0': !isExpanded,
+                'opacity-100 w-auto': isExpanded,
+              }"
             >
-              <div
-                class="transition duration-300 ease-in group-hover:text-[#576cdf]"
-              >
-                <a [routerLink]="['/dashboard']" aria-label="Dashboard">
-                  <i
-                    class="text-[25px] text-[#707070] fas fa-tachometer-alt transition duration-300 ease-in"
-                  ></i>
-                  <div class="hidden sidebar-item">
-                    <p
-                      class="inline text-[15px] ml-[20px] transition duration-300 ease-in"
-                    >
-                      Dashboard
-                    </p>
-                  </div>
-                </a>
-              </div>
+              Dashboard
             </span>
-          </div>
+          </a>
         </li>
 
         <!-- Bibliotekari Icon -->
-        <li
-          *ngIf="isAdmin"
-          class="pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA] h-[60px]"
-        >
-          <div class="ml-[25px]">
-            <span class="flex justify-between w-full whitespace-nowrap">
-              <div>
-                <a [routerLink]="['/librarians']" aria-label="Bibliotekari">
-                  <i
-                    class="text-[25px] text-[#707070] far fa-address-book transition duration-300 ease-in"
-                  ></i>
-                  <div class="hidden sidebar-item">
-                    <p
-                      class="inline text-[15px] ml-[20px] transition duration-300 ease-in"
-                    >
-                      Bibliotekari
-                    </p>
-                  </div>
-                </a>
-              </div>
+        <li *ngIf="isAdmin" class="group hover:bg-[#EAEAEA] pl-[30px]">
+          <a
+            routerLinkActive="text-[#576cdf]"
+            [routerLink]="['/librarians']"
+            aria-label="Bibliotekari"
+            class="flex items-center py-[18px] px-[25px]"
+          >
+            <i
+              class="text-[25px] text-[#707070] far fa-address-book transition duration-300 ease-in group-hover:text-[#576cdf]"
+              routerLinkActive="text-[#576cdf]"
+            ></i>
+            <span
+              class="ml-[20px] text-[15px] whitespace-nowrap transition-all duration-300 ease-in"
+              [ngClass]="{
+                'opacity-0 w-0': !isExpanded,
+                'opacity-100 w-auto': isExpanded,
+              }"
+            >
+              Bibliotekari
             </span>
-          </div>
+          </a>
         </li>
 
         <!-- Učenici Icon -->
-        <li
-          class="pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA] h-[60px]"
-        >
-          <div class="ml-[25px]">
-            <span class="flex justify-between w-full whitespace-nowrap">
-              <div>
-                <a [routerLink]="['/students']" aria-label="Učenici">
-                  <i
-                    class="text-[18px] text-[#707070] fas fa-users transition duration-300 ease-in"
-                  ></i>
-                  <div class="hidden sidebar-item">
-                    <p
-                      class="inline text-[15px] ml-[20px] transition duration-300 ease-in"
-                    >
-                      Učenici
-                    </p>
-                  </div>
-                </a>
-              </div>
+        <li class="group hover:bg-[#EAEAEA] pl-[30px]">
+          <a
+            routerLinkActive="text-[#576cdf]"
+            [routerLink]="['/students']"
+            aria-label="Učenici"
+            class="flex items-center py-[18px] px-[25px]"
+          >
+            <i
+              class="text-[18px] text-[#707070] fas fa-users transition duration-300 ease-in group-hover:text-[#576cdf]"
+              routerLinkActive="text-[#576cdf]"
+            ></i>
+            <span
+              class="ml-[20px] text-[15px] whitespace-nowrap transition-all duration-300 ease-in"
+              [ngClass]="{
+                'opacity-0 w-0': !isExpanded,
+                'opacity-100 w-auto': isExpanded,
+              }"
+            >
+              Učenici
             </span>
-          </div>
+          </a>
         </li>
 
         <!-- Knjige Icon -->
-        <li
-          class="pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA] h-[60px]"
-        >
-          <div class="ml-[25px]">
-            <span class="flex justify-between w-full whitespace-nowrap">
-              <div>
-                <a [routerLink]="['/books']" aria-label="Knjige">
-                  <i
-                    class="text-[25px] text-[#707070] fas fa-book transition duration-300 ease-in"
-                  ></i>
-                  <div class="hidden sidebar-item">
-                    <p
-                      class="inline text-[15px] ml-[20px] transition duration-300 ease-in"
-                    >
-                      Knjige
-                    </p>
-                  </div>
-                </a>
-              </div>
+        <li class="group hover:bg-[#EAEAEA] pl-[30px]">
+          <a
+            routerLinkActive="text-[#576cdf]"
+            [routerLink]="['/books']"
+            aria-label="Knjige"
+            class="flex items-center py-[18px] px-[25px]"
+          >
+            <i
+              class="text-[25px] text-[#707070] fas fa-book transition duration-300 ease-in group-hover:text-[#576cdf]"
+              routerLinkActive="text-[#576cdf]"
+            ></i>
+            <span
+              class="ml-[20px] text-[15px] whitespace-nowrap transition-all duration-300 ease-in"
+              [ngClass]="{
+                'opacity-0 w-0': !isExpanded,
+                'opacity-100 w-auto': isExpanded,
+              }"
+            >
+              Knjige
             </span>
-          </div>
+          </a>
         </li>
 
         <!-- Autori Icon -->
-        <li
-          class="pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA] h-[60px]"
-        >
-          <div class="ml-[25px]">
-            <span class="flex justify-between w-full whitespace-nowrap">
-              <div>
-                <a [routerLink]="['/authors']" aria-label="Autori">
-                  <i
-                    class="text-[25px] text-[#707070] fas fa-user-graduate transition duration-300 ease-in"
-                  ></i>
-                  <div class="hidden sidebar-item">
-                    <p
-                      class="inline text-[15px] ml-[20px] transition duration-300 ease-in"
-                    >
-                      Autori
-                    </p>
-                  </div>
-                </a>
-              </div>
+        <li class="group hover:bg-[#EAEAEA] pl-[30px]">
+          <a
+            routerLinkActive="text-[#576cdf]"
+            [routerLink]="['/authors']"
+            aria-label="Autori"
+            class="flex items-center py-[18px] px-[25px]"
+          >
+            <i
+              class="text-[25px] text-[#707070] fas fa-user-graduate transition duration-300 ease-in group-hover:text-[#576cdf]"
+              routerLinkActive="text-[#576cdf]"
+            ></i>
+            <span
+              class="ml-[20px] text-[15px] whitespace-nowrap transition-all duration-300 ease-in"
+              [ngClass]="{
+                'opacity-0 w-0': !isExpanded,
+                'opacity-100 w-auto': isExpanded,
+              }"
+            >
+              Autori
             </span>
-          </div>
+          </a>
         </li>
 
         <!-- Izdavanje Icon -->
-        <li
-          class="pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA] h-[60px]"
-        >
-          <div class="ml-[25px]">
-            <span class="flex justify-between w-full whitespace-nowrap">
-              <div>
-                <a [routerLink]="['/records/issued']" aria-label="Izdavanje">
-                  <i
-                    class="text-[22px] text-[#707070] fas fa-exchange-alt transition duration-300 ease-in"
-                  ></i>
-                  <div class="hidden sidebar-item">
-                    <p
-                      class="inline text-[15px] ml-[20px] transition duration-300 ease-in"
-                    >
-                      Izdavanje knjiga
-                    </p>
-                  </div>
-                </a>
-              </div>
+        <li class="group hover:bg-[#EAEAEA] pl-[30px]">
+          <a
+            routerLinkActive="text-[#576cdf]"
+            [routerLink]="['/records/issued']"
+            aria-label="Izdavanje"
+            class="flex items-center py-[18px] px-[25px]"
+          >
+            <i
+              class="text-[22px] text-[#707070] fas fa-exchange-alt transition duration-300 ease-in group-hover:text-[#576cdf]"
+              routerLinkActive="text-[#576cdf]"
+            ></i>
+            <span
+              class="ml-[20px] text-[15px] whitespace-nowrap transition-all duration-300 ease-in"
+              [ngClass]="{
+                'opacity-0 w-0': !isExpanded,
+                'opacity-100 w-auto': isExpanded,
+              }"
+            >
+              Izdavanje knjiga
             </span>
-          </div>
+          </a>
         </li>
 
         <!-- Admin Icon -->
-        <li
-          *ngIf="isAdmin"
-          class="pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA] h-[60px]"
-        >
-          <div class="ml-[25px]">
-            <span class="flex justify-between w-full whitespace-nowrap">
-              <div>
-                <a [routerLink]="['/admins']" aria-label="Admin">
-                  <i
-                    class="text-[22px] h-[20px] w-[20px] text-[#707070] fas fa-user-shield transition duration-300 ease-in"
-                  ></i>
-                  <div class="hidden sidebar-item">
-                    <p
-                      class="inline text-[15px] ml-[20px] transition duration-300 ease-in"
-                    >
-                      Administratori
-                    </p>
-                  </div>
-                </a>
-              </div>
+        <li *ngIf="isAdmin" class="group hover:bg-[#EAEAEA] pl-[30px]">
+          <a
+            routerLinkActive="text-[#576cdf]"
+            [routerLink]="['/admins']"
+            aria-label="Admin"
+            class="flex items-center py-[18px] px-[25px]"
+          >
+            <i
+              class="text-[22px] text-[#707070] fas fa-user-shield transition duration-300 ease-in group-hover:text-[#576cdf]"
+              routerLinkActive="text-[#576cdf]"
+            ></i>
+            <span
+              class="ml-[20px] text-[15px] whitespace-nowrap transition-all duration-300 ease-in"
+              [ngClass]="{
+                'opacity-0 w-0': !isExpanded,
+                'opacity-100 w-auto': isExpanded,
+              }"
+            >
+              Administratori
             </span>
-          </div>
+          </a>
         </li>
 
-        <li><hr class="dropdown-divider" /></li>
+        <li><hr class="border-t border-[#e4dfdf]" /></li>
 
         <!-- Documentation Icon -->
-        <li
-          class="pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA] h-[60px]"
-        >
-          <div class="ml-[25px]">
-            <span class="flex justify-between w-full whitespace-nowrap">
-              <div>
-                <a href="" aria-label="Dokumentacija" target="_blank">
-                  <i
-                    class="text-[22px] text-[#707070] fas fa-book transition duration-300 ease-in"
-                  ></i>
-                  <div class="hidden sidebar-item">
-                    <p
-                      class="inline text-[15px] ml-[20px] transition duration-300 ease-in"
-                    >
-                      Dokumentacija
-                    </p>
-                  </div>
-                </a>
-              </div>
+        <li class="group hover:bg-[#EAEAEA] pl-[30px]">
+          <a
+            routerLinkActive="text-[#576cdf]"
+            href=""
+            aria-label="Dokumentacija"
+            target="_blank"
+            class="flex items-center py-[18px] px-[25px]"
+          >
+            <i
+              class="text-[22px] text-[#707070] fas fa-book transition duration-300 ease-in group-hover:text-[#576cdf]"
+              routerLinkActive="text-[#576cdf]"
+            ></i>
+            <span
+              class="ml-[20px] text-[15px] whitespace-nowrap transition-all duration-300 ease-in"
+              [ngClass]="{
+                'opacity-0 w-0': !isExpanded,
+                'opacity-100 w-auto': isExpanded,
+              }"
+            >
+              Dokumentacija
             </span>
-          </div>
+          </a>
         </li>
       </ul>
     </div>
