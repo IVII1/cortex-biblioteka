@@ -4,23 +4,23 @@ import {
   Resolve,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
-  ResolveEnd,
 } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { StudentService } from '../services/student.service';
-import { Librarian } from '../../librarians/models/librarian.model';
+
+import { Student } from '../models/student.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class StudentResolver implements Resolve<Librarian> {
+export class StudentResolver implements Resolve<Student> {
   constructor(private studentService: StudentService) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
-  ): Observable<Librarian> {
+  ): Observable<Student> {
     const studentId = route.paramMap.get('id');
     return this.studentService.getStudent(studentId!);
   }

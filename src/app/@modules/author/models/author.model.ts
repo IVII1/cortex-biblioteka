@@ -3,4 +3,8 @@ export class Author {
   name!: string;
   surname!: string;
   bio?: string;
+  role?: string;
+  email?: string;
+  username?: string;
+  jmbg?: string;
 }

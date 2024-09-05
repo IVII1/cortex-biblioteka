@@ -37,8 +37,8 @@ export class StudentEditAddComponent implements OnInit {
       ],
       jmbg: [this.student?.jmbg ?? '', Validators.required],
       username: [this.student?.username ?? '', Validators.required],
-      password: ['123456', Validators.required],
-      password_confirmation: ['123456', Validators.required],
+      password: ['12345678', Validators.required],
+      password_confirmation: ['12345678', Validators.required],
       photoPath: ['http://library.test/img/profile.jpg', Validators.required],
     });
   }

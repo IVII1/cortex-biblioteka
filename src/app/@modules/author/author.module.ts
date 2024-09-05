@@ -8,6 +8,7 @@ import { AuthorEditAddComponent } from './components/author-edit-add/author-edit
 import { PaginationComponent } from '../../@shared/pagination/pagination.component';
 import { PageHeaderComponent } from '../../@shared/page-header/page-header.component';
 import { SearchAddNewComponent } from '../../@shared/search-add-new/search-add-new.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SearchAddNewComponent } from '../../@shared/search-add-new/search-add-n
     PaginationComponent,
     PageHeaderComponent,
     SearchAddNewComponent,
+    ReactiveFormsModule,
   ],
 })
 export class AuthorModule {}

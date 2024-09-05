@@ -28,7 +28,7 @@
                     [src]="student.photoPath"
                     alt=""
                   />
-                  <a href="ucenikProfile.php">
+                  <a [routerLink]="[student.id]">
                     <span class="font-medium text-center"
                       >{{ student.name }} {{ student.surname }}</span
                     >

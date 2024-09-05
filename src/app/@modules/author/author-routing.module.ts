@@ -17,9 +17,9 @@ const routes = [
   {
     path: 'edit/:id',
     component: AuthorEditAddComponent,
-    // resolve: {
-    //   author: AuthorResolver,
-    // },
+    resolve: {
+      author: AuthorResolver,
+    },
   },
   {
     path: ':id',

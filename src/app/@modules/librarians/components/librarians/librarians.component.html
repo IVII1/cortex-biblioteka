@@ -1,7 +1,7 @@
 <section class="w-screen h-screen pl-[80px] py-4 text-gray-700">
   <div class="height-autori pb-[30px] scroll">
     <app-page-header title="Librarians"></app-page-header>
-    <app-search-add-new buttonName="Add librarian"></app-search-add-new>
+    <app-search-add-new buttonName="Add Librarian"></app-search-add-new>
     <div
       class="inline-block min-w-full px-[30px] pt-3 align-middle bg-white rounded-bl-lg rounded-br-lg shadow-dashboard"
     >
@@ -73,7 +73,7 @@
                           <span class="px-4 py-0">View Details</span>
                         </a>
                         <a
-                          [routerLink]="[librarian.id]"
+                          [routerLink]="['edit', librarian.id]"
                           tabindex="0"
                           class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                           role="menuitem"
