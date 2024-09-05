@@ -14,8 +14,15 @@ export class SearchAddNewComponent {
   authorService = inject(AuthorService);
   buttonName = input<string>();
 
-  newAuthor() {
-    this.router.navigate(['/authors/new']);
-    this.authorService.saveAuthor();
+  newForm() {
+    if (this.buttonName() === 'Add Student') {
+      this.router.navigate(['/students/new']);
+    }
+    if (this.buttonName() === 'Add Author') {
+      this.router.navigate(['/authors/new']);
+    }
+    if (this.buttonName() === 'Add Librarian') {
+      this.router.navigate(['/librarians/new']);
+    }
   }
 }

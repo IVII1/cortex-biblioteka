@@ -11,8 +11,8 @@ import { StudentService } from '../../services/student.service';
   styleUrl: './student-edit-add.component.scss',
 })
 export class StudentEditAddComponent implements OnInit {
+  student!: Student | null;
   form!: FormGroup;
-  student!: Student;
   studentService = inject(StudentService);
 
   constructor(
@@ -22,24 +22,31 @@ export class StudentEditAddComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.student = this.route.snapshot.data['student'];
+    this.student = this.route.snapshot.data['student'] || null;
     this.initForm();
   }
 
   initForm(): void {
     this.form = this.fb.group({
-      name: [this.student.name ?? '', Validators.required],
-      surname: [this.student.surname ?? ''],
-      role_id: [this.student.role, Validators.required],
-      email: [this.student.email, [Validators.required, Validators.email]],
-      jmbg: [this.student.jmbg, Validators.required],
-      username: [this.student.username, Validators.required],
+      name: [this.student?.name ?? '', Validators.required],
+      surname: [this.student?.surname ?? ''],
+      role_id: [this.student?.role ?? '', Validators.required],
+      email: [
+        this.student?.email ?? '',
+        [Validators.required, Validators.email],
+      ],
+      jmbg: [this.student?.jmbg ?? '', Validators.required],
+      username: [this.student?.username ?? '', Validators.required],
       password: ['123456', Validators.required],
       password_confirmation: ['123456', Validators.required],
+      photoPath: ['http://library.test/img/profile.jpg', Validators.required],
     });
   }
 
   onSubmit(): void {
-    this.studentService.saveStudent(this.form.value, this.student.id);
+    if (this.form.valid) {
+      this.studentService.saveStudent(this.form.value, this.student?.id);
+      console.log(this.form.value);
+    }
   }
 }
