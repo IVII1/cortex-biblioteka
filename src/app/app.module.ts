@@ -13,6 +13,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { PaginationComponent } from './@shared/pagination/pagination.component';
 import { SearchAddNewComponent } from './@shared/search-add-new/search-add-new.component';
 import { PageHeaderComponent } from './@shared/page-header/page-header.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { PageHeaderComponent } from './@shared/page-header/page-header.component
     PaginationComponent,
     SearchAddNewComponent,
     PageHeaderComponent,
+    ReactiveFormsModule,
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent],

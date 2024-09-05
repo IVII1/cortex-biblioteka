@@ -7,7 +7,11 @@ import { StudentResolver } from './resolvers/student.resolver';
 
 const routes: Routes = [
   { path: '', component: StudentsComponent },
-  { path: 'edit/:id', component: StudentEditAddComponent },
+  {
+    path: 'edit/:id',
+    component: StudentEditAddComponent,
+    resolve: { student: StudentResolver },
+  },
   { path: 'new', component: StudentEditAddComponent },
   {
     path: ':id',

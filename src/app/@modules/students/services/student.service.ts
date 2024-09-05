@@ -1,14 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { DestroyRef, inject, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { Student } from '../models/student.model';
 import { map, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StudentService {
+  students: Student[] = [];
+  destroyRef = inject(DestroyRef);
   httpClient = inject(HttpClient);
+  router = inject(Router);
   deleteStudent(id: number) {
     const url = `${environment.apiUsersUrl}${id}`;
     const headers = new HttpHeaders().set('Authorization', environment.token);
@@ -16,6 +21,7 @@ export class StudentService {
       next: (response) => console.log('Deletion successful', response),
     });
   }
+
   getStudent(id: string): Observable<Student> {
     const headers = new HttpHeaders().set(`Authorization`, environment.token);
 
@@ -24,5 +30,21 @@ export class StudentService {
         data: Student;
       }>(`${environment.apiUsersUrl}/${id}`, { headers })
       .pipe(map((response) => response.data));
+  }
+  saveStudent(data: any, id?: number) {
+    if (id) {
+      const url = `${environment.apiUsersUrl}/${id}`;
+      const headers = new HttpHeaders().set('Authorization', environment.token);
+      this.httpClient.put<Student>(url, data, { headers }).subscribe({
+        next: (response) => console.log(response),
+      });
+    } else {
+      const url = `${environment.apiUsersStore}`;
+      const headers = new HttpHeaders().set('Authorization', environment.token);
+      this.httpClient.post<Student>(url, data, { headers }).subscribe({
+        next: (response) => console.log(response),
+      });
+    }
+    this.router.navigate(['/students']);
   }
 }
