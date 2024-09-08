@@ -14,6 +14,7 @@ import { PaginationComponent } from './@shared/pagination/pagination.component';
 import { SearchAddNewComponent } from './@shared/search-add-new/search-add-new.component';
 import { PageHeaderComponent } from './@shared/page-header/page-header.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     PageHeaderComponent,
     ReactiveFormsModule,
   ],
-  providers: [provideHttpClient()],
+  providers: [provideHttpClient(), provideAnimationsAsync()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

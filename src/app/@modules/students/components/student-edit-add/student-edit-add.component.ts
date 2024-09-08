@@ -46,7 +46,6 @@ export class StudentEditAddComponent implements OnInit {
   onSubmit(): void {
     if (this.form.valid) {
       this.studentService.saveStudent(this.form.value, this.student?.id);
-      console.log(this.form.value);
     }
   }
 }

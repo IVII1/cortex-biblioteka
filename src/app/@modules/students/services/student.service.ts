@@ -17,9 +17,7 @@ export class StudentService {
   deleteStudent(id: number) {
     const url = `${environment.apiUsersUrl}${id}`;
     const headers = new HttpHeaders().set('Authorization', environment.token);
-    this.httpClient.delete<{ data: Student[] }>(url, { headers }).subscribe({
-      next: (response) => console.log('Deletion successful', response),
-    });
+    this.httpClient.delete<{ data: Student[] }>(url, { headers }).subscribe({});
   }
 
   getStudent(id: string): Observable<Student> {
@@ -35,15 +33,11 @@ export class StudentService {
     if (id) {
       const url = `${environment.apiUsersUrl}/${id}`;
       const headers = new HttpHeaders().set('Authorization', environment.token);
-      this.httpClient.put<Student>(url, data, { headers }).subscribe({
-        next: (response) => console.log(response),
-      });
+      this.httpClient.put<Student>(url, data, { headers }).subscribe({});
     } else {
       const url = `${environment.apiUsersStore}`;
       const headers = new HttpHeaders().set('Authorization', environment.token);
-      this.httpClient.post<Student>(url, data, { headers }).subscribe({
-        next: (response) => console.log(response),
-      });
+      this.httpClient.post<Student>(url, data, { headers }).subscribe({});
     }
     this.router.navigate(['/students']);
   }

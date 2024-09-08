@@ -7,6 +7,7 @@ import { LibrarianEditAddComponent } from './components/librarian-edit-add/libra
 
 const routes: Routes = [
   { path: '', component: LibrariansComponent },
+  { path: 'new', component: LibrarianEditAddComponent },
   {
     path: ':id',
     component: LibrarianDetailComponent,
@@ -17,7 +18,6 @@ const routes: Routes = [
     component: LibrarianEditAddComponent,
     resolve: { librarian: LibrarianResolver },
   },
-  { path: 'new', component: LibrarianEditAddComponent },
 ];
 
 @NgModule({

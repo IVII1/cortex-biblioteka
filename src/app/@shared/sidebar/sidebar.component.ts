@@ -11,6 +11,5 @@ export class SidebarComponent {
 
   expandSidebar() {
     this.isExpanded = !this.isExpanded;
-    console.log(this.isExpanded);
   }
 }

@@ -12,6 +12,5 @@ export class StudentDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
   ngOnInit(): void {
     this.student = this.route.snapshot.data['student'];
-    console.log(this.student);
   }
 }

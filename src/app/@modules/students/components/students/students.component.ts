@@ -29,7 +29,6 @@ export class StudentsComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.students = res.data;
-          console.log(this.students);
         },
       });
     this.destroyRef.onDestroy(() => {

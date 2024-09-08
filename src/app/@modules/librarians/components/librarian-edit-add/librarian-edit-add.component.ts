@@ -45,7 +45,6 @@ export class LibrarianEditAddComponent {
   onSubmit(): void {
     if (this.form.valid) {
       this.librarianService.saveLibrarian(this.form.value, this.librarian?.id);
-      console.log(this.form.value);
     }
   }
 }

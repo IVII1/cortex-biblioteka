@@ -29,7 +29,6 @@ export class LibrariansComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.librarians = res.data;
-          console.log(this.librarians);
         },
       });
     this.destroyRef.onDestroy(() => {

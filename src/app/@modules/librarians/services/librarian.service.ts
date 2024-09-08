@@ -15,9 +15,9 @@ export class LibrarianService {
   deleteLibrarian(id: number) {
     const url = `${environment.apiUsersUrl}${id}`;
     const headers = new HttpHeaders().set('Authorization', environment.token);
-    this.httpClient.delete<{ data: Librarian[] }>(url, { headers }).subscribe({
-      next: (response) => console.log('Deletion successful', response),
-    });
+    this.httpClient
+      .delete<{ data: Librarian[] }>(url, { headers })
+      .subscribe({});
   }
   getLibrarian(id: string): Observable<Librarian> {
     const headers = new HttpHeaders().set(`Authorization`, environment.token);
@@ -32,15 +32,11 @@ export class LibrarianService {
     if (id) {
       const url = `${environment.apiUsersUrl}/${id}`;
       const headers = new HttpHeaders().set('Authorization', environment.token);
-      this.httpClient.put<Librarian>(url, data, { headers }).subscribe({
-        next: (response) => console.log(response),
-      });
+      this.httpClient.put<Librarian>(url, data, { headers }).subscribe({});
     } else {
       const url = `${environment.apiUsersStore}`;
       const headers = new HttpHeaders().set('Authorization', environment.token);
-      this.httpClient.post<Librarian>(url, data, { headers }).subscribe({
-        next: (response) => console.log(response),
-      });
+      this.httpClient.post<Librarian>(url, data, { headers }).subscribe({});
     }
     this.router.navigate(['/librarians']);
   }

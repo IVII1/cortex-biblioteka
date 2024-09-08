@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BookDetailComponent } from './components/book-detail/book-detail.component';
 import { BookListComponent } from './components/book-list/book-list.component';
+import { BookResolver } from './resolvers/book.resolver';
 
 const routes = [
   {
@@ -15,9 +16,10 @@ const routes = [
   {
     path: ':id',
     component: BookDetailComponent,
-    // resolve: {
-    //   Book: BookResolver,
-    // },
+
+    resolve: {
+      book: BookResolver,
+    },
   },
 ];
 

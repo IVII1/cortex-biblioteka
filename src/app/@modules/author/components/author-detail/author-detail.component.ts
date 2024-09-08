@@ -12,6 +12,5 @@ export class AuthorDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
   ngOnInit(): void {
     this.author = this.route.snapshot.data['author'];
-    console.log(this.author);
   }
 }

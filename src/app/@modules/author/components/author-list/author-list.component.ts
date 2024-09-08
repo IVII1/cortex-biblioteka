@@ -30,7 +30,6 @@ export class AuthorListComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.authors = res.data;
-          console.log(this.authors);
         },
       });
     this.destroyRef.onDestroy(() => {

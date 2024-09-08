@@ -12,6 +12,5 @@ export class LibrarianDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
   ngOnInit(): void {
     this.librarian = this.route.snapshot.data['librarian'];
-    console.log(this.librarian);
   }
 }
