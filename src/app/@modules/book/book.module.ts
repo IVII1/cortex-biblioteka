@@ -7,6 +7,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { PageHeaderComponent } from '../../@shared/page-header/page-header.component';
 import { CommonModule } from '@angular/common';
 import { BookStatsComponent } from './components/book-stats/book-stats.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 @NgModule({
   declarations: [BookListComponent, BookDetailComponent],
   imports: [
@@ -16,6 +20,9 @@ import { BookStatsComponent } from './components/book-stats/book-stats.component
     PageHeaderComponent,
     CommonModule,
     BookStatsComponent,
+    MatInputModule,
+    MatSelectModule,
+    MatFormFieldModule,
   ],
 })
 export class BookModule {}

@@ -40,4 +40,14 @@ export class AuthorService {
       .get<{ data: Author }>(`${environment.apiAuthorsUrl}/${id}`, { headers })
       .pipe(map((response) => response.data));
   }
+  allAuthors() {
+    const url = `${environment.apiAuthorsUrl}`;
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `${environment.token}`,
+    );
+    return this.httpClient.get<{ data: Author[] }>(url, {
+      headers,
+    });
+  }
 }

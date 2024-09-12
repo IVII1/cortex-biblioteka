@@ -1,9 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { DestroyRef } from '@angular/core';
 import { Author } from '../../models/author.model';
 import { AuthorService } from '../../services/author.service';
-import { environment } from 'src/environments/environment.development';
+
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,20 +20,10 @@ export class AuthorListComponent implements OnInit {
   authorService = inject(AuthorService);
 
   ngOnInit(): void {
-    const url = `${environment.apiAuthorsUrl}`;
-    const headers = new HttpHeaders().set(
-      'Authorization',
-      `${environment.token}`,
-    );
-    const subscription = this.httpClient
-      .get<{ data: Author[] }>(url, { headers })
-      .subscribe({
-        next: (res) => {
-          this.authors = res.data;
-        },
-      });
-    this.destroyRef.onDestroy(() => {
-      subscription.unsubscribe();
+    this.authorService.allAuthors().subscribe({
+      next: (res) => {
+        this.authors = res.data;
+      },
     });
   }
   openMenuId: number | null = null;

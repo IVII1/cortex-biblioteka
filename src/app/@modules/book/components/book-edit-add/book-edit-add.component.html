@@ -1,1 +1,349 @@
-<p>book-edit-add works!</p>
+<section class="h-screen w-screen pl-[80px] pb-2 text-gray-700">
+  <!-- Header section - outside of tabs -->
+  <div class="heading">
+    <div class="flex border-b-[1px] border-[#e4dfdf]">
+      <div class="pl-[30px] py-[10px] flex flex-col">
+        <div>
+          <h1>Edit</h1>
+        </div>
+        <div>
+          <nav class="w-full rounded">
+            <ol class="flex list-reset">
+              <li>
+                <a
+                  routerLink="/books"
+                  class="text-[#2196f3] hover:text-blue-600"
+                  >All Books</a
+                >
+              </li>
+              <li><span class="mx-2">/</span></li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-blue-600">Edit</a>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+    <mat-tab-group>
+      <mat-tab label="Overview">
+        <div class="tab-content" id="nav-tabContent">
+          <div class="scroll height-content section-content">
+            <div class="flex flex-row ml-[30px] mb-[150px]">
+              <div class="w-[50%]">
+                <div class="mt-[20px]">
+                  <mat-form-field class="w-[90%]">
+                    <mat-label>Book Title</mat-label>
+                    <input matInput formControlName="nazivKnjiga" required />
+                    <mat-error
+                      *ngIf="
+                        bookForm.get('nazivKnjiga')?.hasError('required') &&
+                        bookForm.get('nazivKnjiga')?.touched
+                      "
+                    >
+                      Book title is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="mt-[20px]">
+                  <mat-form-field class="w-[90%]">
+                    <mat-label>Description</mat-label>
+                    <textarea
+                      matInput
+                      formControlName="kratki_sadrzaj"
+                    ></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="mt-[20px]">
+                  <mat-form-field class="w-[90%]">
+                    <mat-label>Categories</mat-label>
+                    <mat-select formControlName="categories" multiple required>
+                      <mat-option
+                        *ngFor="let category of categories"
+                        [value]="category.id"
+                      >
+                        {{ category.name }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        bookForm.get('categories')?.hasError('required') &&
+                        bookForm.get('categories')?.touched
+                      "
+                    >
+                      At least one category is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="mt-[20px]">
+                  <mat-form-field class="w-[90%]">
+                    <mat-label>Genres</mat-label>
+                    <mat-select formControlName="genres" multiple required>
+                      <mat-option
+                        *ngFor="let genre of genres"
+                        [value]="genre.id"
+                      >
+                        {{ genre.name }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        bookForm.get('genres')?.hasError('required') &&
+                        bookForm.get('genres')?.touched
+                      "
+                    >
+                      At least one genre is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="w-[50%]">
+                <div class="mt-[20px]">
+                  <mat-form-field class="w-[90%]">
+                    <mat-label>Authors</mat-label>
+                    <mat-select formControlName="authors" multiple required>
+                      <mat-option
+                        *ngFor="let author of authors"
+                        [value]="author.id"
+                      >
+                        {{ author.name }} {{ author.surname }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        bookForm.get('authors')?.hasError('required') &&
+                        bookForm.get('authors')?.touched
+                      "
+                    >
+                      At least one author is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="mt-[20px]">
+                  <mat-form-field class="w-[90%]">
+                    <mat-label>Publisher</mat-label>
+                    <mat-select formControlName="izdavac" required>
+                      <mat-option
+                        *ngFor="let publisher of publishers"
+                        [value]="publisher.id"
+                      >
+                        {{ publisher.name }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        bookForm.get('publisher')?.hasError('required') &&
+                        bookForm.get('publisher')?.touched
+                      "
+                    >
+                      Publisher is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="mt-[20px]">
+                  <mat-form-field class="w-[90%]">
+                    <mat-label>Publication Year</mat-label>
+                    <mat-select formControlName="godinaIzdavanja" required>
+                      <mat-option
+                        *ngFor="let year of yearRange(50)"
+                        [value]="year"
+                      >
+                        {{ year }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        bookForm.get('publicationYear')?.hasError('required') &&
+                        bookForm.get('publicationYear')?.touched
+                      "
+                    >
+                      Publication year is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="mt-[20px]">
+                  <mat-form-field class="w-[45%]">
+                    <mat-label>Quantity</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="knjigaKolicina"
+                      min="0"
+                      required
+                    />
+                    <mat-error
+                      *ngIf="
+                        bookForm.get('quantity')?.hasError('required') &&
+                        bookForm.get('quantity')?.touched
+                      "
+                    >
+                      Quantity is required
+                    </mat-error>
+                    <mat-error
+                      *ngIf="
+                        bookForm.get('quantity')?.hasError('min') &&
+                        bookForm.get('quantity')?.touched
+                      "
+                    >
+                      Quantity must be 0 or greater
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Specifications">
+        <div class="scroll height-content section-content">
+          <div class="flex flex-row ml-[30px]">
+            <div class="w-[50%] mb-[150px]">
+              <div class="mt-[20px]">
+                <mat-form-field class="w-[45%]">
+                  <mat-label>Page Count</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    formControlName="brStrana"
+                    min="0"
+                    required
+                  />
+                  <mat-error
+                    *ngIf="
+                      bookForm.get('quantity')?.hasError('required') &&
+                      bookForm.get('quantity')?.touched
+                    "
+                  >
+                    Page count is required
+                  </mat-error>
+                  <mat-error
+                    *ngIf="
+                      bookForm.get('pageCount')?.hasError('min') &&
+                      bookForm.get('pageCount')?.touched
+                    "
+                  >
+                    Quantity must be 1 or greater
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="mt-[20px]">
+                <mat-form-field class="w-[90%]">
+                  <mat-label>Script</mat-label>
+                  <mat-select formControlName="pismo" required>
+                    <mat-option
+                      *ngFor="let script of scripts"
+                      [value]="script.id"
+                    >
+                      {{ script.name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error
+                    *ngIf="
+                      bookForm.get('psmo')?.hasError('required') &&
+                      bookForm.get('pismo')?.touched
+                    "
+                  >
+                    Script is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="mt-[20px]">
+                <mat-form-field class="w-[90%]">
+                  <mat-label>Bookbind</mat-label>
+                  <mat-select formControlName="povez" required>
+                    <mat-option
+                      *ngFor="let bookbind of bookbinds"
+                      [value]="bookbind.id"
+                    >
+                      {{ bookbind.name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error
+                    *ngIf="
+                      bookForm.get('povez')?.hasError('required') &&
+                      bookForm.get('povez')?.touched
+                    "
+                  >
+                    Bookbind is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="mt-[20px]">
+                <mat-form-field class="w-[90%]">
+                  <mat-label>Format</mat-label>
+                  <mat-select formControlName="format" required>
+                    <mat-option
+                      *ngFor="let format of formats"
+                      [value]="format.id"
+                    >
+                      {{ format.name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error
+                    *ngIf="
+                      bookForm.get('format')?.hasError('required') &&
+                      bookForm.get('format')?.touched
+                    "
+                  >
+                    Format is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="mt-[20px]">
+                <mat-form-field class="w-[90%]">
+                  <mat-label>ISBN</mat-label>
+                  <input matInput formControlName="isbn" required />
+                  <mat-error
+                    *ngIf="
+                      bookForm.get('isbn')?.hasError('required') &&
+                      bookForm.get('isbn')?.touched
+                    "
+                  >
+                    ISBN is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+
+    <div class="absolute bottom-0 w-full">
+      <div class="flex flex-row">
+        <div
+          class="inline-block w-full text-white text-right py-[7px] mr-[100px]"
+        >
+          <button
+            type="button"
+            class="btn-animation shadow-lg mr-[15px] w-[150px] focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]"
+          >
+            Cancel <i class="fas fa-times ml-[4px]"></i>
+          </button>
+
+          <button
+            id="sacuvajKnjigu"
+            type="submit"
+            [disabled]="!bookForm.valid"
+            class="btn-animation shadow-lg w-[150px] disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50] cursor-pointer"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>

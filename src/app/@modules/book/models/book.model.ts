@@ -12,7 +12,7 @@ export class Book {
   authors!: { id: number; name: string; surname: string }[];
   categories!: { id: number; name: string }[];
   genres!: { id: number; name: string }[];
-  publishers!: { id: number; name: string };
+  publishers!: { id: number; name: string }[];
   script!: { id: number; name: string };
   language!: { id: number; name: string };
   bookbind!: { id: number; name: string };

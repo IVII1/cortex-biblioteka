@@ -28,19 +28,66 @@ export class BookService {
   }
   save(data: any, id?: number) {
     if (id) {
-      const url = `${environment.apiBooks}/${id}`;
+      const url = `${environment.apiBookUpdate}/${id}/update`;
       const headers = new HttpHeaders().set('Authorization', environment.token);
-      this.httpClient.put<Book>(url, data, { headers });
+      return this.httpClient.post<Book>(url, data, { headers });
     } else {
-      const url = `${environment.apiBooks}`;
+      const url = `${environment.apiBookStore}`;
       const headers = new HttpHeaders().set('Authorization', environment.token);
-      this.httpClient.post<Book>(url, data, { headers });
+      return this.httpClient.post<Book>(url, data, { headers });
     }
-    this.router.navigate(['/books']);
   }
 
   all(): Observable<any> {
     const url = `${environment.apiBooks}`;
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `${environment.token}`,
+    );
+    return this.httpClient.get(url, { headers });
+  }
+  allGenres(): Observable<any> {
+    const url = `${environment.apiGenres}`;
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `${environment.token}`,
+    );
+    return this.httpClient.get(url, { headers });
+  }
+  allCategories(): Observable<any> {
+    const url = `${environment.apiCategories}`;
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `${environment.token}`,
+    );
+    return this.httpClient.get(url, { headers });
+  }
+  allPublishers(): Observable<any> {
+    const url = `${environment.apiPublishers}`;
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `${environment.token}`,
+    );
+    return this.httpClient.get(url, { headers });
+  }
+  allScripts(): Observable<any> {
+    const url = `${environment.apiScripts}`;
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `${environment.token}`,
+    );
+    return this.httpClient.get(url, { headers });
+  }
+  allBookbinds(): Observable<any> {
+    const url = `${environment.apiBookbinds}`;
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `${environment.token}`,
+    );
+    return this.httpClient.get(url, { headers });
+  }
+  allFormats(): Observable<any> {
+    const url = `${environment.apiFormats}`;
     const headers = new HttpHeaders().set(
       'Authorization',
       `${environment.token}`,

@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { BookDetailComponent } from './components/book-detail/book-detail.component';
 import { BookListComponent } from './components/book-list/book-list.component';
 import { BookResolver } from './resolvers/book.resolver';
+import { BookEditAddComponent } from './components/book-edit-add/book-edit-add.component';
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
   {
     path: 'new',
     component: BookDetailComponent,
+  },
+  {
+    path: 'edit/:id',
+    component: BookEditAddComponent,
+    resolve: { book: BookResolver },
   },
   {
     path: ':id',
