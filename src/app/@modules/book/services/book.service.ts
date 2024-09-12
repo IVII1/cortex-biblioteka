@@ -94,4 +94,21 @@ export class BookService {
     );
     return this.httpClient.get(url, { headers });
   }
+
+  reserve(id: number): Observable<any> {
+    const url = `${environment.apiBooks}/${id}/reserve`;
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `${environment.token}`,
+    );
+    return this.httpClient.post(url, { headers });
+  }
+  borrow(id: number): Observable<any> {
+    const url = `${environment.apiBooks}/${id}/izdaj`;
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `${environment.token}`,
+    );
+    return this.httpClient.post(url, { headers });
+  }
 }

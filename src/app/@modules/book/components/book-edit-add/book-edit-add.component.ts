@@ -54,9 +54,6 @@ export class BookEditAddComponent implements OnInit {
   ngOnInit() {
     this.fecthData();
     this.initForm();
-    this.bookForm.valueChanges.subscribe(() => {
-      this.checkFormValidity();
-    });
   }
 
   initForm() {
@@ -83,18 +80,6 @@ export class BookEditAddComponent implements OnInit {
       ],
     });
   }
-  checkFormValidity() {
-    console.log('Overall form validity:', this.bookForm.valid);
-    Object.keys(this.bookForm.controls).forEach((key) => {
-      const control = this.bookForm.get(key);
-      console.log(
-        `${key} validity:`,
-        control?.valid,
-        'Errors:',
-        control?.errors,
-      );
-    });
-  }
 
   onSubmit() {
     if (this.bookForm.valid) {
@@ -107,12 +92,11 @@ export class BookEditAddComponent implements OnInit {
         },
         (error) => {
           console.error('Error saving book:', error);
-          // Show error message
         },
       );
     } else {
       console.log('Form is invalid');
-      // Optionally mark all fields as touched to show validation errors
+
       Object.keys(this.bookForm.controls).forEach((key) => {
         const control = this.bookForm.get(key);
         control?.markAsTouched();

@@ -41,4 +41,12 @@ export class StudentService {
     }
     this.router.navigate(['/students']);
   }
+  all(): Observable<{ data: Student[] }> {
+    const url = `${environment.apiUsersUrl}`;
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `${environment.token}`,
+    );
+    return this.httpClient.get<{ data: Student[] }>(url, { headers });
+  }
 }
