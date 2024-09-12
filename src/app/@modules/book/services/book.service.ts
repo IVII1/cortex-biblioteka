@@ -94,6 +94,14 @@ export class BookService {
     );
     return this.httpClient.get(url, { headers });
   }
+  allLanguages(): Observable<any> {
+    const url = `${environment.apiLanguages}`;
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `${environment.token}`,
+    );
+    return this.httpClient.get(url, { headers });
+  }
 
   reserve(id: number): Observable<any> {
     const url = `${environment.apiBooks}/${id}/reserve`;

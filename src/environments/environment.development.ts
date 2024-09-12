@@ -11,6 +11,7 @@ export const environment = {
   apiScripts: 'https://biblioteka.simonovicp.com/api/scripts',
   apiBookbinds: 'https://biblioteka.simonovicp.com/api/bookbinds',
   apiFormats: 'https://biblioteka.simonovicp.com/api/formats',
+  apiLanguages: 'https://biblioteka.simonovicp.com/api/languages',
   apiBookUpdate: 'https://biblioteka.simonovicp.com/books',
   apiBookStore: 'https://biblioteka.simonovicp.com/api/books/store',
 };

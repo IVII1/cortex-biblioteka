@@ -149,56 +149,77 @@
                   </mat-form-field>
                 </div>
 
-                <div class="mt-[20px]">
-                  <mat-form-field class="w-[90%]">
-                    <mat-label>Publication Year</mat-label>
-                    <mat-select formControlName="godinaIzdavanja" required>
-                      <mat-option
-                        *ngFor="let year of yearRange(50)"
-                        [value]="year"
-                      >
-                        {{ year }}
-                      </mat-option>
-                    </mat-select>
-                    <mat-error
-                      *ngIf="
-                        bookForm.get('publicationYear')?.hasError('required') &&
-                        bookForm.get('publicationYear')?.touched
-                      "
+                <div class="mt-[20px]"></div>
+                <mat-form-field class="w-[90%]">
+                  <mat-label>Language</mat-label>
+                  <mat-select formControlName="jezik" required>
+                    <mat-option
+                      *ngFor="let language of languages"
+                      [value]="language.id"
                     >
-                      Publication year is required
-                    </mat-error>
-                  </mat-form-field>
-                </div>
+                      {{ language.name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error
+                    *ngIf="
+                      bookForm.get('publisher')?.hasError('required') &&
+                      bookForm.get('publisher')?.touched
+                    "
+                  >
+                    Langauge is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
 
-                <div class="mt-[20px]">
-                  <mat-form-field class="w-[45%]">
-                    <mat-label>Quantity</mat-label>
-                    <input
-                      matInput
-                      type="text"
-                      formControlName="knjigaKolicina"
-                      min="0"
-                      required
-                    />
-                    <mat-error
-                      *ngIf="
-                        bookForm.get('quantity')?.hasError('required') &&
-                        bookForm.get('quantity')?.touched
-                      "
+              <div class="mt-[20px]">
+                <mat-form-field class="w-[90%]">
+                  <mat-label>Publication Year</mat-label>
+                  <mat-select formControlName="godinaIzdavanja" required>
+                    <mat-option
+                      *ngFor="let year of yearRange(50)"
+                      [value]="year"
                     >
-                      Quantity is required
-                    </mat-error>
-                    <mat-error
-                      *ngIf="
-                        bookForm.get('quantity')?.hasError('min') &&
-                        bookForm.get('quantity')?.touched
-                      "
-                    >
-                      Quantity must be 0 or greater
-                    </mat-error>
-                  </mat-form-field>
-                </div>
+                      {{ year }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error
+                    *ngIf="
+                      bookForm.get('publicationYear')?.hasError('required') &&
+                      bookForm.get('publicationYear')?.touched
+                    "
+                  >
+                    Publication year is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="mt-[20px]">
+                <mat-form-field class="w-[45%]">
+                  <mat-label>Quantity</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    formControlName="knjigaKolicina"
+                    min="0"
+                    required
+                  />
+                  <mat-error
+                    *ngIf="
+                      bookForm.get('quantity')?.hasError('required') &&
+                      bookForm.get('quantity')?.touched
+                    "
+                  >
+                    Quantity is required
+                  </mat-error>
+                  <mat-error
+                    *ngIf="
+                      bookForm.get('quantity')?.hasError('min') &&
+                      bookForm.get('quantity')?.touched
+                    "
+                  >
+                    Quantity must be 0 or greater
+                  </mat-error>
+                </mat-form-field>
               </div>
             </div>
           </div>

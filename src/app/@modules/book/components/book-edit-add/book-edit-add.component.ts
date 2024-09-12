@@ -18,6 +18,7 @@ import { Script } from '../../models/script';
 import { Format } from '../../models/format';
 import { Bookbind } from '../../models/bookbind';
 import { Router } from '@angular/router';
+import { Language } from '../../models/language';
 
 @Component({
   selector: 'app-book-edit-add',
@@ -43,6 +44,7 @@ export class BookEditAddComponent implements OnInit {
   scripts: Script[] = [];
   formats: Format[] = [];
   bookbinds: Bookbind[] = [];
+  languages: Language[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -68,7 +70,7 @@ export class BookEditAddComponent implements OnInit {
       knjigaKolicina: ['', [Validators.required, Validators.min(0)]],
       brStrana: [1, [Validators.required, Validators.min(1)]],
       pismo: ['', Validators.required],
-      jezik: ['Crnogorski', Validators.required],
+      jezik: ['', Validators.required],
       povez: ['', Validators.required],
       format: ['', Validators.required],
       isbn: ['', [Validators.required]],
@@ -164,6 +166,15 @@ export class BookEditAddComponent implements OnInit {
       error: (err) => console.error(err),
     });
   }
+  allLanguages() {
+    this.bookService.allLanguages().subscribe({
+      next: (response) => {
+        this.languages = response.data;
+      },
+      error: (err) => console.error(err),
+    });
+  }
+
   fecthData() {
     this.initForm();
     this.allCategories();
@@ -173,5 +184,6 @@ export class BookEditAddComponent implements OnInit {
     this.allScripts();
     this.allFormats();
     this.allBookbinds();
+    this.allLanguages();
   }
 }
