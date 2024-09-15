@@ -55,7 +55,7 @@ export class BookBorrowComponent {
       );
   }
   onSubmit() {
-    console.log(this.borrowForm.value);
+   
     this.bookService.borrow(this.book.id).subscribe({
       next: (response) => (this.borrowEvent = response.data),
     });

@@ -51,8 +51,6 @@ export class BookReserveComponent implements OnInit {
     this.bookService.reserve(this.book.id).subscribe({
       next: (response) => (this.reservation = response.data),
     });
-
-    console.log(this.reserveForm.value);
   }
 
   formatDate(date: Date, controlName: string) {

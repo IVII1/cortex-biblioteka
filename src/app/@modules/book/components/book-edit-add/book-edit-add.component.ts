@@ -17,7 +17,7 @@ import { Publisher } from '../../models/publisher';
 import { Script } from '../../models/script';
 import { Format } from '../../models/format';
 import { Bookbind } from '../../models/bookbind';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Language } from '../../models/language';
 
 @Component({
@@ -51,6 +51,7 @@ export class BookEditAddComponent implements OnInit {
     private bookService: BookService,
     private authorService: AuthorService,
     private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
@@ -60,20 +61,26 @@ export class BookEditAddComponent implements OnInit {
 
   initForm() {
     this.bookForm = this.fb.group({
-      nazivKnjiga: ['', Validators.required],
-      kratki_sadrzaj: [''],
-      categories: [[], Validators.required],
-      genres: [[], Validators.required],
-      authors: [[], Validators.required],
-      izdavac: ['', Validators.required],
-      godinaIzdavanja: ['', Validators.required],
-      knjigaKolicina: ['', [Validators.required, Validators.min(0)]],
-      brStrana: [1, [Validators.required, Validators.min(1)]],
-      pismo: ['', Validators.required],
-      jezik: ['', Validators.required],
-      povez: ['', Validators.required],
-      format: ['', Validators.required],
-      isbn: ['', [Validators.required]],
+      nazivKnjiga: [this.book?.title ?? '', Validators.required],
+      kratki_sadrzaj: [this.book?.description ?? '', Validators.required],
+      categories: [this.book?.categories ?? [], Validators.required],
+      genres: [this.book?.genres ?? [], Validators.required],
+      authors: [this.book?.authors ?? [], Validators.required],
+      izdavac: [this.book?.publishers ?? '', Validators.required],
+      godinaIzdavanja: [this.book?.pDate ?? '', Validators.required],
+      knjigaKolicina: [
+        this.book?.samples ?? '',
+        [Validators.required, Validators.min(0)],
+      ],
+      brStrana: [
+        this.book?.pages ?? '',
+        [Validators.required, Validators.min(1)],
+      ],
+      pismo: [this.book?.script ?? '', Validators.required],
+      jezik: [this.book?.language ?? '', Validators.required],
+      povez: [this.book?.bookbind ?? '', Validators.required],
+      format: [this.book?.format ?? '', Validators.required],
+      isbn: [this.book?.isbn ?? '', Validators.required],
       deletePdfs: [0, [Validators.required]],
       present: [[1, 2, 3], Validators.required],
       pictures: [
@@ -85,20 +92,10 @@ export class BookEditAddComponent implements OnInit {
 
   onSubmit() {
     if (this.bookForm.valid) {
-      console.log('Form submitted', this.bookForm.value);
-      this.bookService.save(this.bookForm.value, this.book?.id);
-      this.bookService.save(this.bookForm.value, this.book?.id).subscribe(
-        (response) => {
-          console.log('Book saved successfully:', response);
-          this.router.navigate(['/books']);
-        },
-        (error) => {
-          console.error('Error saving book:', error);
-        },
-      );
+      this.bookService
+        .save(this.bookForm.value, this.book?.id)
+        .subscribe({ next: (response) => (this.book = response) });
     } else {
-      console.log('Form is invalid');
-
       Object.keys(this.bookForm.controls).forEach((key) => {
         const control = this.bookForm.get(key);
         control?.markAsTouched();
@@ -176,7 +173,6 @@ export class BookEditAddComponent implements OnInit {
   }
 
   fecthData() {
-    this.initForm();
     this.allCategories();
     this.allGenres();
     this.allAuthors();
@@ -185,5 +181,6 @@ export class BookEditAddComponent implements OnInit {
     this.allFormats();
     this.allBookbinds();
     this.allLanguages();
+    this.book = this.route.snapshot.data['book'] || null;
   }
 }
