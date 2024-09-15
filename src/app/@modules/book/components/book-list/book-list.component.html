@@ -422,7 +422,7 @@
                     src="img/tomsojer.jpg"
                     alt=""
                   />
-                  <a href="knjigaOsnovniDetalji.php">
+                  <a [routerLink]="['edit', book.id]">
                     <span class="font-medium text-center">{{
                       book.title
                     }}</span>

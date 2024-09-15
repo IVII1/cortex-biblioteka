@@ -17,7 +17,7 @@
               <ol class="flex list-reset">
                 <li>
                   <a
-                    href="evidencijaKnjiga.php"
+                    routerLink="/books"
                     class="text-[#2196f3] hover:text-blue-600"
                   >
                     Evidencija knjiga
@@ -28,7 +28,7 @@
                 </li>
                 <li>
                   <a
-                    href="knjigaOsnovniDetalji.php"
+                    [routerLink]="['/books', book.id]"
                     class="text-[#2196f3] hover:text-blue-600"
                   >
                     KNJIGA {{ book.id }}
@@ -38,12 +38,7 @@
                   <span class="mx-2">/</span>
                 </li>
                 <li>
-                  <a
-                    href="rezervisiKnjigu.php"
-                    class="text-[#2196f3] hover:text-blue-600"
-                  >
-                    Rezervisi knjigu
-                  </a>
+                  <p class="text-[#2196f3]">Rezervisi knjigu</p>
                 </li>
               </ol>
             </nav>
@@ -51,26 +46,29 @@
         </div>
       </div>
       <div class="pt-[24px] mr-[30px]">
-        <a href="otpisiKnjigu.php" class="inline hover:text-blue-600">
+        <a
+          [routerLink]="['/discard', book.id]"
+          class="inline hover:text-blue-600"
+        >
           <i class="fas fa-level-up-alt mr-[3px]"></i>
           Otpisi knjigu
         </a>
         <a
-          href="izdajKnjigu.php"
+          [routerLink]="['/borrow', book.id]"
           class="inline hover:text-blue-600 ml-[20px] pr-[10px]"
         >
           <i class="far fa-hand-scissors mr-[3px]"></i>
           Izdaj knjigu
         </a>
         <a
-          href="vratiKnjigu.php"
+          [routerLink]="['/return', book.id]"
           class="hover:text-blue-600 inline ml-[20px] pr-[10px]"
         >
           <i class="fas fa-redo-alt mr-[3px]"></i>
           Vrati knjigu
         </a>
         <a
-          href="rezervisiKnjigu.php"
+          [routerLink]="['/reserve', book.id]"
           class="hover:text-blue-600 inline ml-[20px] pr-[10px]"
         >
           <i class="far fa-calendar-check mr-[3px]"></i>
@@ -92,7 +90,7 @@
           >
             <div class="py-1">
               <a
-                href="editKnjiga.php"
+                [routerLink]="['/edit', book.id]"
                 tabindex="0"
                 class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                 role="menuitem"
