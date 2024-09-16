@@ -19,6 +19,7 @@ import { Format } from '../../models/format';
 import { Bookbind } from '../../models/bookbind';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Language } from '../../models/language';
+import { TmplAstDeferredBlock } from '@angular/compiler';
 
 @Component({
   selector: 'app-book-edit-add',
@@ -91,16 +92,15 @@ export class BookEditAddComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.bookForm.valid) {
-      this.bookService
-        .save(this.bookForm.value, this.book?.id)
-        .subscribe({ next: (response) => (this.book = response) });
-    } else {
-      Object.keys(this.bookForm.controls).forEach((key) => {
-        const control = this.bookForm.get(key);
-        control?.markAsTouched();
-      });
+
+    if (!this.bookForm.valid) {
+      this.bookForm.markAllAsTouched();
+      return;
     }
+
+    this.bookService
+      .save(this.bookForm.value, this.book?.id)
+      .subscribe({ next: (response) => (this.book = response) });
   }
 
   yearRange(count: number): number[] {
