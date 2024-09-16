@@ -33,7 +33,6 @@
         <div class="tab-content" id="nav-tabContent">
           <div class="scroll height-content section-content">
             <div class="flex flex-row ml-[30px] mb-[150px]">
-
               <div class="w-[50%]">
                 <div class="mt-[20px]">
                   <mat-form-field class="w-[90%]">
@@ -65,7 +64,7 @@
                     <mat-label>Categories</mat-label>
                     <mat-select formControlName="categories" multiple required>
                       <mat-option
-                        *ngFor="let category of categories"
+                        *ngFor="let category of allCategories"
                         [value]="category.id"
                       >
                         {{ category.name }}
@@ -87,7 +86,7 @@
                     <mat-label>Genres</mat-label>
                     <mat-select formControlName="genres" multiple required>
                       <mat-option
-                        *ngFor="let genre of genres"
+                        *ngFor="let genre of allGenres"
                         [value]="genre.id"
                       >
                         {{ genre.name }}
@@ -133,7 +132,7 @@
                     <mat-label>Publisher</mat-label>
                     <mat-select formControlName="izdavac" required>
                       <mat-option
-                        *ngFor="let publisher of publishers"
+                        *ngFor="let publisher of allPublishers"
                         [value]="publisher.id"
                       >
                         {{ publisher.name }}
@@ -155,7 +154,7 @@
                     <mat-label>Language</mat-label>
                     <mat-select formControlName="jezik" required>
                       <mat-option
-                        *ngFor="let language of languages"
+                        *ngFor="let language of allLanguages"
                         [value]="language.id"
                       >
                         {{ language.name }}
@@ -222,9 +221,7 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-
               </div>
-
             </div>
           </div>
         </div>
@@ -267,7 +264,7 @@
                   <mat-label>Script</mat-label>
                   <mat-select formControlName="pismo" required>
                     <mat-option
-                      *ngFor="let script of scripts"
+                      *ngFor="let script of allScripts"
                       [value]="script.id"
                     >
                       {{ script.name }}
@@ -288,7 +285,7 @@
                   <mat-label>Bookbind</mat-label>
                   <mat-select formControlName="povez" required>
                     <mat-option
-                      *ngFor="let bookbind of bookbinds"
+                      *ngFor="let bookbind of allBookbinds"
                       [value]="bookbind.id"
                     >
                       {{ bookbind.name }}
@@ -310,7 +307,7 @@
                   <mat-label>Format</mat-label>
                   <mat-select formControlName="format" required>
                     <mat-option
-                      *ngFor="let format of formats"
+                      *ngFor="let format of allFormats"
                       [value]="format.id"
                     >
                       {{ format.name }}

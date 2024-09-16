@@ -1,3 +1,4 @@
+/* eslint-disable no-constant-binary-expression */
 // book-edit-add.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -37,14 +38,14 @@ import { Language } from '../../models/language';
 export class BookEditAddComponent implements OnInit {
   bookForm!: FormGroup;
   book!: Book | null;
-  genres: Genre[] = [];
-  categories: Category[] = [];
+  allGenres: Genre[] = [];
+  allCategories: Category[] = [];
   allAuthors: Author[] = [];
-  publishers: Publisher[] = [];
-  scripts: Script[] = [];
-  formats: Format[] = [];
-  bookbinds: Bookbind[] = [];
-  languages: Language[] = [];
+  allPublishers: Publisher[] = [];
+  allScripts: Script[] = [];
+  allFormats: Format[] = [];
+  allBookbinds: Bookbind[] = [];
+  allLanguages: Language[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -63,10 +64,19 @@ export class BookEditAddComponent implements OnInit {
     this.bookForm = this.fb.group({
       nazivKnjiga: [this.book?.title ?? '', Validators.required],
       kratki_sadrzaj: [this.book?.description ?? '', Validators.required],
-      categories: [this.book?.categories ?? [], Validators.required],
-      genres: [this.book?.genres ?? [], Validators.required],
-      authors: [this.book?.authors.map(item => item.id) ?? [], Validators.required],
-      izdavac: [this.book?.publishers ?? '', Validators.required],
+      categories: [
+        this.book?.categories.map((item) => item.id) ?? [],
+        Validators.required,
+      ],
+      genres: [
+        this.book?.genres.map((item) => item.id) ?? [],
+        Validators.required,
+      ],
+      authors: [
+        this.book?.authors.map((item) => item.id) ?? [],
+        Validators.required,
+      ],
+      izdavac: [this.book?.publisher.id ?? '', Validators.required],
       godinaIzdavanja: [this.book?.pDate ?? '', Validators.required],
       knjigaKolicina: [
         this.book?.samples ?? '',
@@ -76,11 +86,11 @@ export class BookEditAddComponent implements OnInit {
         this.book?.pages ?? '',
         [Validators.required, Validators.min(1)],
       ],
-      pismo: [this.book?.script ?? '', Validators.required],
-      jezik: [this.book?.language ?? '', Validators.required],
-      povez: [this.book?.bookbind ?? '', Validators.required],
-      format: [this.book?.format ?? '', Validators.required],
-      isbn: [this.book?.isbn ?? '', Validators.required],
+      pismo: [this.book?.script.id ?? '', Validators.required],
+      jezik: [this.book?.language.id ?? '', Validators.required],
+      povez: [this.book?.bookbind.id ?? '', Validators.required],
+      format: [this.book?.format.id ?? '', Validators.required],
+      isbn: [Number(this.book?.isbn) ?? '', Validators.required],
       deletePdfs: [0, [Validators.required]],
       present: [[1, 2, 3], Validators.required],
       pictures: [
@@ -91,10 +101,6 @@ export class BookEditAddComponent implements OnInit {
   }
 
   onSubmit() {
-
-    console.log(this.bookForm.value);
-    return;
-
     if (!this.bookForm.valid) {
       this.bookForm.markAllAsTouched();
       return;
@@ -109,18 +115,18 @@ export class BookEditAddComponent implements OnInit {
     const currentYear = new Date().getFullYear();
     return Array.from({ length: count }, (_, i) => currentYear - i);
   }
-  allCategories() {
+  getAllCategories() {
     this.bookService.allCategories().subscribe({
       next: (response) => {
-        this.categories = response.data;
+        this.allCategories = response.data;
       },
       error: (err) => console.error(err),
     });
   }
-  allGenres() {
+  getAllGenres() {
     this.bookService.allGenres().subscribe({
       next: (response) => {
-        this.genres = response.data;
+        this.allGenres = response.data;
       },
       error: (err) => console.error(err),
     });
@@ -133,56 +139,56 @@ export class BookEditAddComponent implements OnInit {
       error: (err) => console.error(err),
     });
   }
-  allPublishers() {
+  getAllPublishers() {
     this.bookService.allPublishers().subscribe({
       next: (response) => {
-        this.publishers = response.data;
+        this.allPublishers = response.data;
       },
       error: (err) => console.error(err),
     });
   }
-  allScripts() {
+  getAllScripts() {
     this.bookService.allScripts().subscribe({
       next: (response) => {
-        this.scripts = response.data;
+        this.allScripts = response.data;
       },
       error: (err) => console.error(err),
     });
   }
-  allFormats() {
+  getAllFormats() {
     this.bookService.allFormats().subscribe({
       next: (response) => {
-        this.formats = response.data;
+        this.allFormats = response.data;
       },
       error: (err) => console.error(err),
     });
   }
-  allBookbinds() {
+  getAllBookbinds() {
     this.bookService.allBookbinds().subscribe({
       next: (response) => {
-        this.bookbinds = response.data;
+        this.allBookbinds = response.data;
       },
       error: (err) => console.error(err),
     });
   }
-  allLanguages() {
+  getAllLanguages() {
     this.bookService.allLanguages().subscribe({
       next: (response) => {
-        this.languages = response.data;
+        this.allLanguages = response.data;
       },
       error: (err) => console.error(err),
     });
   }
 
   fecthData() {
-    this.allCategories();
-    this.allGenres();
+    this.getAllCategories();
+    this.getAllGenres();
     this.getAllAuthors();
-    this.allPublishers();
-    this.allScripts();
-    this.allFormats();
-    this.allBookbinds();
-    this.allLanguages();
+    this.getAllPublishers();
+    this.getAllScripts();
+    this.getAllFormats();
+    this.getAllBookbinds();
+    this.getAllLanguages();
     this.book = this.route.snapshot.data['book'] || null;
   }
 }
