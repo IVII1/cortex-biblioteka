@@ -34,28 +34,28 @@
       </div>
       <div class="pt-[24px] mr-[30px]">
         <a
-          [routerLink]="['/discard', book.id]"
+          [routerLink]="['/books/discard', book.id]"
           class="inline hover:text-blue-600"
         >
           <i class="fas fa-level-up-alt mr-[3px]"></i>
           Otpisi knjigu
         </a>
         <a
-          [routerLink]="['/borrow', book.id]"
+          [routerLink]="['/books/borrow', book.id]"
           class="inline hover:text-blue-600 ml-[20px] pr-[10px]"
         >
           <i class="far fa-hand-scissors mr-[3px]"></i>
           Izdaj knjigu
         </a>
         <a
-          [routerLink]="['/return', book.id]"
+          [routerLink]="['/books/return', book.id]"
           class="hover:text-blue-600 inline ml-[20px] pr-[10px]"
         >
           <i class="fas fa-redo-alt mr-[3px]"></i>
           Vrati knjigu
         </a>
         <a
-          [routerLink]="['/reserve', book.id]"
+          [routerLink]="['/books/reserve', book.id]"
           class="hover:text-blue-600 inline ml-[20px] pr-[10px]"
         >
           <i class="far fa-calendar-check mr-[3px]"></i>
@@ -63,11 +63,13 @@
         </a>
         <p
           class="inline cursor-pointer text-[25px] py-[10px] pl-[30px] border-l-[1px] border-[#e4dfdf] dotsKnjigaOsnovniDetalji hover:text-[#606FC7]"
+          (click)="toggleMenu(book.id)"
         >
           <i class="fas fa-ellipsis-v"></i>
         </p>
         <div
-          class="z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-knjiga-osnovni-detalji"
+          class="z-10 transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-knjiga-osnovni-detalji"
+          [ngClass]="{ hidden: openMenuId !== book.id }"
         >
           <div
             class="absolute right-0 w-56 mt-[7px] origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
@@ -77,7 +79,7 @@
           >
             <div class="py-1">
               <a
-                [routerLink]="['/edit', book.id]"
+                [routerLink]="['/books/edit', book.id]"
                 tabindex="0"
                 class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                 role="menuitem"
@@ -103,63 +105,110 @@
 
   <mat-tab-group>
     <mat-tab label="Overview">
-      <div class="">
-        <!-- Space for content -->
-        <div class="pl-[30px] section- mt-[20px]">
-          <div class="flex flex-row justify-between">
-            <div class="mr-[30px]">
-              <div class="mt-[20px]">
-                <span class="text-gray-500 text-[14px]">Book Title</span>
-                <p class="font-medium">{{ book.title }}</p>
-              </div>
-              <div class="mt-[40px]">
-                <span class="text-gray-500 text-[14px]">Categories</span>
-                @for (category of book.categories; track category.id) {
-                  <p class="font-medium">{{ category.name }}</p>
-                }
-              </div>
-              <div class="mt-[40px]">
-                <span class="text-gray-500 text-[14px]">Genre</span>
-                @for (genre of book.genres; track genre.id) {
-                  <p class="font-medium">{{ genre.name }}</p>
-                }
-              </div>
-              <div class="mt-[40px]">
-                <span class="text-gray-500 text-[14px]">Authors</span>
-                @for (author of book.authors; track author.id) {
-                  <p class="font-medium">
-                    {{ author.name }} {{ author.surname }}
-                  </p>
-                }
-              </div>
-              <div class="mt-[40px]">
-                <span class="text-gray-500 text-[14px]">Publisher</span>
-                <p class="font-medium">{{ book.publisher }}</p>
-              </div>
-              <div class="mt-[40px]">
-                <span class="text-gray-500 text-[14px]">Godina izdavanja</span>
-                <p class="font-medium">{{ book.pDate }}</p>
-              </div>
-            </div>
-            <div class="mr-[70px] mt-[20px] flex flex-col max-w-[600px]">
-              <div>
-                <h4 class="text-gray-500">Storyline (Kratki sadrzaj)</h4>
-                <p class="addReadMore showlesscontent my-[10px]">
-                  {{ book.description }}
-                  <span class="SecSec"></span>
-                  <span class="readMore" title="Click to Show More">
-                    ... Prikazi vise ⇩</span
-                  >
-                  <span class="readLess" title="Click to Show Less">
-                    Prikazi manje ⇑</span
-                  >
-                </p>
+      <div class="flex flex-row overflow-auto height-osnovniDetalji">
+        <div class="w-[80%]">
+          <div class="">
+            <!-- Space for content -->
+            <div class="pl-[30px] section- mt-[20px]">
+              <div class="flex flex-row justify-between">
+                <div class="mr-[30px]">
+                  <div class="mt-[20px]">
+                    <span class="text-gray-500 text-[14px]">Naziv knjige</span>
+                    <p class="font-medium">{{ book.title }}</p>
+                  </div>
+                  <div class="mt-[40px]">
+                    <span class="text-gray-500 text-[14px]">Zanr</span>
+                    @for (genre of book.genres; track genre.id) {
+                      <p class="font-medium">
+                        {{ genre.name }}
+                      </p>
+                    }
+                  </div>
+                  <div class="mt-[40px]">
+                    <span class="text-gray-500 text-[14px]">Kategorija</span>
+                    @for (category of book.categories; track category.id) {
+                      <p class="font-medium">
+                        {{ category.name }}
+                      </p>
+                    }
+                  </div>
+
+                  <div class="mt-[40px]">
+                    <span class="text-gray-500 text-[14px]">Autor/ri</span>
+                    @for (author of book.authors; track author.id) {
+                      <p class="font-medium">
+                        {{ author.name }} {{ author.surname }}
+                      </p>
+                    }
+                  </div>
+
+                  <div class="mt-[40px]">
+                    <span class="text-gray-500 text-[14px]">Izdavac</span>
+                    <p class="font-medium">{{ book.publisher.name }}</p>
+                  </div>
+                  <div class="mt-[40px]">
+                    <span class="text-gray-500 text-[14px]"
+                      >Godina izdavanja</span
+                    >
+                    <p class="font-medium">{{ book.pDate }}</p>
+                  </div>
+                </div>
+                <div class="mr-[70px] mt-[20px] flex flex-col max-w-[600px]">
+                  <div>
+                    <h4 class="text-gray-500">Storyline (Kratki sadrzaj)</h4>
+                    <p class="my-[10px]">{{ book.description }}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <app-book-stats></app-book-stats>
       </div>
-      <app-book-stats></app-book-stats>
+    </mat-tab>
+    <mat-tab label="Specifications">
+      <div class="flex flex-row overflow-auto height-osnovniDetalji">
+        <div class="w-[80%]">
+          <div class="">
+            <!-- Space for content -->
+            <div class="pl-[30px] section- mt-[20px]">
+              <div class="flex flex-row justify-between">
+                <div class="mr-[30px]">
+                  <div class="mt-[20px]">
+                    <span class="text-gray-500 text-[14px]">Broj strana</span>
+                    <p class="font-medium">{{ book.pages }}</p>
+                  </div>
+                  <div class="mt-[40px]">
+                    <span class="text-gray-500 text-[14px]">Pismo</span>
+                    <p class="font-medium">{{ book.script.name }}</p>
+                  </div>
+                  <div class="mt-[40px]">
+                    <span class="text-gray-500 text-[14px]">Jezik</span>
+                    <p class="font-medium">{{ book.language.name }}</p>
+                  </div>
+                  <div class="mt-[40px]">
+                    <span class="text-gray-500 text-[14px]">Povez</span>
+                    <p class="font-medium">{{ book.bookbind.name }}</p>
+                  </div>
+                  <div class="mt-[40px]">
+                    <span class="text-gray-500 text-[14px]">Format</span>
+                    <p class="font-medium">{{ book.format.name }}</p>
+                  </div>
+                  <div class="mt-[40px]">
+                    <span class="text-gray-500 text-[14px]"
+                      >International Standard Book Number (ISBN)</span
+                    >
+                    <p class="font-medium">{{ book.isbn }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="min-w-[20%] border-l-[1px] border-[#e4dfdf]">
+          <app-book-stats></app-book-stats>
+        </div>
+      </div>
     </mat-tab>
   </mat-tab-group>
 </section>

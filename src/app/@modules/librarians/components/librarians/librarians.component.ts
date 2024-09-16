@@ -37,11 +37,11 @@ export class LibrariansComponent implements OnInit {
   }
   openMenuId: number | null = null;
 
-  toggleMenu(studentId: number) {
-    if (this.openMenuId === studentId) {
+  toggleMenu(librarianId: number) {
+    if (this.openMenuId === librarianId) {
       this.openMenuId = null;
     } else {
-      this.openMenuId = studentId;
+      this.openMenuId = librarianId;
     }
   }
   deleteLibrarian(id: number) {

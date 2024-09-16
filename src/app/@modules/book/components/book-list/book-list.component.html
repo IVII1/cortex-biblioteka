@@ -7,6 +7,16 @@
     <!-- Space for content -->
     <div class="px-[30px] pt-2 bg-white">
       <div class="w-full mt-2">
+        <div
+          class="flex items-center px-[30px] py-4 space-x-3 rounded-lg justify-between"
+        >
+          <a
+            routerLink="new"
+            class="btn-animation inline-flex items-center text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] tracking-wider text-white bg-[#3f51b5] rounded hover:bg-[#4558BE]"
+          >
+            <i class="fas fa-plus mr-[15px]"></i> New Book
+          </a>
+        </div>
         <!-- Table -->
         <table class="w-full overflow-hidden shadow-lg rounded-xl" id="myTable">
           <thead class="bg-[#EFF3F6]">
@@ -419,10 +429,10 @@
                 <td class="flex flex-row items-center px-4 py-4">
                   <img
                     class="object-cover w-8 mr-2 h-11"
-                    src="img/tomsojer.jpg"
+                    [src]="book.photo"
                     alt=""
                   />
-                  <a [routerLink]="['edit', book.id]">
+                  <a [routerLink]="[book.id]">
                     <span class="font-medium text-center">{{
                       book.title
                     }}</span>

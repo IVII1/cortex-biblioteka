@@ -17,4 +17,13 @@ export class BookDetailComponent implements OnInit {
       this.book = data['book'];
     });
   }
+  openMenuId: number | null = null;
+
+  toggleMenu(bookId: number) {
+    if (this.openMenuId === bookId) {
+      this.openMenuId = null;
+    } else {
+      this.openMenuId = bookId;
+    }
+  }
 }
