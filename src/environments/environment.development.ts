@@ -1,6 +1,6 @@
 export const environment = {
   apiAuthorsUrl: `https://biblioteka.simonovicp.com/api/authors`,
-  token: `Bearer 162|9AUTzdTBXEYkzLAcRV9lpjRoKxmPZDL0IBjkRuAC`,
+  token: `Bearer 198|YFu0ZCez1iypPVK8wnIODkuz2q6PBi5ViEyojt5S`,
   apiStoreAuthors: `https://biblioteka.simonovicp.com/api/authors/store`,
   apiUsersUrl: `https://biblioteka.simonovicp.com/api/users`,
   apiUsersStore: 'https://biblioteka.simonovicp.com/api/users/store',
@@ -12,6 +12,6 @@ export const environment = {
   apiBookbinds: 'https://biblioteka.simonovicp.com/api/bookbinds',
   apiFormats: 'https://biblioteka.simonovicp.com/api/formats',
   apiLanguages: 'https://biblioteka.simonovicp.com/api/languages',
-  apiBookUpdate: 'https://biblioteka.simonovicp.com/books',
+  apiBookUpdate: 'https://biblioteka.simonovicp.com/api/books',
   apiBookStore: 'https://biblioteka.simonovicp.com/api/books/store',
 };
