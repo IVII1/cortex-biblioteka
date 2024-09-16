@@ -19,7 +19,6 @@ import { Format } from '../../models/format';
 import { Bookbind } from '../../models/bookbind';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Language } from '../../models/language';
-import { TmplAstDeferredBlock } from '@angular/compiler';
 
 @Component({
   selector: 'app-book-edit-add',
@@ -40,7 +39,7 @@ export class BookEditAddComponent implements OnInit {
   book!: Book | null;
   genres: Genre[] = [];
   categories: Category[] = [];
-  authors: Author[] = [];
+  allAuthors: Author[] = [];
   publishers: Publisher[] = [];
   scripts: Script[] = [];
   formats: Format[] = [];
@@ -93,6 +92,9 @@ export class BookEditAddComponent implements OnInit {
 
   onSubmit() {
 
+    console.log(this.bookForm.value);
+    return;
+
     if (!this.bookForm.valid) {
       this.bookForm.markAllAsTouched();
       return;
@@ -123,10 +125,10 @@ export class BookEditAddComponent implements OnInit {
       error: (err) => console.error(err),
     });
   }
-  allAuthors() {
+  getAllAuthors() {
     this.authorService.allAuthors().subscribe({
       next: (response) => {
-        this.authors = response.data;
+        this.allAuthors = response.data;
       },
       error: (err) => console.error(err),
     });
@@ -175,7 +177,7 @@ export class BookEditAddComponent implements OnInit {
   fecthData() {
     this.allCategories();
     this.allGenres();
-    this.allAuthors();
+    this.getAllAuthors();
     this.allPublishers();
     this.allScripts();
     this.allFormats();
