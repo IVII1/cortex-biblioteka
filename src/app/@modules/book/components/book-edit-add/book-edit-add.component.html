@@ -111,7 +111,7 @@
                     <mat-label>Authors</mat-label>
                     <mat-select formControlName="authors" multiple required>
                       <mat-option
-                        *ngFor="let author of authors"
+                        *ngFor="let author of allAuthors"
                         [value]="author.id"
                       >
                         {{ author.name }} {{ author.surname }}

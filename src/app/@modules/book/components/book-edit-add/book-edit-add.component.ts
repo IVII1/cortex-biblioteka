@@ -65,7 +65,7 @@ export class BookEditAddComponent implements OnInit {
       kratki_sadrzaj: [this.book?.description ?? '', Validators.required],
       categories: [this.book?.categories ?? [], Validators.required],
       genres: [this.book?.genres ?? [], Validators.required],
-      authors: [this.book?.authors ?? [], Validators.required],
+      authors: [this.book?.authors.map(item => item.id) ?? [], Validators.required],
       izdavac: [this.book?.publishers ?? '', Validators.required],
       godinaIzdavanja: [this.book?.pDate ?? '', Validators.required],
       knjigaKolicina: [
