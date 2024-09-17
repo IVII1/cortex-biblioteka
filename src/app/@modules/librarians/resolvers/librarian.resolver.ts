@@ -20,6 +20,6 @@ export class LibrarianResolver implements Resolve<Librarian> {
     state: RouterStateSnapshot,
   ): Observable<Librarian> {
     const librarianId = route.paramMap.get('id');
-    return this.librarianService.getLibrarian(librarianId!);
+    return this.librarianService.get(librarianId!);
   }
 }

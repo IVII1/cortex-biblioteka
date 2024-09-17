@@ -44,7 +44,7 @@ export class AuthorEditAddComponent {
 
   onSubmit(): void {
     if (this.form.valid) {
-      this.authorService.saveAuthor(this.form.value, this.author?.id);
+      this.authorService.save(this.form.value, this.author?.id);
     }
   }
 }

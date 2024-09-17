@@ -15,12 +15,12 @@ export class AuthorService {
   destroyRef = inject(DestroyRef);
   router = inject(Router);
 
-  deleteAuthor(id: number) {
+  delete(id: number) {
     const url = `${environment.apiAuthorsUrl}${id}`;
     const headers = new HttpHeaders().set('Authorization', environment.token);
     this.httpClient.delete<{ data: Author[] }>(url, { headers }).subscribe({});
   }
-  saveAuthor(data: any, id?: number) {
+  save(data: any, id?: number) {
     if (id) {
       const url = `${environment.apiAuthorsUrl}/${id}`;
       const headers = new HttpHeaders().set('Authorization', environment.token);
@@ -33,14 +33,14 @@ export class AuthorService {
     this.router.navigate(['/authors']);
   }
 
-  getAuthor(id: string): Observable<Author> {
+  get(id: string): Observable<Author> {
     const headers = new HttpHeaders().set(`Authorization`, environment.token);
 
     return this.httpClient
       .get<{ data: Author }>(`${environment.apiAuthorsUrl}/${id}`, { headers })
       .pipe(map((response) => response.data));
   }
-  allAuthors() {
+  all() {
     const url = `${environment.apiAuthorsUrl}`;
     const headers = new HttpHeaders().set(
       'Authorization',

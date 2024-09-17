@@ -19,11 +19,7 @@ export class StudentsComponent implements OnInit {
   studentService = inject(StudentService);
 
   ngOnInit(): void {
-    this.studentService.all().subscribe({
-      next: (res) => {
-        this.students = res.data;
-      },
-    });
+    this.fetchData();
   }
   openMenuId: number | null = null;
 
@@ -35,7 +31,14 @@ export class StudentsComponent implements OnInit {
     }
   }
   deleteStudent(id: number) {
-    this.studentService.deleteStudent(id);
-    this.ngOnInit();
+    this.studentService.delete(id);
+    this.fetchData();
+  }
+  fetchData() {
+    this.studentService.all().subscribe({
+      next: (res) => {
+        this.students = res.data;
+      },
+    });
   }
 }

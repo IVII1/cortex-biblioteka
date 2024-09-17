@@ -20,6 +20,6 @@ export class AuthorResolver implements Resolve<Author> {
     state: RouterStateSnapshot,
   ): Observable<Author> {
     const authorId = route.paramMap.get('id');
-    return this.authorService.getAuthor(authorId!);
+    return this.authorService.get(authorId!);
   }
 }

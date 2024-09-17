@@ -20,11 +20,7 @@ export class AuthorListComponent implements OnInit {
   authorService = inject(AuthorService);
 
   ngOnInit(): void {
-    this.authorService.allAuthors().subscribe({
-      next: (res) => {
-        this.authors = res.data;
-      },
-    });
+    this.fetchData();
   }
   openMenuId: number | null = null;
 
@@ -36,11 +32,18 @@ export class AuthorListComponent implements OnInit {
     }
   }
   deleteAuthor(id: number) {
-    this.authorService.deleteAuthor(id);
-    this.ngOnInit();
+    this.authorService.delete(id);
+    this.fetchData();
   }
   saveAuthor(id: number) {
     this.router.navigate(['authors/edit', id]);
-    this.authorService.saveAuthor(id);
+    this.authorService.save(id);
+  }
+  fetchData() {
+    this.authorService.all().subscribe({
+      next: (res) => {
+        this.authors = res.data;
+      },
+    });
   }
 }

@@ -12,14 +12,14 @@ import { Router } from '@angular/router';
 export class LibrarianService {
   httpClient = inject(HttpClient);
   router = inject(Router);
-  deleteLibrarian(id: number) {
+  delete(id: number) {
     const url = `${environment.apiUsersUrl}${id}`;
     const headers = new HttpHeaders().set('Authorization', environment.token);
     this.httpClient
       .delete<{ data: Librarian[] }>(url, { headers })
       .subscribe({});
   }
-  getLibrarian(id: string): Observable<Librarian> {
+  get(id: string): Observable<Librarian> {
     const headers = new HttpHeaders().set(`Authorization`, environment.token);
 
     return this.httpClient
@@ -28,7 +28,7 @@ export class LibrarianService {
       }>(`${environment.apiUsersUrl}/${id}`, { headers })
       .pipe(map((response) => response.data));
   }
-  saveLibrarian(data: any, id?: number) {
+  save(data: any, id?: number) {
     if (id) {
       const url = `${environment.apiUsersUrl}/${id}`;
       const headers = new HttpHeaders().set('Authorization', environment.token);
@@ -38,6 +38,15 @@ export class LibrarianService {
       const headers = new HttpHeaders().set('Authorization', environment.token);
       this.httpClient.post<Librarian>(url, data, { headers }).subscribe({});
     }
-    this.router.navigate(['/librarians']);
+  }
+  all() {
+    const url = `${environment.apiUsersUrl}`;
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `${environment.token}`,
+    );
+    return this.httpClient.get<{ data: Librarian[] }>(url, {
+      headers,
+    });
   }
 }

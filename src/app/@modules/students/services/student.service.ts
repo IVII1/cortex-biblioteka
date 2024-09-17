@@ -14,13 +14,13 @@ export class StudentService {
   destroyRef = inject(DestroyRef);
   httpClient = inject(HttpClient);
   router = inject(Router);
-  deleteStudent(id: number) {
+  delete(id: number) {
     const url = `${environment.apiUsersUrl}${id}`;
     const headers = new HttpHeaders().set('Authorization', environment.token);
     this.httpClient.delete<{ data: Student[] }>(url, { headers }).subscribe({});
   }
 
-  getStudent(id: string): Observable<Student> {
+  get(id: string): Observable<Student> {
     const headers = new HttpHeaders().set(`Authorization`, environment.token);
 
     return this.httpClient
@@ -29,7 +29,7 @@ export class StudentService {
       }>(`${environment.apiUsersUrl}/${id}`, { headers })
       .pipe(map((response) => response.data));
   }
-  saveStudent(data: any, id?: number) {
+  save(data: any, id?: number) {
     if (id) {
       const url = `${environment.apiUsersUrl}/${id}`;
       const headers = new HttpHeaders().set('Authorization', environment.token);

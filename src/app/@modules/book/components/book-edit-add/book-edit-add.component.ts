@@ -132,7 +132,7 @@ export class BookEditAddComponent implements OnInit {
     });
   }
   getAllAuthors() {
-    this.authorService.allAuthors().subscribe({
+    this.authorService.all().subscribe({
       next: (response) => {
         this.allAuthors = response.data;
       },

@@ -22,6 +22,6 @@ export class StudentResolver implements Resolve<Student> {
     state: RouterStateSnapshot,
   ): Observable<Student> {
     const studentId = route.paramMap.get('id');
-    return this.studentService.getStudent(studentId!);
+    return this.studentService.get(studentId!);
   }
 }
