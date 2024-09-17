@@ -13,6 +13,7 @@ export class AuthorEditAddComponent {
   author!: Author | null;
   form!: FormGroup;
   authorService = inject(AuthorService);
+  errorMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -44,7 +45,19 @@ export class AuthorEditAddComponent {
 
   onSubmit(): void {
     if (this.form.valid) {
-      this.authorService.save(this.form.value, this.author?.id);
+      this.authorService.save(this.form.value, this.author?.id).subscribe({
+        next: () => {
+          this.router.navigate(['/students']);
+        },
+        error: () => {
+          console.log('Error saving author');
+        },
+      });
+    } else {
+      this.errorMessage = 'Form is invalid, please fill out all the fields.';
     }
+  }
+  onCancel() {
+    this.router.navigate(['/authors']);
   }
 }

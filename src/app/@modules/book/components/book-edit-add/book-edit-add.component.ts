@@ -1,5 +1,4 @@
 /* eslint-disable no-constant-binary-expression */
-// book-edit-add.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Book } from '../../models/book.model';
@@ -46,6 +45,7 @@ export class BookEditAddComponent implements OnInit {
   allFormats: Format[] = [];
   allBookbinds: Bookbind[] = [];
   allLanguages: Language[] = [];
+  errorMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -90,7 +90,10 @@ export class BookEditAddComponent implements OnInit {
       jezik: [this.book?.language.id ?? '', Validators.required],
       povez: [this.book?.bookbind.id ?? '', Validators.required],
       format: [this.book?.format.id ?? '', Validators.required],
-      isbn: [Number(this.book?.isbn) ?? '', Validators.required],
+      isbn: [
+        this.book?.isbn ? Number(this.book?.isbn) : '',
+        Validators.required,
+      ],
       deletePdfs: [0, [Validators.required]],
       present: [[1, 2, 3], Validators.required],
       pictures: [
@@ -103,12 +106,15 @@ export class BookEditAddComponent implements OnInit {
   onSubmit() {
     if (!this.bookForm.valid) {
       this.bookForm.markAllAsTouched();
-      return;
+      this.errorMessage = 'Form is invalid, try again.';
     }
 
-    this.bookService
-      .save(this.bookForm.value, this.book?.id)
-      .subscribe({ next: (response) => (this.book = response) });
+    this.bookService.save(this.bookForm.value, this.book?.id).subscribe({
+      next: () => {
+        this.router.navigate(['books']);
+      },
+      error: () => console.log('Error saving book'),
+    });
   }
 
   yearRange(count: number): number[] {
@@ -190,5 +196,17 @@ export class BookEditAddComponent implements OnInit {
     this.getAllBookbinds();
     this.getAllLanguages();
     this.book = this.route.snapshot.data['book'] || null;
+  }
+  openMenuId: number | null = null;
+
+  toggleMenu(studentId: number) {
+    if (this.openMenuId === studentId) {
+      this.openMenuId = null;
+    } else {
+      this.openMenuId = studentId;
+    }
+  }
+  onCancel() {
+    this.router.navigate(['/books']);
   }
 }

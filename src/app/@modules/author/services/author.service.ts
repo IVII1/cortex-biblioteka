@@ -20,17 +20,16 @@ export class AuthorService {
     const headers = new HttpHeaders().set('Authorization', environment.token);
     this.httpClient.delete<{ data: Author[] }>(url, { headers }).subscribe({});
   }
-  save(data: any, id?: number) {
+  save(data: any, id?: number): Observable<Author> {
     if (id) {
       const url = `${environment.apiAuthorsUrl}/${id}`;
       const headers = new HttpHeaders().set('Authorization', environment.token);
-      this.httpClient.put<Author>(url, data, { headers }).subscribe({});
+      return this.httpClient.put<Author>(url, data, { headers });
     } else {
       const url = `${environment.apiUsersStore}`;
       const headers = new HttpHeaders().set('Authorization', environment.token);
-      this.httpClient.post<Author>(url, data, { headers }).subscribe({});
+      return this.httpClient.post<Author>(url, data, { headers });
     }
-    this.router.navigate(['/authors']);
   }
 
   get(id: string): Observable<Author> {

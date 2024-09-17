@@ -29,17 +29,16 @@ export class StudentService {
       }>(`${environment.apiUsersUrl}/${id}`, { headers })
       .pipe(map((response) => response.data));
   }
-  save(data: any, id?: number) {
+  save(data: any, id?: number): Observable<Student> {
     if (id) {
       const url = `${environment.apiUsersUrl}/${id}`;
       const headers = new HttpHeaders().set('Authorization', environment.token);
-      this.httpClient.put<Student>(url, data, { headers }).subscribe({});
+      return this.httpClient.put<Student>(url, data, { headers });
     } else {
       const url = `${environment.apiUsersStore}`;
       const headers = new HttpHeaders().set('Authorization', environment.token);
-      this.httpClient.post<Student>(url, data, { headers }).subscribe({});
+      return this.httpClient.post<Student>(url, data, { headers });
     }
-    this.router.navigate(['/students']);
   }
   all(): Observable<{ data: Student[] }> {
     const url = `${environment.apiUsersUrl}`;

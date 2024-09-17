@@ -173,6 +173,9 @@
               <small class="text-red-500">Please repeat the password</small>
             </div>
           </div>
+          <div *ngIf="errorMessage" class="mt-[10px] text-red-600">
+            <p class="text-xl">{{ errorMessage }}</p>
+          </div>
         </div>
         <div class="mt-[20px]">
           <span>Photo <span class="text-red-500">*</span></span>
@@ -229,6 +232,7 @@
             class="inline-block w-full text-right py-[7px] mr-[100px] text-white"
           >
             <button
+              (click)="onCancel()"
               type="button"
               class="btn-animation shadow-lg mr-[15px] w-[150px] focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]"
             >
@@ -236,7 +240,6 @@
             </button>
             <button
               type="submit"
-              [disabled]="!form.valid"
               class="btn-animation shadow-lg w-[150px] disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50]"
             >
               Save <i class="fas fa-check ml-[4px]"></i>

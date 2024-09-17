@@ -13,6 +13,7 @@ export class LibrarianEditAddComponent {
   librarian!: Librarian | null;
   form!: FormGroup;
   librarianService = inject(LibrarianService);
+  errorMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -44,7 +45,21 @@ export class LibrarianEditAddComponent {
 
   onSubmit(): void {
     if (this.form.valid) {
-      this.librarianService.save(this.form.value, this.librarian?.id);
+      this.librarianService
+        .save(this.form.value, this.librarian?.id)
+        .subscribe({
+          next: () => {
+            this.router.navigate(['/librarians']);
+          },
+          error: () => {
+            console.log('Error saving librarian');
+          },
+        });
+    } else {
+      this.errorMessage = 'Form is invalid, please fill out all the fields.';
     }
+  }
+  onCancel() {
+    this.router.navigate(['/librarians']);
   }
 }

@@ -1,4 +1,4 @@
-/* eslint-disable no-constant-binary-expression */
+// eslint-disable no-constant-binary-expression
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Student } from '../../models/student.model';
@@ -14,6 +14,7 @@ export class StudentEditAddComponent implements OnInit {
   student!: Student | null;
   form!: FormGroup;
   studentService = inject(StudentService);
+  errorMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -45,7 +46,19 @@ export class StudentEditAddComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
-      this.studentService.save(this.form.value, this.student?.id);
+      this.studentService.save(this.form.value, this.student?.id).subscribe({
+        next: () => {
+          this.router.navigate(['/students']);
+        },
+        error: () => {
+          console.log('Error saving student:');
+        },
+      });
+    } else {
+      this.errorMessage = 'Form is invalid, please fill out all the fields.';
     }
+  }
+  onCancel() {
+    this.router.navigate(['/students']);
   }
 }

@@ -102,6 +102,9 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
+                <div *ngIf="errorMessage" class="mt-[10px] text-red-600">
+                  <p class="text-xl">{{ errorMessage }}</p>
+                </div>
               </div>
 
               <div class="w-[50%]">
@@ -338,6 +341,9 @@
                   </mat-error>
                 </mat-form-field>
               </div>
+              <div *ngIf="errorMessage" class="mt-[10px] text-red-600">
+                <p class="text-xl">{{ errorMessage }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -350,6 +356,7 @@
           class="inline-block w-full text-white text-right py-[7px] mr-[100px]"
         >
           <button
+            (click)="onCancel()"
             type="button"
             class="btn-animation shadow-lg mr-[15px] w-[150px] focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]"
           >
