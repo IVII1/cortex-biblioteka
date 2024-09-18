@@ -34,7 +34,9 @@ export class BookListComponent implements OnInit {
     }
   }
   deleteBook(id: number) {
-    this.bookService.delete(id);
+    this.bookService
+      .delete(id)
+      .subscribe({ next: () => console.log('Successful') });
     this.bookService.all();
   }
   saveBook(id: number) {

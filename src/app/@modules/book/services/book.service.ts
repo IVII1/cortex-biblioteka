@@ -12,10 +12,10 @@ import { environment } from 'src/environments/environment.development';
 export class BookService {
   httpClient = inject(HttpClient);
   router = inject(Router);
-  delete(id: number) {
+  delete(id: number): Observable<{ data: Book }> {
     const url = `${environment.apiBooks}/${id}/destroy`;
     const headers = new HttpHeaders().set('Authorization', environment.token);
-    this.httpClient.delete<{ data: Book[] }>(url, { headers }).subscribe({});
+    return this.httpClient.delete<{ data: Book }>(url, { headers });
   }
   get(id: string): Observable<Book> {
     const headers = new HttpHeaders().set(`Authorization`, environment.token);

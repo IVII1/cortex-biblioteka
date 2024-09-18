@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from '../../models/book.model';
+import { BookService } from '../../services/book.service';
 
 @Component({
   selector: 'app-book-detail',
@@ -10,7 +11,11 @@ import { Book } from '../../models/book.model';
 export class BookDetailComponent implements OnInit {
   book!: Book;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private bookService: BookService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
@@ -25,5 +30,13 @@ export class BookDetailComponent implements OnInit {
     } else {
       this.openMenuId = bookId;
     }
+  }
+  deleteBook(id: number) {
+    this.bookService.delete(id).subscribe({
+      next: () => {
+        this.router.navigate(['/books']);
+      },
+    });
+    this.bookService.all();
   }
 }
