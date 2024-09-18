@@ -113,7 +113,7 @@ export class BookEditAddComponent implements OnInit {
       next: () => {
         this.router.navigate(['books']);
       },
-      error: () => console.log('Error saving book'),
+      error: (err) => console.log('Error saving book', err),
     });
   }
 

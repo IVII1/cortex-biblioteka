@@ -103,20 +103,20 @@ export class BookService {
     return this.httpClient.get(url, { headers });
   }
 
-  reserve(id: number): Observable<any> {
+  reserve(id: number, data: any): Observable<any> {
     const url = `${environment.apiBooks}/${id}/reserve`;
     const headers = new HttpHeaders().set(
       'Authorization',
       `${environment.token}`,
     );
-    return this.httpClient.post(url, { headers });
+    return this.httpClient.post(url, data, { headers });
   }
-  borrow(id: number): Observable<any> {
+  borrow(id: number, data: any): Observable<any> {
     const url = `${environment.apiBooks}/${id}/izdaj`;
     const headers = new HttpHeaders().set(
       'Authorization',
       `${environment.token}`,
     );
-    return this.httpClient.post(url, { headers });
+    return this.httpClient.post(url, data, { headers });
   }
 }

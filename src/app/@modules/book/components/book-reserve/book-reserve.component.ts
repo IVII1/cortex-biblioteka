@@ -48,8 +48,8 @@ export class BookReserveComponent implements OnInit {
       );
   }
   onSubmit() {
-    this.bookService.reserve(this.book.id).subscribe({
-      next: (response) => (this.reservation = response.data),
+    this.bookService.reserve(this.book.id, this.reserveForm.value).subscribe({
+      next: (response) => (this.reservation = response),
     });
   }
 

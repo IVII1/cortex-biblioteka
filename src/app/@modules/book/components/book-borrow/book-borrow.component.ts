@@ -55,9 +55,8 @@ export class BookBorrowComponent {
       );
   }
   onSubmit() {
-   
-    this.bookService.borrow(this.book.id).subscribe({
-      next: (response) => (this.borrowEvent = response.data),
+    this.bookService.borrow(this.book.id, this.borrowForm.value).subscribe({
+      next: (response) => (this.borrowEvent = response),
     });
   }
 
