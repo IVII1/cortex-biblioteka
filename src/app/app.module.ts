@@ -15,6 +15,8 @@ import { SearchAddNewComponent } from './@shared/search-add-new/search-add-new.c
 import { PageHeaderComponent } from './@shared/page-header/page-header.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     SearchAddNewComponent,
     PageHeaderComponent,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [provideHttpClient(), provideAnimationsAsync()],
   bootstrap: [AppComponent],

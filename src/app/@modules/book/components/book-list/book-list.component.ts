@@ -3,6 +3,7 @@ import { BookService } from '../../services/book.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Book } from '../../models/book.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-book-list',
@@ -16,6 +17,7 @@ export class BookListComponent implements OnInit {
   books: Book[] = [];
   isOpen = true;
   bookService = inject(BookService);
+  toastr = inject(ToastrService);
 
   ngOnInit(): void {
     this.bookService.all().subscribe({
@@ -34,10 +36,17 @@ export class BookListComponent implements OnInit {
     }
   }
   deleteBook(id: number) {
-    this.bookService
-      .delete(id)
-      .subscribe({ next: () => console.log('Successful') });
-    this.bookService.all();
+    this.bookService.delete(id).subscribe({
+      next: () => {
+        this.bookService.all();
+        this.toastr.success('Book Deleted Successfully');
+        this.router.navigate(['/books']);
+      },
+      error: (err) => {
+        this.toastr.error('Error Deleting Book');
+        console.log(err);
+      },
+    });
   }
   saveBook(id: number) {
     this.router.navigate(['authors/edit', id]);

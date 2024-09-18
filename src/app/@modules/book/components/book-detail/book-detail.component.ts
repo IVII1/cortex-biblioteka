@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from '../../models/book.model';
 import { BookService } from '../../services/book.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-book-detail',
@@ -15,6 +16,7 @@ export class BookDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private bookService: BookService,
     private router: Router,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -34,9 +36,14 @@ export class BookDetailComponent implements OnInit {
   deleteBook(id: number) {
     this.bookService.delete(id).subscribe({
       next: () => {
+        this.bookService.all();
+        this.toastr.success('Book Deleted Successfully');
         this.router.navigate(['/books']);
       },
+      error: (err) => {
+        this.toastr.error('Error Deleting Book');
+        console.log(err);
+      },
     });
-    this.bookService.all();
   }
 }
