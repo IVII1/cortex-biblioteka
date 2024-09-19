@@ -5,7 +5,7 @@ import { AppLayoutComponent } from './@shared/layouts/app-layout/app-layout.comp
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   },
   {

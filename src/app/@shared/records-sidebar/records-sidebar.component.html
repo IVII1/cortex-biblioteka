@@ -1,0 +1,111 @@
+<mat-nav-list class="mt-2">
+  <mat-list-item class="mb-1 group">
+    <a
+      routerLink="/records/borrowed"
+      routerLinkActive="text-blue-500"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="flex items-center w-full p-3 rounded-lg"
+    >
+      <mat-icon
+        class="text-[#707070] mr-4"
+        routerLinkActive="text-blue-500"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >content_copy</mat-icon
+      >
+      <span
+        class="text-[#707070] text-sm"
+        routerLinkActive="text-blue-500"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Izdate knjige</span
+      >
+    </a>
+  </mat-list-item>
+
+  <mat-list-item class="mb-1 group">
+    <a
+      routerLink="/records/returned"
+      class="flex items-center w-full p-3 rounded-lg transition"
+      routerLinkActive="text-blue-500"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <mat-icon
+        class="text-[#707070] mr-4"
+        routerLinkActive="text-blue-500"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >assignment_return</mat-icon
+      >
+      <span
+        class="text-sm text-[#707070]"
+        routerLinkActive="text-blue-500"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Vraćene knjige</span
+      >
+    </a>
+  </mat-list-item>
+
+  <mat-list-item class="mb-1 group">
+    <a
+      routerLink="/records/overdrafted"
+      routerLinkActive="text-blue-500"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="flex items-center w-full p-3 rounded-lg transition"
+    >
+      <mat-icon
+        class="text-[#707070] mr-4"
+        routerLinkActive="text-blue-500"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >warning</mat-icon
+      >
+      <span
+        class="text-sm text-[#707070]"
+        routerLinkActive="text-blue-500"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Knjige u prekoracenju</span
+      >
+    </a>
+  </mat-list-item>
+
+  <mat-list-item class="mb-1 group">
+    <a
+      routerLink="/records/reservations-active"
+      class="flex items-center w-full p-3 rounded-lg transition"
+      routerLinkActive="text-blue-500"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <mat-icon
+        class="text-[#707070] mr-4"
+        routerLinkActive="text-blue-500"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >calendar_today</mat-icon
+      >
+      <span
+        class="text-sm text-[#707070]"
+        routerLinkActive="text-blue-500"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Aktivne rezervacije</span
+      >
+    </a>
+  </mat-list-item>
+
+  <mat-list-item class="mb-1 group">
+    <a
+      routerLink="/records/reservations-archived"
+      class="flex items-center w-full p-3 rounded-lg transition"
+      routerLinkActive="text-blue-500"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <mat-icon
+        class="text-[#707070] mr-4"
+        routerLinkActive="text-blue-500"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >archive</mat-icon
+      >
+      <span
+        class="text-sm text-[#707070]"
+        routerLinkActive="text-blue-500"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Arhivirane rezervacije</span
+      >
+    </a>
+  </mat-list-item>
+</mat-nav-list>

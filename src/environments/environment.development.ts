@@ -14,4 +14,5 @@ export const environment = {
   apiLanguages: 'https://biblioteka.simonovicp.com/api/languages',
   apiBookUpdate: 'https://biblioteka.simonovicp.com/api/books',
   apiBookStore: 'https://biblioteka.simonovicp.com/api/books/store',
+  apiRecordsBorrow: 'https://biblioteka.simonovicp.com/api/books/borrows',
 };

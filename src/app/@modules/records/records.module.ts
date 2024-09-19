@@ -1,12 +1,33 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { RecordsRoutingModule } from './records-routing.module';
-import { IssuedComponent } from './components/issued/issued.component';
-import { RecordsComponent } from './components/records/records.component';
+import { BorrowedComponent } from './components/borrowed/borrowed.component';
+import { PageHeaderComponent } from '../../@shared/page-header/page-header.component';
+import { PaginationComponent } from '../../@shared/pagination/pagination.component';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { ReturnedComponent } from './components/returned/returned.component';
+import { OverdraftedComponent } from './components/overdrafted/overdrafted.component';
+import { ActiveReservationsComponent } from './components/active-reservations/active-reservations.component';
+import { ArchivedReservationsComponent } from './components/archived-reservations/archived-reservations.component';
+import { RecordsSidebarComponent } from '../../@shared/records-sidebar/records-sidebar.component';
 
 @NgModule({
-  declarations: [IssuedComponent, RecordsComponent],
-  imports: [CommonModule, RecordsRoutingModule],
+  declarations: [
+    BorrowedComponent,
+    ReturnedComponent,
+    OverdraftedComponent,
+    ActiveReservationsComponent,
+    ArchivedReservationsComponent,
+  ],
+  imports: [
+    CommonModule,
+    RecordsRoutingModule,
+    PageHeaderComponent,
+    PaginationComponent,
+    MatListModule,
+    MatIconModule,
+    RecordsSidebarComponent,
+  ],
 })
 export class RecordsModule {}
