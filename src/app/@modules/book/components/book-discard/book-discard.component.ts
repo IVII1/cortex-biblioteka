@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BookService } from '../../services/book.service';
 import { RecordsData } from 'src/app/@modules/records/models/records-data.model';
 import { Book } from '../../models/book.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-book-discard',
@@ -19,6 +20,7 @@ export class BookDiscardComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private bookService: BookService,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -75,7 +77,11 @@ export class BookDiscardComponent implements OnInit {
     console.log(this.bookDiscardForm.value);
     this.bookService.writeOff(this.bookDiscardForm.value).subscribe({
       next: () => {
+        this.toastr.success('Returned Successfully!');
         this.bookDiscarded();
+      },
+      error: () => {
+        this.toastr.error('Action Unsuccessful');
       },
     });
   }

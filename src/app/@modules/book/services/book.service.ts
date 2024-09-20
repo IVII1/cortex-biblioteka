@@ -139,4 +139,12 @@ export class BookService {
     );
     return this.httpClient.post(url, data, { headers });
   }
+  return(data: any) {
+    const url = `${environment.apiBooksReturn}`;
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `${environment.token}`,
+    );
+    return this.httpClient.post(url, data, { headers });
+  }
 }
