@@ -11,6 +11,7 @@ import { OverdraftedComponent } from './components/overdrafted/overdrafted.compo
 import { ActiveReservationsComponent } from './components/active-reservations/active-reservations.component';
 import { ArchivedReservationsComponent } from './components/archived-reservations/archived-reservations.component';
 import { RecordsSidebarComponent } from '../../@shared/records-sidebar/records-sidebar.component';
+import { RecordsDetailsComponent } from './components/records-details/records-details.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { RecordsSidebarComponent } from '../../@shared/records-sidebar/records-s
     OverdraftedComponent,
     ActiveReservationsComponent,
     ArchivedReservationsComponent,
+    RecordsDetailsComponent,
   ],
   imports: [
     CommonModule,
