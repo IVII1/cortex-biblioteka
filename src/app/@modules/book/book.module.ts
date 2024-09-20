@@ -17,6 +17,7 @@ import { BookDiscardComponent } from './components/book-discard/book-discard.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { PaginationComponent } from '../../@shared/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
+    PaginationComponent,
   ],
 })
 export class BookModule {}

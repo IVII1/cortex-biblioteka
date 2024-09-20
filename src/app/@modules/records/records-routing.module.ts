@@ -29,7 +29,7 @@ const routes: Routes = [
     path: 'reservations-active',
     component: ActiveReservationsComponent,
   },
-  {
+  { 
     path: 'reservations-archived',
     component: ArchivedReservationsComponent,
   },

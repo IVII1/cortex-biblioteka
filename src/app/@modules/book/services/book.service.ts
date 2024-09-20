@@ -119,4 +119,24 @@ export class BookService {
     );
     return this.httpClient.post(url, data, { headers });
   }
+  getReservations(data: any): Observable<any> {
+    const url = `${environment.apiRecordsBorrow}`;
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `${environment.token}`,
+    );
+    const options = {
+      headers: headers,
+      params: data,
+    };
+    return this.httpClient.get(url, options);
+  }
+  writeOff(data: any): Observable<any> {
+    const url = `${environment.apiBooksWriteOff}`;
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `${environment.token}`,
+    );
+    return this.httpClient.post(url, data, { headers });
+  }
 }
