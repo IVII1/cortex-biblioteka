@@ -15,7 +15,18 @@ export class BorrowedComponent implements OnInit {
     private router: Router,
   ) {}
   ngOnInit(): void {
-    this.router.navigate(['/records/borrowed']);
+    this.fetchData();
+  }
+  openMenuId: number | null = null;
+
+  toggleMenu(bookId: number) {
+    if (this.openMenuId === bookId) {
+      this.openMenuId = null;
+    } else {
+      this.openMenuId = bookId;
+    }
+  }
+  fetchData() {
     this.recordsService.allData().subscribe({
       next: (res) => {
         this.borrows = res.data.izdate;

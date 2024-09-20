@@ -5,6 +5,7 @@ import { ReturnedComponent } from './components/returned/returned.component';
 import { OverdraftedComponent } from './components/overdrafted/overdrafted.component';
 import { ActiveReservationsComponent } from './components/active-reservations/active-reservations.component';
 import { ArchivedReservationsComponent } from './components/archived-reservations/archived-reservations.component';
+import { RecordsDetailsComponent } from './components/records-details/records-details.component';
 
 const routes: Routes = [
   {
@@ -33,9 +34,8 @@ const routes: Routes = [
     component: ArchivedReservationsComponent,
   },
   {
-    path: '**',
-    redirectTo: 'borrowed',
-    pathMatch: 'full',
+    path: ':type/:id',
+    component: RecordsDetailsComponent,
   },
 ];
 
