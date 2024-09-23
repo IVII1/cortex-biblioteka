@@ -5,7 +5,6 @@ import { AuthorDetailComponent } from './components/author-detail/author-detail.
 import { AuthorListComponent } from './components/author-list/author-list.component';
 import { CommonModule } from '@angular/common';
 import { AuthorEditAddComponent } from './components/author-edit-add/author-edit-add.component';
-import { PaginationComponent } from '../../@shared/pagination/pagination.component';
 import { PageHeaderComponent } from '../../@shared/page-header/page-header.component';
 import { SearchAddNewComponent } from '../../@shared/search-add-new/search-add-new.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -20,7 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     RouterModule,
     AuthorRoutingModule,
     CommonModule,
-    PaginationComponent,
+
     PageHeaderComponent,
     SearchAddNewComponent,
     ReactiveFormsModule,

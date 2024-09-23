@@ -14,8 +14,9 @@ export class LibrariansComponent implements OnInit {
   private router = inject(Router);
   private httpClient = inject(HttpClient);
   private destroyRef = inject(DestroyRef);
+  isLoading!: boolean;
   librarians: Librarian[] = [];
-  isOpen = true;
+
   librarianService = inject(LibrarianService);
 
   ngOnInit(): void {
@@ -35,8 +36,10 @@ export class LibrariansComponent implements OnInit {
     this.fetchData();
   }
   fetchData() {
+    this.isLoading = true;
     this.librarianService.all().subscribe({
       next: (res) => {
+        this.isLoading = false;
         this.librarians = res.data;
       },
     });

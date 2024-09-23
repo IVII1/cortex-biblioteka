@@ -10,6 +10,7 @@ import { RecordsService } from '../../services/records.service';
 })
 export class OverdraftedComponent {
   overdraftEvents!: RecordsData[];
+  isLoading!: boolean;
   constructor(
     private recordsService: RecordsService,
     private router: Router,
@@ -27,9 +28,11 @@ export class OverdraftedComponent {
     }
   }
   fetchData() {
+    this.isLoading = true;
     this.recordsService.allData().subscribe({
       next: (res) => {
         this.overdraftEvents = res.data.prekoracene;
+        this.isLoading = false;
       },
     });
   }

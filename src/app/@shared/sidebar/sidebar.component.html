@@ -13,30 +13,6 @@
     </div>
     <div class="mt-[30px]">
       <ul class="text-[#2D3B48] sidebar-nav">
-        <!-- Dashboard Icon -->
-        <li class="group hover:bg-[#EAEAEA] pl-[30px]">
-          <a
-            routerLinkActive="text-[#576cdf]"
-            [routerLink]="['/dashboard']"
-            aria-label="Dashboard"
-            class="flex items-center py-[18px] px-[25px] w-full"
-          >
-            <i
-              class="text-[25px] text-[#707070] fas fa-tachometer-alt transition duration-300 ease-in group-hover:text-[#576cdf]"
-              routerLinkActive="text-[#576cdf]"
-            ></i>
-            <span
-              class="ml-[20px] text-[15px] whitespace-nowrap transition-all duration-300 ease-in"
-              [ngClass]="{
-                'opacity-0 w-0': !isExpanded,
-                'opacity-100 w-auto': isExpanded,
-              }"
-            >
-              Dashboard
-            </span>
-          </a>
-        </li>
-
         <li class="group hover:bg-[#EAEAEA] pl-[30px]">
           <a
             routerLinkActive="text-[#576cdf]"
@@ -157,60 +133,8 @@
         </li>
 
         <!-- Admin Icon -->
-        <li *ngIf="isAdmin" class="group hover:bg-[#EAEAEA] pl-[30px]">
-          <a
-            routerLinkActive="text-[#576cdf]"
-            [routerLink]="['/admins']"
-            aria-label="Admin"
-            class="flex items-center py-[18px] px-[25px]"
-          >
-            <i
-              class="text-[22px] text-[#707070] fas fa-user-shield transition duration-300 ease-in group-hover:text-[#576cdf]"
-              routerLinkActive="text-[#576cdf]"
-            ></i>
-            <span
-              class="ml-[20px] text-[15px] whitespace-nowrap transition-all duration-300 ease-in"
-              [ngClass]="{
-                'opacity-0 w-0': !isExpanded,
-                'opacity-100 w-auto': isExpanded,
-              }"
-            >
-              Administratori
-            </span>
-          </a>
-        </li>
-
-        <li>
-          <hr
-            class="border-t border-[#e4dfdf]"
-            [ngClass]="{ hidden: !isExpanded }"
-          />
-        </li>
 
         <!-- Documentation Icon -->
-        <li class="group hover:bg-[#EAEAEA] pl-[30px]">
-          <a
-            routerLinkActive="text-[#576cdf]"
-            href=""
-            aria-label="Dokumentacija"
-            target="_blank"
-            class="flex items-center py-[18px] px-[25px]"
-          >
-            <i
-              class="text-[22px] text-[#707070] fas fa-book transition duration-300 ease-in group-hover:text-[#576cdf]"
-              routerLinkActive="text-[#576cdf]"
-            ></i>
-            <span
-              class="ml-[20px] text-[15px] whitespace-nowrap transition-all duration-300 ease-in"
-              [ngClass]="{
-                'opacity-0 w-0': !isExpanded,
-                'opacity-100 w-auto': isExpanded,
-              }"
-            >
-              Dokumentacija
-            </span>
-          </a>
-        </li>
       </ul>
     </div>
   </div>

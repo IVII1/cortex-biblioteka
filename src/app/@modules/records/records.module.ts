@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RecordsRoutingModule } from './records-routing.module';
 import { BorrowedComponent } from './components/borrowed/borrowed.component';
 import { PageHeaderComponent } from '../../@shared/page-header/page-header.component';
-import { PaginationComponent } from '../../@shared/pagination/pagination.component';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { ReturnedComponent } from './components/returned/returned.component';
@@ -26,7 +25,7 @@ import { RecordsDetailsComponent } from './components/records-details/records-de
     CommonModule,
     RecordsRoutingModule,
     PageHeaderComponent,
-    PaginationComponent,
+
     MatListModule,
     MatIconModule,
     RecordsSidebarComponent,

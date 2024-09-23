@@ -10,6 +10,7 @@ import { RecordsService } from '../../services/records.service';
 })
 export class ReturnedComponent {
   returnEvents!: RecordsData[];
+  isLoading!: boolean;
   constructor(
     private recordsService: RecordsService,
     private router: Router,
@@ -27,9 +28,11 @@ export class ReturnedComponent {
     }
   }
   fetchData() {
+    this.isLoading = true;
     this.recordsService.allData().subscribe({
       next: (res) => {
         this.returnEvents = res.data.vracene;
+        this.isLoading = false;
       },
     });
   }

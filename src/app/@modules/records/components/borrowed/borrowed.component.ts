@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class BorrowedComponent implements OnInit {
   borrows!: RecordsData[];
+  isLoading!: boolean;
+
   constructor(
     private recordsService: RecordsService,
     private router: Router,
@@ -27,9 +29,11 @@ export class BorrowedComponent implements OnInit {
     }
   }
   fetchData() {
+    this.isLoading = true;
     this.recordsService.allData().subscribe({
       next: (res) => {
         this.borrows = res.data.izdate;
+        this.isLoading = false;
       },
     });
   }

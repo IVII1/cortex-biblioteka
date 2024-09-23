@@ -14,17 +14,14 @@ export class BookListComponent implements OnInit {
   private router = inject(Router);
   private httpClient = inject(HttpClient);
   private destroyRef = inject(DestroyRef);
+  isLoading!: boolean;
   books: Book[] = [];
-  isOpen = true;
+
   bookService = inject(BookService);
   toastr = inject(ToastrService);
 
   ngOnInit(): void {
-    this.bookService.all().subscribe({
-      next: (response) => {
-        this.books = response.data;
-      },
-    });
+    this.fetchData();
   }
   openMenuId: number | null = null;
 
@@ -51,5 +48,14 @@ export class BookListComponent implements OnInit {
   saveBook(id: number) {
     this.router.navigate(['authors/edit', id]);
     this.bookService.save(id);
+  }
+  fetchData() {
+    this.isLoading = true;
+    this.bookService.all().subscribe({
+      next: (response) => {
+        this.books = response.data;
+        this.isLoading = false;
+      },
+    });
   }
 }

@@ -2,7 +2,6 @@ import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { Student } from '../../models/student.model';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
 import { StudentService } from '../../services/student.service';
 
 @Component({
@@ -15,7 +14,8 @@ export class StudentsComponent implements OnInit {
   private httpClient = inject(HttpClient);
   private destroyRef = inject(DestroyRef);
   students: Student[] = [];
-  isOpen = true;
+
+  isLoading!: boolean;
   studentService = inject(StudentService);
 
   ngOnInit(): void {
@@ -35,8 +35,10 @@ export class StudentsComponent implements OnInit {
     this.fetchData();
   }
   fetchData() {
+    this.isLoading = true;
     this.studentService.all().subscribe({
       next: (res) => {
+        this.isLoading = false;
         this.students = res.data;
       },
     });

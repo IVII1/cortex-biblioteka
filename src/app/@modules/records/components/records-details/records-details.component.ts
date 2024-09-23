@@ -14,6 +14,7 @@ export class RecordsDetailsComponent implements OnInit {
   recordType!: RecordType;
   records!: RecordsData[];
   currentRecord!: RecordsData | null;
+  isLoading!: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,6 +31,7 @@ export class RecordsDetailsComponent implements OnInit {
   }
 
   loadRecords(id: number) {
+    this.isLoading = true;
     this.recordsService.allData().subscribe({
       next: (response: { data: BorrowData }) => {
         switch (this.recordType) {
@@ -47,6 +49,7 @@ export class RecordsDetailsComponent implements OnInit {
 
         this.currentRecord =
           this.records.find((record) => record.id === id) || null;
+        this.isLoading = false;
       },
     });
   }

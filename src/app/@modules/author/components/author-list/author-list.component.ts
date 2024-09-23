@@ -15,8 +15,9 @@ export class AuthorListComponent implements OnInit {
   private router = inject(Router);
   private httpClient = inject(HttpClient);
   private destroyRef = inject(DestroyRef);
+  isLoading!: boolean;
   authors: Author[] = [];
-  isOpen = true;
+
   authorService = inject(AuthorService);
 
   ngOnInit(): void {
@@ -40,8 +41,10 @@ export class AuthorListComponent implements OnInit {
     this.authorService.save(id);
   }
   fetchData() {
+    this.isLoading = true;
     this.authorService.all().subscribe({
       next: (res) => {
+        this.isLoading = false;
         this.authors = res.data;
       },
     });

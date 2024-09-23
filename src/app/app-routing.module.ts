@@ -5,7 +5,7 @@ import { AppLayoutComponent } from './@shared/layouts/app-layout/app-layout.comp
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'books',
     pathMatch: 'full',
   },
   {
@@ -13,13 +13,6 @@ const routes: Routes = [
     component: AppLayoutComponent,
 
     children: [
-      {
-        path: 'dashboard',
-        loadChildren: () =>
-          import('./@modules/dashboard/dashboard.module').then(
-            (m) => m.DashboardModule,
-          ),
-      },
       {
         path: 'authors',
 
@@ -56,12 +49,6 @@ const routes: Routes = [
           import('./@modules/records/records.module').then(
             (m) => m.RecordsModule,
           ),
-      },
-      {
-        path: 'admins',
-
-        loadChildren: () =>
-          import('./@modules/admin/admin.module').then((m) => m.AdminModule),
       },
     ],
   },
