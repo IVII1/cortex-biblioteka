@@ -13,6 +13,7 @@ import { RecordsSidebarComponent } from '../../@shared/records-sidebar/records-s
 import { RecordsDetailsComponent } from './components/records-details/records-details.component';
 import { CustomDatePipe } from 'src/app/custom-date.pipe';
 import { ExpirationDatePipe } from 'src/app/expiration-date.pipe';
+import { TimeKeptPipe } from 'src/app/time-kept.pipe';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ExpirationDatePipe } from 'src/app/expiration-date.pipe';
     PageHeaderComponent,
     CustomDatePipe,
     ExpirationDatePipe,
+    TimeKeptPipe,
     MatListModule,
     MatIconModule,
     RecordsSidebarComponent,

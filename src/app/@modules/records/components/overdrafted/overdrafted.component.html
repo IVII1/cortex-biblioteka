@@ -81,11 +81,11 @@
                       {{ overdraftEvent.student.surname }}
                     </td>
                     <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
-                      {{ overdraftEvent.borrow_date }}
+                      {{ overdraftEvent.borrow_date | customDate }}
                     </td>
                     <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
                       <div>
-                        <span>3 nedelje i 6 dana</span>
+                        <span>{{ overdraftEvent.borrow_date | timeKept }}</span>
                       </div>
                     </td>
                     <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
