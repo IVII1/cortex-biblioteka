@@ -104,11 +104,14 @@
                           role="menu"
                         >
                           <div class="py-1">
-                            <a
-                              [routerLink]="[
-                                '/records/reservationed',
-                                reservation.id,
-                              ]"
+                            <button
+                              (click)="
+                                borrowBook(
+                                  reservation.id,
+                                  reservation.knjiga.id,
+                                  reservation.student.id
+                                )
+                              "
                               tabindex="0"
                               class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                               role="menuitem"
@@ -117,7 +120,7 @@
                                 class="far fa-file mr-[10px] ml-[5px] py-1"
                               ></i>
                               <span class="px-4 py-0">Izdaj knjigu</span>
-                            </a>
+                            </button>
 
                             <button
                               (click)="cancelReservation(reservation.id)"

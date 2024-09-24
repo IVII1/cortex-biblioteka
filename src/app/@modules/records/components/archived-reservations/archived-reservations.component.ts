@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RecordsData } from '../../models/records-data.model';
 import { RecordsService } from '../../services/records.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment.development';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-archived-reservations',
@@ -15,6 +18,7 @@ export class ArchivedReservationsComponent implements OnInit {
   constructor(
     private recordsService: RecordsService,
     private router: Router,
+    private httpClient: HttpClient,
   ) {}
   ngOnInit(): void {
     this.fetchData();
@@ -36,5 +40,28 @@ export class ArchivedReservationsComponent implements OnInit {
         this.isLoading = false;
       },
     });
+  }
+  borrowBook(studentId: number, bookId: number) {
+    {
+      const url = `${environment.apiBooks}/${bookId}/izdaj`;
+      const headers = new HttpHeaders().set(
+        'Authorization',
+        `${environment.token}`,
+      );
+      const formattedActionDate = DateTime.now().toFormat('MM/dd/yyyy');
+      const fromattedReturnDate = DateTime.now()
+        .plus({ days: 20 })
+        .toFormat('MM/dd/yyyy');
+      const data = {
+        student_id: studentId,
+        datumIzdavanja: formattedActionDate,
+        datumVracanja: fromattedReturnDate,
+      };
+      this.httpClient.post(url, data, { headers }).subscribe({
+        next: () => {
+          this.fetchData();
+        },
+      });
+    }
   }
 }

@@ -1,7 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RecordsData } from '../../models/records-data.model';
 import { RecordsService } from '../../services/records.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { DateTime } from 'luxon';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-active-reservations',
@@ -15,6 +19,7 @@ export class ActiveReservationsComponent implements OnInit {
   constructor(
     private recordsService: RecordsService,
     private router: Router,
+    private httpClient: HttpClient,
   ) {}
   ngOnInit(): void {
     this.fetchData();
@@ -44,5 +49,32 @@ export class ActiveReservationsComponent implements OnInit {
         this.fetchData();
       },
     });
+  }
+
+  borrowBook(reservationId: number, studentId: number, bookId: number) {
+    {
+      const url = `${environment.apiBooks}/${bookId}/izdaj`;
+      const headers = new HttpHeaders().set(
+        'Authorization',
+        `${environment.token}`,
+      );
+      const formattedActionDate = DateTime.now().toFormat('MM/dd/yyyy');
+      const fromattedReturnDate = DateTime.now()
+        .plus({ days: 20 })
+        .toFormat('MM/dd/yyyy');
+      const data = {
+        student_id: studentId,
+        datumIzdavanja: formattedActionDate,
+        datumVracanja: fromattedReturnDate,
+      };
+      this.httpClient.post(url, data, { headers }).subscribe();
+    }
+    this.recordsService
+      .cancelReservation({ reservation_id: reservationId })
+      .subscribe({
+        next: () => {
+          this.fetchData();
+        },
+      });
   }
 }
