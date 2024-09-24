@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RecordsData } from '../../models/records-data.model';
 import { RecordsService } from '../../services/records.service';
-import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-archived-reservations',
@@ -17,7 +15,6 @@ export class ArchivedReservationsComponent implements OnInit {
   constructor(
     private recordsService: RecordsService,
     private router: Router,
-    dt: DateTime,
   ) {}
   ngOnInit(): void {
     this.fetchData();
@@ -41,6 +38,4 @@ export class ArchivedReservationsComponent implements OnInit {
       },
     });
   }
-
-  customDate() {}
 }

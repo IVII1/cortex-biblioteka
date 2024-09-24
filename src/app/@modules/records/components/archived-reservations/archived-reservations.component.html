@@ -74,11 +74,13 @@
                       {{ reservation.student.surname }}
                     </td>
                     <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
-                      {{ reservation.action_date }}
+                      {{ reservation.action_date | customDate }}
                     </td>
                     <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
                       <div>
-                        <span>3 nedelje i 6 dana</span>
+                        <span>{{
+                          reservation.action_date | expirationDate
+                        }}</span>
                       </div>
                     </td>
 

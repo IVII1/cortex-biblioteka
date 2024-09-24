@@ -11,6 +11,8 @@ import { ActiveReservationsComponent } from './components/active-reservations/ac
 import { ArchivedReservationsComponent } from './components/archived-reservations/archived-reservations.component';
 import { RecordsSidebarComponent } from '../../@shared/records-sidebar/records-sidebar.component';
 import { RecordsDetailsComponent } from './components/records-details/records-details.component';
+import { CustomDatePipe } from 'src/app/custom-date.pipe';
+import { ExpirationDatePipe } from 'src/app/expiration-date.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { RecordsDetailsComponent } from './components/records-details/records-de
     CommonModule,
     RecordsRoutingModule,
     PageHeaderComponent,
-
+    CustomDatePipe,
+    ExpirationDatePipe,
     MatListModule,
     MatIconModule,
     RecordsSidebarComponent,
