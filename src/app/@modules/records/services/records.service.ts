@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
@@ -21,5 +22,10 @@ export class RecordsService {
     const url = environment.apiBooksReserve;
     const headers = new HttpHeaders().set('Authorization', environment.token);
     return this.httpClient.get<{ data: ReservationData }>(url, { headers });
+  }
+  cancelReservation(data: any) {
+    const url = environment.apiBooksCancelReservation;
+    const headers = new HttpHeaders().set('Authorization', environment.token);
+    return this.httpClient.post(url, data, { headers });
   }
 }

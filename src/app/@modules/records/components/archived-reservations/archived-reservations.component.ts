@@ -34,7 +34,6 @@ export class ArchivedReservationsComponent implements OnInit {
       next: (res) => {
         this.reservations = res.data.archive;
         this.isLoading = false;
-        console.log(this.reservations);
       },
     });
   }

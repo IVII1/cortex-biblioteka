@@ -34,7 +34,14 @@ export class ActiveReservationsComponent implements OnInit {
       next: (res) => {
         this.reservations = res.data.active;
         this.isLoading = false;
-        console.log(this.reservations);
+      },
+    });
+  }
+
+  cancelReservation(id: number) {
+    this.recordsService.cancelReservation({ reservation_id: id }).subscribe({
+      next: () => {
+        this.fetchData();
       },
     });
   }

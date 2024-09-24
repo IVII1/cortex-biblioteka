@@ -18,4 +18,6 @@ export const environment = {
   apiBooksWriteOff: 'https://biblioteka.simonovicp.com/api/books/otpisi',
   apiBooksReturn: 'https://biblioteka.simonovicp.com/api/books/vrati',
   apiBooksReserve: 'https://biblioteka.simonovicp.com/api/books/reservations',
+  apiBooksCancelReservation:
+    'https://biblioteka.simonovicp.com/api/books/reservations/cancel',
 };
