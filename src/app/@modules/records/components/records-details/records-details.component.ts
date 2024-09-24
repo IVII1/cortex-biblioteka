@@ -32,7 +32,7 @@ export class RecordsDetailsComponent implements OnInit {
 
   loadRecords(id: number) {
     this.isLoading = true;
-    this.recordsService.allData().subscribe({
+    this.recordsService.allBorrowData().subscribe({
       next: (response: { data: BorrowData }) => {
         switch (this.recordType) {
           case RecordType.BORROW:

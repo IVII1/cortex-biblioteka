@@ -29,7 +29,7 @@ export class ReturnedComponent {
   }
   fetchData() {
     this.isLoading = true;
-    this.recordsService.allData().subscribe({
+    this.recordsService.allBorrowData().subscribe({
       next: (res) => {
         this.returnEvents = res.data.vracene;
         this.isLoading = false;

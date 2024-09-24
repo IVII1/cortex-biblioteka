@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RecordsData } from '../../models/records-data.model';
 import { RecordsService } from '../../services/records.service';
@@ -8,7 +8,7 @@ import { RecordsService } from '../../services/records.service';
   templateUrl: './overdrafted.component.html',
   styleUrl: './overdrafted.component.scss',
 })
-export class OverdraftedComponent {
+export class OverdraftedComponent implements OnInit {
   overdraftEvents!: RecordsData[];
   isLoading!: boolean;
   constructor(
@@ -29,7 +29,7 @@ export class OverdraftedComponent {
   }
   fetchData() {
     this.isLoading = true;
-    this.recordsService.allData().subscribe({
+    this.recordsService.allBorrowData().subscribe({
       next: (res) => {
         this.overdraftEvents = res.data.prekoracene;
         this.isLoading = false;

@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 
 import { BorrowData } from '../models/borrow-data.model';
+import { ReservationData } from '../models/reservation-data.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,9 +11,15 @@ import { BorrowData } from '../models/borrow-data.model';
 export class RecordsService {
   httpClient = inject(HttpClient);
 
-  allData() {
+  allBorrowData() {
     const url = environment.apiRecordsBorrow;
     const headers = new HttpHeaders().set('Authorization', environment.token);
     return this.httpClient.get<{ data: BorrowData }>(url, { headers });
+  }
+
+  allReservationData() {
+    const url = environment.apiBooksReserve;
+    const headers = new HttpHeaders().set('Authorization', environment.token);
+    return this.httpClient.get<{ data: ReservationData }>(url, { headers });
   }
 }

@@ -1,1 +1,146 @@
-<p>active-reservations works!</p>
+<section class="w-screen h-screen pl-[80px] py-4 text-gray-700">
+  <!-- Heading of content -->
+  <app-page-header title="Records"></app-page-header>
+  <!-- Space for content -->
+  <div class="scroll height-dashboard">
+    <div>
+      <!-- Space for content -->
+      <div class="flex justify-start pt-3 bg-white">
+        <app-records-sidebar></app-records-sidebar>
+
+        <div class="w-full mt-[10px] ml-2 px-2">
+          @if (!isLoading) {
+            <table
+              class="overflow-hidden shadow-lg rounded-xl w-full border-[1px] border-[#e4dfdf]"
+              id="myTable"
+            >
+              <thead class="bg-[#EFF3F6]">
+                <tr class="border-b-[1px] border-[#e4dfdf]">
+                  <th
+                    class="px-4 py-4 leading-4 tracking-wider text-left text-blue-500"
+                  ></th>
+                  <th class="px-4 py-4 leading-4 tracking-wider text-left">
+                    Naziv knjige
+                  </th>
+                  <!-- Izdato uceniku + dropdown filter for ucenik -->
+                  <th
+                    class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left uceniciDrop-toggle"
+                  >
+                    Reservaciju podnio
+                  </th>
+
+                  <!-- Datum izdavanja + dropdown filter for datum -->
+                  <th
+                    class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left datumDrop-toggle"
+                  >
+                    Datum rezervacije
+                  </th>
+
+                  <!-- Trenutno zadrzavanje + dropdown filter for zadrzavanje -->
+                  <th
+                    class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left zadrzavanjeDrop-toggle"
+                  >
+                    Rezervacija ističe
+                  </th>
+                  <!-- Knjigu izdao + dropdown filter for bibliotekar -->
+
+                  <th class="px-4 py-4"></th>
+                </tr>
+              </thead>
+              <tbody class="bg-white">
+                @for (reservation of reservations; track reservation.id) {
+                  <tr
+                    class="hover:bg-gray-200 hover:shadow-md border-b-[1px] border-[#e4dfdf]"
+                  >
+                    <td class="px-4 py-3 whitespace-no-wrap">
+                      <label class="inline-flex items-center">
+                        <input type="checkbox" class="form-checkbox" />
+                      </label>
+                    </td>
+                    <td class="flex flex-row items-center px-4 py-3">
+                      <img
+                        class="object-cover w-8 mr-2 h-11"
+                        [src]="reservation.knjiga.photo"
+                        alt=""
+                      />
+                      <a href="knjigaOsnovniDetalji.php">
+                        <span class="font-medium text-center">{{
+                          reservation.knjiga.title
+                        }}</span>
+                      </a>
+                    </td>
+                    <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
+                      {{ reservation.student.name }}
+                      {{ reservation.student.surname }}
+                    </td>
+                    <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
+                      {{ reservation.action_date }}
+                    </td>
+                    <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
+                      <div>
+                        <span>3 nedelje i 6 dana</span>
+                      </div>
+                    </td>
+
+                    <td
+                      class="px-6 py-3 text-sm leading-5 text-right whitespace-no-wrap"
+                    >
+                      <p
+                        class="inline cursor-pointer text-[20px] py-[10px] px-[30px] border-gray-300 dotsIzdateKnjige hover:text-[#606FC7]"
+                        (click)="toggleMenu(reservation.id)"
+                      >
+                        <i class="fas fa-ellipsis-v"></i>
+                      </p>
+                      <div
+                        class="relative z-10 transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 izdate-knjige"
+                        [ngClass]="{ hidden: openMenuId !== reservation.id }"
+                      >
+                        <div
+                          class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
+                          aria-labelledby="headlessui-menu-button-1"
+                          id="headlessui-menu-items-117"
+                          role="menu"
+                        >
+                          <div class="py-1">
+                            <a
+                              [routerLink]="[
+                                '/records/reservationed',
+                                reservation.id,
+                              ]"
+                              tabindex="0"
+                              class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                              role="menuitem"
+                            >
+                              <i
+                                class="far fa-file mr-[10px] ml-[5px] py-1"
+                              ></i>
+                              <span class="px-4 py-0">Izdaj knjigu</span>
+                            </a>
+
+                            <a
+                              href="otpisiKnjigu.php"
+                              tabindex="0"
+                              class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                              role="menuitem"
+                            >
+                              <i
+                                class="fas fa-level-up-alt mr-[14px] ml-[5px] py-1"
+                              ></i>
+                              <span class="px-4 py-0">Otkaži rezervaciju</span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          } @else {
+            <h1 class="flex justify-center text-center">Loading...</h1>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

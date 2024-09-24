@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { RecordsData } from 'src/app/@modules/records/models/records-data.model';
 import { Book } from '../../models/book.model';
@@ -24,21 +24,14 @@ export class BookReturnComponent {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      const bookId = +params['id'];
-      this.route.data.subscribe((data) => {
-        this.book = data['book'];
-      });
-      this.bookActionsForm = new FormGroup({
-        book_id: new FormControl(bookId, Validators.required),
-      });
-    });
+    this.book = this.route.snapshot.data['book'] || null;
+
     this.bookReturned();
     this.initbookReturnForm();
   }
 
   bookReturned() {
-    this.bookService.getReservations(this.bookActionsForm.value).subscribe({
+    this.bookService.getReservations({ book_id: this.book.id }).subscribe({
       next: (res) => {
         this.logs = [...res.data.prekoracene, ...res.data.izdate];
       },

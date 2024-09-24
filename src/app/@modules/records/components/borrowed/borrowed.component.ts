@@ -30,7 +30,7 @@ export class BorrowedComponent implements OnInit {
   }
   fetchData() {
     this.isLoading = true;
-    this.recordsService.allData().subscribe({
+    this.recordsService.allBorrowData().subscribe({
       next: (res) => {
         this.borrows = res.data.izdate;
         this.isLoading = false;

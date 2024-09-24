@@ -17,4 +17,5 @@ export const environment = {
   apiRecordsBorrow: 'https://biblioteka.simonovicp.com/api/books/borrows',
   apiBooksWriteOff: 'https://biblioteka.simonovicp.com/api/books/otpisi',
   apiBooksReturn: 'https://biblioteka.simonovicp.com/api/books/vrati',
+  apiBooksReserve: 'https://biblioteka.simonovicp.com/api/books/reservations',
 };
