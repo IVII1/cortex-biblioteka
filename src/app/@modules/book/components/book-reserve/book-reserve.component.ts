@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../../models/book.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StudentService } from 'src/app/@modules/students/services/student.service';
 import { Student } from 'src/app/@modules/students/models/student.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { BookService } from '../../services/book.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-book-reserve',
   templateUrl: './book-reserve.component.html',
@@ -25,6 +26,8 @@ export class BookReserveComponent implements OnInit {
     private fb: FormBuilder,
     private datePipe: DatePipe,
     private bookService: BookService,
+    private router: Router,
+    private toastr: ToastrService,
   ) {}
   ngOnInit(): void {
     this.book = this.route.snapshot.data['book'];
@@ -49,7 +52,14 @@ export class BookReserveComponent implements OnInit {
   }
   onSubmit() {
     this.bookService.reserve(this.book.id, this.reserveForm.value).subscribe({
-      next: (response) => (this.reservation = response),
+      next: (response) => {
+        this.reservation = response;
+        this.router.navigate(['/books']);
+        this.toastr.success('Reservation Made Sucessfully');
+      },
+      error: () => {
+        this.toastr.error('Reservation Failed');
+      },
     });
   }
 
