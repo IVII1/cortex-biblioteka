@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Book } from '../models/book.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { Observable, forkJoin, map } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -146,5 +146,21 @@ export class BookService {
       `${environment.token}`,
     );
     return this.httpClient.post(url, data, { headers });
+  }
+  getSingleBookData(data: any): Observable<any> {
+    const borrowUrl = environment.apiRecordsBorrow;
+    const reserveUrl = environment.apiBooksReserve;
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `${environment.token}`,
+    );
+    const options = {
+      headers: headers,
+      params: data,
+    };
+    return forkJoin({
+      borrows: this.httpClient.get(borrowUrl, options),
+      reservations: this.httpClient.get(reserveUrl, options),
+    });
   }
 }

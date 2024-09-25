@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from '../../models/book.model';
 import { BookService } from '../../services/book.service';
 import { ToastrService } from 'ngx-toastr';
+import { RecordsData } from 'src/app/@modules/records/models/records-data.model';
 
 @Component({
   selector: 'app-book-detail',
@@ -11,6 +12,13 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class BookDetailComponent implements OnInit {
   book!: Book;
+  borrows!: RecordsData[];
+  reservations!: RecordsData[];
+  overdrafts!: RecordsData[];
+  returns!: RecordsData[];
+  activeReservations!: RecordsData[];
+  archivedReservations!: RecordsData[];
+  isLoading!: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -23,6 +31,7 @@ export class BookDetailComponent implements OnInit {
     this.route.data.subscribe((data) => {
       this.book = data['book'];
     });
+    this.getRecordsData();
   }
   openMenuId: number | null = null;
 
@@ -43,6 +52,42 @@ export class BookDetailComponent implements OnInit {
       error: (err) => {
         this.toastr.error('Error Deleting Book');
         console.log(err);
+      },
+    });
+  }
+  getRecordsData() {
+    this.isLoading = true;
+    this.bookService
+      .getSingleBookData({
+        book_id: this.book.id,
+      })
+      .subscribe({
+        next: (res) => {
+          this.borrows = res.borrows.data.izdate;
+          this.overdrafts = res.borrows.data.prekoracene;
+          console.log(this.overdrafts);
+          this.returns = res.borrows.data.vracene;
+          this.activeReservations = res.reservations.data.active;
+          this.archivedReservations = res.reservations.data.archive;
+          this.isLoading = false;
+        },
+      });
+  }
+  writeOff(id: number) {
+    this.bookService.writeOff({ toWriteoff: id }).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.getRecordsData();
+        this.router.navigate(['/records/borrowed']);
+      },
+    });
+  }
+  return(id: number) {
+    this.bookService.writeOff({ toReturn: id }).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.getRecordsData();
+        this.router.navigate(['/records/borrowed']);
       },
     });
   }

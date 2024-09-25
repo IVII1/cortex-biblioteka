@@ -210,5 +210,962 @@
         </div>
       </div>
     </mat-tab>
+    <mat-tab label="Records">
+      <mat-tab-group>
+        <mat-tab label="Borrows">
+          <section class="w-screen h-screen pl-[80px] py-4 text-gray-700">
+            <!-- Heading of content -->
+
+            <!-- Space for content -->
+            <div class="scroll height-dashboard">
+              <div>
+                <!-- Space for content -->
+                <div class="flex justify-start pt-3 bg-white">
+                  <div class="w-full mt-[10px] mr-3 px-2">
+                    @if (!isLoading) {
+                      <table
+                        class="overflow-hidden shadow-lg rounded-xl w-full border-[1px] border-[#e4dfdf]"
+                        id="myTable"
+                      >
+                        <thead class="bg-[#EFF3F6]">
+                          <tr class="border-b-[1px] border-[#e4dfdf]">
+                            <th
+                              class="px-4 py-4 leading-4 tracking-wider text-left text-blue-500"
+                            ></th>
+                            <th
+                              class="px-4 py-4 leading-4 tracking-wider text-left"
+                            >
+                              Naziv knjige
+                            </th>
+                            <!-- Izdato uceniku + dropdown filter for ucenik -->
+                            <th
+                              class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left uceniciDrop-toggle"
+                            >
+                              Izdato uceniku
+                            </th>
+
+                            <!-- Datum izdavanja + dropdown filter for datum -->
+                            <th
+                              class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left datumDrop-toggle"
+                            >
+                              Datum izdavanja
+                            </th>
+
+                            <!-- Trenutno zadrzavanje + dropdown filter for zadrzavanje -->
+                            <th
+                              class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left zadrzavanjeDrop-toggle"
+                            >
+                              Trenutno zadrzavanje knjige
+                            </th>
+                            <!-- Knjigu izdao + dropdown filter for bibliotekar -->
+                            <th
+                              class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left bibliotekariDrop-toggle"
+                            >
+                              Knjigu izdao
+                            </th>
+                            <th class="px-4 py-4"></th>
+                          </tr>
+                        </thead>
+                        <tbody class="bg-white">
+                          @for (borrow of borrows; track borrow.id) {
+                            <tr
+                              class="hover:bg-gray-200 hover:shadow-md border-b-[1px] border-[#e4dfdf]"
+                            >
+                              <td class="px-4 py-3 whitespace-no-wrap">
+                                <label class="inline-flex items-center">
+                                  <input
+                                    type="checkbox"
+                                    class="form-checkbox"
+                                  />
+                                </label>
+                              </td>
+                              <td class="flex flex-row items-center px-4 py-3">
+                                <img
+                                  class="object-cover w-8 mr-2 h-11"
+                                  [src]="borrow.knjiga.photo"
+                                  alt=""
+                                />
+                                <a href="knjigaOsnovniDetalji.php">
+                                  <span class="font-medium text-center">{{
+                                    borrow.knjiga.title
+                                  }}</span>
+                                </a>
+                              </td>
+                              <td
+                                class="px-4 py-3 text-sm leading-5 whitespace-no-wrap"
+                              >
+                                {{ borrow.student.name }}
+                                {{ borrow.student.surname }}
+                              </td>
+                              <td
+                                class="px-4 py-3 text-sm leading-5 whitespace-no-wrap"
+                              >
+                                {{ borrow.borrow_date | customDate }}
+                              </td>
+                              <td
+                                class="px-4 py-3 text-sm leading-5 whitespace-no-wrap"
+                              >
+                                <div>
+                                  <span>{{
+                                    borrow.borrow_date | timeKept
+                                  }}</span>
+                                </div>
+                              </td>
+                              <td
+                                class="px-4 py-3 text-sm leading-5 whitespace-no-wrap"
+                              >
+                                {{ borrow.bibliotekar0.name }}
+                                {{ borrow.bibliotekar0.surname }}
+                              </td>
+                              <td
+                                class="px-6 py-3 text-sm leading-5 text-right whitespace-no-wrap"
+                              >
+                                <p
+                                  class="inline cursor-pointer text-[20px] py-[10px] px-[30px] border-gray-300 dotsIzdateKnjige hover:text-[#606FC7]"
+                                  (click)="toggleMenu(borrow.id)"
+                                >
+                                  <i class="fas fa-ellipsis-v"></i>
+                                </p>
+                                <div
+                                  class="relative z-10 transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 izdate-knjige z-50"
+                                  [ngClass]="{
+                                    hidden: openMenuId !== borrow.id,
+                                  }"
+                                >
+                                  <div
+                                    class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
+                                    aria-labelledby="headlessui-menu-button-1"
+                                    id="headlessui-menu-items-117"
+                                    role="menu"
+                                  >
+                                    <div class="py-1">
+                                      <a
+                                        [routerLink]="[
+                                          '/records/borrowed',
+                                          borrow.id,
+                                        ]"
+                                        tabindex="0"
+                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                        role="menuitem"
+                                      >
+                                        <i
+                                          class="far fa-file mr-[10px] ml-[5px] py-1"
+                                        ></i>
+                                        <span class="px-4 py-0"
+                                          >Pogledaj detalje</span
+                                        >
+                                      </a>
+
+                                      <button
+                                        (click)="writeOff(borrow.id)"
+                                        tabindex="0"
+                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                        role="menuitem"
+                                      >
+                                        <i
+                                          class="fas fa-level-up-alt mr-[14px] ml-[5px] py-1"
+                                        ></i>
+                                        <span class="px-4 py-0"
+                                          >Otpisi knjigu</span
+                                        >
+                                      </button>
+
+                                      <button
+                                        (click)="return(borrow.id)"
+                                        tabindex="0"
+                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                        role="menuitem"
+                                      >
+                                        <i
+                                          class="fas fa-redo-alt mr-[10px] ml-[5px] py-1"
+                                        ></i>
+                                        <span class="px-4 py-0"
+                                          >Vrati knjigu</span
+                                        >
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          }
+                        </tbody>
+                      </table>
+                    } @else {
+                      <h1 class="flex justify-center text-center">
+                        Loading...
+                      </h1>
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </mat-tab>
+        <mat-tab label="Returns">
+          <section class="w-screen h-screen pl-[80px] py-4 text-gray-700">
+            <!-- Heading of content -->
+
+            <!-- Space for content -->
+            <div class="scroll height-dashboard">
+              <div>
+                <!-- Space for content -->
+                <div class="flex justify-start pt-3 bg-white">
+                  <div class="w-full mt-[10px] mr-3 px-2">
+                    @if (!isLoading) {
+                      <table
+                        class="overflow-hidden shadow-lg rounded-xl w-full border-[1px] border-[#e4dfdf]"
+                        id="myTable"
+                      >
+                        <thead class="bg-[#EFF3F6]">
+                          <tr class="border-b-[1px] border-[#e4dfdf]">
+                            <th
+                              class="px-4 py-4 leading-4 tracking-wider text-left text-blue-500"
+                            ></th>
+                            <th
+                              class="px-4 py-4 leading-4 tracking-wider text-left"
+                            >
+                              Naziv knjige
+                            </th>
+                            <!-- Izdato uceniku + dropdown filter for ucenik -->
+                            <th
+                              class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left uceniciDrop-toggle"
+                            >
+                              Izdato uceniku
+                            </th>
+
+                            <!-- Datum izdavanja + dropdown filter for datum -->
+                            <th
+                              class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left datumDrop-toggle"
+                            >
+                              Datum izdavanja
+                            </th>
+
+                            <!-- Trenutno zadrzavanje + dropdown filter for zadrzavanje -->
+                            <th
+                              class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left zadrzavanjeDrop-toggle"
+                            >
+                              Trenutno zadrzavanje knjige
+                            </th>
+                            <!-- Knjigu izdao + dropdown filter for bibliotekar -->
+                            <th
+                              class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left bibliotekariDrop-toggle"
+                            >
+                              Knjigu izdao
+                            </th>
+                            <th class="px-4 py-4"></th>
+                          </tr>
+                        </thead>
+                        <tbody class="bg-white">
+                          @for (record of returns; track record.id) {
+                            <tr
+                              class="hover:bg-gray-200 hover:shadow-md border-b-[1px] border-[#e4dfdf]"
+                            >
+                              <td class="px-4 py-3 whitespace-no-wrap">
+                                <label class="inline-flex items-center">
+                                  <input
+                                    type="checkbox"
+                                    class="form-checkbox"
+                                  />
+                                </label>
+                              </td>
+                              <td class="flex flex-row items-center px-4 py-3">
+                                <img
+                                  class="object-cover w-8 mr-2 h-11"
+                                  [src]="record.knjiga.photo"
+                                  alt=""
+                                />
+                                <a href="knjigaOsnovniDetalji.php">
+                                  <span class="font-medium text-center">{{
+                                    record.knjiga.title
+                                  }}</span>
+                                </a>
+                              </td>
+                              <td
+                                class="px-4 py-3 text-sm leading-5 whitespace-no-wrap"
+                              >
+                                {{ record.student.name }}
+                                {{ record.student.surname }}
+                              </td>
+                              <td
+                                class="px-4 py-3 text-sm leading-5 whitespace-no-wrap"
+                              >
+                                {{ record.borrow_date | customDate }}
+                              </td>
+                              <td
+                                class="px-4 py-3 text-sm leading-5 whitespace-no-wrap"
+                              >
+                                <div>
+                                  <span>{{
+                                    record.borrow_date | timeKept
+                                  }}</span>
+                                </div>
+                              </td>
+                              <td
+                                class="px-4 py-3 text-sm leading-5 whitespace-no-wrap"
+                              >
+                                {{ record.bibliotekar0.name }}
+                                {{ record.bibliotekar0.surname }}
+                              </td>
+                              <td
+                                class="px-6 py-3 text-sm leading-5 text-right whitespace-no-wrap"
+                              >
+                                <p
+                                  class="inline cursor-pointer text-[20px] py-[10px] px-[30px] border-gray-300 dotsIzdateKnjige hover:text-[#606FC7]"
+                                  (click)="toggleMenu(record.id)"
+                                >
+                                  <i class="fas fa-ellipsis-v"></i>
+                                </p>
+                                <div
+                                  class="relative z-10 transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 izdate-knjige z-50"
+                                  [ngClass]="{
+                                    hidden: openMenuId !== record.id,
+                                  }"
+                                >
+                                  <div
+                                    class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
+                                    aria-labelledby="headlessui-menu-button-1"
+                                    id="headlessui-menu-items-117"
+                                    role="menu"
+                                  >
+                                    <div class="py-1">
+                                      <a
+                                        [routerLink]="[
+                                          '/records/borrowed',
+                                          record.id,
+                                        ]"
+                                        tabindex="0"
+                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                        role="menuitem"
+                                      >
+                                        <i
+                                          class="far fa-file mr-[10px] ml-[5px] py-1"
+                                        ></i>
+                                        <span class="px-4 py-0"
+                                          >Pogledaj detalje</span
+                                        >
+                                      </a>
+
+                                      <button
+                                        (click)="writeOff(record.id)"
+                                        tabindex="0"
+                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                        role="menuitem"
+                                      >
+                                        <i
+                                          class="fas fa-level-up-alt mr-[14px] ml-[5px] py-1"
+                                        ></i>
+                                        <span class="px-4 py-0"
+                                          >Otpisi knjigu</span
+                                        >
+                                      </button>
+
+                                      <button
+                                        (click)="return(record.id)"
+                                        tabindex="0"
+                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                        role="menuitem"
+                                      >
+                                        <i
+                                          class="fas fa-redo-alt mr-[10px] ml-[5px] py-1"
+                                        ></i>
+                                        <span class="px-4 py-0"
+                                          >Vrati knjigu</span
+                                        >
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          }
+                        </tbody>
+                      </table>
+                    } @else {
+                      <h1 class="flex justify-center text-center">
+                        Loading...
+                      </h1>
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </mat-tab>
+        <mat-tab label="Overdrafts">
+          <section class="w-screen h-screen pl-[80px] py-4 text-gray-700">
+            <!-- Heading of content -->
+
+            <!-- Space for content -->
+            <div class="scroll height-dashboard">
+              <div>
+                <!-- Space for content -->
+                <div class="flex justify-start pt-3 bg-white">
+                  <div class="w-full mt-[10px] mr-3 px-2">
+                    @if (!isLoading) {
+                      <table
+                        class="overflow-hidden shadow-lg rounded-xl w-full border-[1px] border-[#e4dfdf]"
+                        id="myTable"
+                      >
+                        <thead class="bg-[#EFF3F6]">
+                          <tr class="border-b-[1px] border-[#e4dfdf]">
+                            <th
+                              class="px-4 py-4 leading-4 tracking-wider text-left text-blue-500"
+                            ></th>
+                            <th
+                              class="px-4 py-4 leading-4 tracking-wider text-left"
+                            >
+                              Naziv knjige
+                            </th>
+                            <!-- Izdato uceniku + dropdown filter for ucenik -->
+                            <th
+                              class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left uceniciDrop-toggle"
+                            >
+                              Izdato uceniku
+                            </th>
+
+                            <!-- Datum izdavanja + dropdown filter for datum -->
+                            <th
+                              class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left datumDrop-toggle"
+                            >
+                              Datum izdavanja
+                            </th>
+
+                            <!-- Trenutno zadrzavanje + dropdown filter for zadrzavanje -->
+                            <th
+                              class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left zadrzavanjeDrop-toggle"
+                            >
+                              Trenutno zadrzavanje knjige
+                            </th>
+                            <!-- Knjigu izdao + dropdown filter for bibliotekar -->
+                            <th
+                              class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left bibliotekariDrop-toggle"
+                            >
+                              Knjigu izdao
+                            </th>
+                            <th class="px-4 py-4"></th>
+                          </tr>
+                        </thead>
+                        <tbody class="bg-white">
+                          @for (record of overdrafts; track record.id) {
+                            <tr
+                              class="hover:bg-gray-200 hover:shadow-md border-b-[1px] border-[#e4dfdf]"
+                            >
+                              <td class="px-4 py-3 whitespace-no-wrap">
+                                <label class="inline-flex items-center">
+                                  <input
+                                    type="checkbox"
+                                    class="form-checkbox"
+                                  />
+                                </label>
+                              </td>
+                              <td class="flex flex-row items-center px-4 py-3">
+                                <img
+                                  class="object-cover w-8 mr-2 h-11"
+                                  [src]="record.knjiga.photo"
+                                  alt=""
+                                />
+                                <a href="knjigaOsnovniDetalji.php">
+                                  <span class="font-medium text-center">{{
+                                    record.knjiga.title
+                                  }}</span>
+                                </a>
+                              </td>
+                              <td
+                                class="px-4 py-3 text-sm leading-5 whitespace-no-wrap"
+                              >
+                                {{ record.student.name }}
+                                {{ record.student.surname }}
+                              </td>
+                              <td
+                                class="px-4 py-3 text-sm leading-5 whitespace-no-wrap"
+                              >
+                                {{ record.borrow_date | customDate }}
+                              </td>
+                              <td
+                                class="px-4 py-3 text-sm leading-5 whitespace-no-wrap"
+                              >
+                                <div>
+                                  <span>{{
+                                    record.borrow_date | timeKept
+                                  }}</span>
+                                </div>
+                              </td>
+                              <td
+                                class="px-4 py-3 text-sm leading-5 whitespace-no-wrap"
+                              >
+                                {{ record.bibliotekar0.name }}
+                                {{ record.bibliotekar0.surname }}
+                              </td>
+                              <td
+                                class="px-6 py-3 text-sm leading-5 text-right whitespace-no-wrap"
+                              >
+                                <p
+                                  class="inline cursor-pointer text-[20px] py-[10px] px-[30px] border-gray-300 dotsIzdateKnjige hover:text-[#606FC7]"
+                                  (click)="toggleMenu(record.id)"
+                                >
+                                  <i class="fas fa-ellipsis-v"></i>
+                                </p>
+                                <div
+                                  class="relative z-10 transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 izdate-knjige z-50"
+                                  [ngClass]="{
+                                    hidden: openMenuId !== record.id,
+                                  }"
+                                >
+                                  <div
+                                    class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
+                                    aria-labelledby="headlessui-menu-button-1"
+                                    id="headlessui-menu-items-117"
+                                    role="menu"
+                                  >
+                                    <div class="py-1">
+                                      <a
+                                        [routerLink]="[
+                                          '/records/borrowed',
+                                          record.id,
+                                        ]"
+                                        tabindex="0"
+                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                        role="menuitem"
+                                      >
+                                        <i
+                                          class="far fa-file mr-[10px] ml-[5px] py-1"
+                                        ></i>
+                                        <span class="px-4 py-0"
+                                          >Pogledaj detalje</span
+                                        >
+                                      </a>
+
+                                      <button
+                                        (click)="writeOff(record.id)"
+                                        tabindex="0"
+                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                        role="menuitem"
+                                      >
+                                        <i
+                                          class="fas fa-level-up-alt mr-[14px] ml-[5px] py-1"
+                                        ></i>
+                                        <span class="px-4 py-0"
+                                          >Otpisi knjigu</span
+                                        >
+                                      </button>
+
+                                      <button
+                                        (click)="return(record.id)"
+                                        tabindex="0"
+                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                        role="menuitem"
+                                      >
+                                        <i
+                                          class="fas fa-redo-alt mr-[10px] ml-[5px] py-1"
+                                        ></i>
+                                        <span class="px-4 py-0"
+                                          >Vrati knjigu</span
+                                        >
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          }
+                        </tbody>
+                      </table>
+                    } @else {
+                      <h1 class="flex justify-center text-center">
+                        Loading...
+                      </h1>
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </mat-tab>
+        <mat-tab label="Active Reservations">
+          <section class="w-screen h-screen pl-[80px] py-4 text-gray-700">
+            <!-- Heading of content -->
+
+            <!-- Space for content -->
+            <div class="scroll height-dashboard">
+              <div>
+                <!-- Space for content -->
+                <div class="flex justify-start pt-3 bg-white">
+                  <div class="w-full mt-[10px] mr-3 px-2">
+                    @if (!isLoading) {
+                      <table
+                        class="overflow-hidden shadow-lg rounded-xl w-full border-[1px] border-[#e4dfdf]"
+                        id="myTable"
+                      >
+                        <thead class="bg-[#EFF3F6]">
+                          <tr class="border-b-[1px] border-[#e4dfdf]">
+                            <th
+                              class="px-4 py-4 leading-4 tracking-wider text-left text-blue-500"
+                            ></th>
+                            <th
+                              class="px-4 py-4 leading-4 tracking-wider text-left"
+                            >
+                              Naziv knjige
+                            </th>
+                            <!-- Izdato uceniku + dropdown filter for ucenik -->
+                            <th
+                              class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left uceniciDrop-toggle"
+                            >
+                              Izdato uceniku
+                            </th>
+
+                            <!-- Datum izdavanja + dropdown filter for datum -->
+                            <th
+                              class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left datumDrop-toggle"
+                            >
+                              Datum izdavanja
+                            </th>
+
+                            <!-- Trenutno zadrzavanje + dropdown filter for zadrzavanje -->
+                            <th
+                              class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left zadrzavanjeDrop-toggle"
+                            >
+                              Trenutno zadrzavanje knjige
+                            </th>
+                            <!-- Knjigu izdao + dropdown filter for bibliotekar -->
+                            <th
+                              class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left bibliotekariDrop-toggle"
+                            >
+                              Knjigu izdao
+                            </th>
+                            <th class="px-4 py-4"></th>
+                          </tr>
+                        </thead>
+                        <tbody class="bg-white">
+                          @for (record of activeReservations; track record.id) {
+                            <tr
+                              class="hover:bg-gray-200 hover:shadow-md border-b-[1px] border-[#e4dfdf]"
+                            >
+                              <td class="px-4 py-3 whitespace-no-wrap">
+                                <label class="inline-flex items-center">
+                                  <input
+                                    type="checkbox"
+                                    class="form-checkbox"
+                                  />
+                                </label>
+                              </td>
+                              <td class="flex flex-row items-center px-4 py-3">
+                                <img
+                                  class="object-cover w-8 mr-2 h-11"
+                                  [src]="record.knjiga.photo"
+                                  alt=""
+                                />
+                                <a href="knjigaOsnovniDetalji.php">
+                                  <span class="font-medium text-center">{{
+                                    record.knjiga.title
+                                  }}</span>
+                                </a>
+                              </td>
+                              <td
+                                class="px-4 py-3 text-sm leading-5 whitespace-no-wrap"
+                              >
+                                {{ record.student.name }}
+                                {{ record.student.surname }}
+                              </td>
+                              <td
+                                class="px-4 py-3 text-sm leading-5 whitespace-no-wrap"
+                              >
+                                {{ record.borrow_date | customDate }}
+                              </td>
+                              <td
+                                class="px-4 py-3 text-sm leading-5 whitespace-no-wrap"
+                              >
+                                <div>
+                                  <span>{{
+                                    record.borrow_date | timeKept
+                                  }}</span>
+                                </div>
+                              </td>
+                              <td
+                                class="px-4 py-3 text-sm leading-5 whitespace-no-wrap"
+                              >
+                                {{ record.bibliotekar0.name }}
+                                {{ record.bibliotekar0.surname }}
+                              </td>
+                              <td
+                                class="px-6 py-3 text-sm leading-5 text-right whitespace-no-wrap"
+                              >
+                                <p
+                                  class="inline cursor-pointer text-[20px] py-[10px] px-[30px] border-gray-300 dotsIzdateKnjige hover:text-[#606FC7]"
+                                  (click)="toggleMenu(record.id)"
+                                >
+                                  <i class="fas fa-ellipsis-v"></i>
+                                </p>
+                                <div
+                                  class="relative z-10 transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 izdate-knjige z-50"
+                                  [ngClass]="{
+                                    hidden: openMenuId !== record.id,
+                                  }"
+                                >
+                                  <div
+                                    class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
+                                    aria-labelledby="headlessui-menu-button-1"
+                                    id="headlessui-menu-items-117"
+                                    role="menu"
+                                  >
+                                    <div class="py-1">
+                                      <a
+                                        [routerLink]="[
+                                          '/records/borrowed',
+                                          record.id,
+                                        ]"
+                                        tabindex="0"
+                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                        role="menuitem"
+                                      >
+                                        <i
+                                          class="far fa-file mr-[10px] ml-[5px] py-1"
+                                        ></i>
+                                        <span class="px-4 py-0"
+                                          >Pogledaj detalje</span
+                                        >
+                                      </a>
+
+                                      <button
+                                        (click)="writeOff(record.id)"
+                                        tabindex="0"
+                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                        role="menuitem"
+                                      >
+                                        <i
+                                          class="fas fa-level-up-alt mr-[14px] ml-[5px] py-1"
+                                        ></i>
+                                        <span class="px-4 py-0"
+                                          >Otpisi knjigu</span
+                                        >
+                                      </button>
+
+                                      <button
+                                        (click)="return(record.id)"
+                                        tabindex="0"
+                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                        role="menuitem"
+                                      >
+                                        <i
+                                          class="fas fa-redo-alt mr-[10px] ml-[5px] py-1"
+                                        ></i>
+                                        <span class="px-4 py-0"
+                                          >Vrati knjigu</span
+                                        >
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          }
+                        </tbody>
+                      </table>
+                    } @else {
+                      <h1 class="flex justify-center text-center">
+                        Loading...
+                      </h1>
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </mat-tab>
+        <mat-tab label="Archived Reservations">
+          <section class="w-screen h-screen pl-[80px] py-4 text-gray-700">
+            <!-- Heading of content -->
+
+            <!-- Space for content -->
+            <div class="scroll height-dashboard">
+              <div>
+                <!-- Space for content -->
+                <div class="flex justify-start pt-3 bg-white">
+                  <div class="w-full mt-[10px] mr-3 px-2">
+                    @if (!isLoading) {
+                      <table
+                        class="overflow-hidden shadow-lg rounded-xl w-full border-[1px] border-[#e4dfdf]"
+                        id="myTable"
+                      >
+                        <thead class="bg-[#EFF3F6]">
+                          <tr class="border-b-[1px] border-[#e4dfdf]">
+                            <th
+                              class="px-4 py-4 leading-4 tracking-wider text-left text-blue-500"
+                            ></th>
+                            <th
+                              class="px-4 py-4 leading-4 tracking-wider text-left"
+                            >
+                              Naziv knjige
+                            </th>
+                            <!-- Izdato uceniku + dropdown filter for ucenik -->
+                            <th
+                              class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left uceniciDrop-toggle"
+                            >
+                              Izdato uceniku
+                            </th>
+
+                            <!-- Datum izdavanja + dropdown filter for datum -->
+                            <th
+                              class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left datumDrop-toggle"
+                            >
+                              Datum izdavanja
+                            </th>
+
+                            <!-- Trenutno zadrzavanje + dropdown filter for zadrzavanje -->
+                            <th
+                              class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left zadrzavanjeDrop-toggle"
+                            >
+                              Trenutno zadrzavanje knjige
+                            </th>
+                            <!-- Knjigu izdao + dropdown filter for bibliotekar -->
+                            <th
+                              class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left bibliotekariDrop-toggle"
+                            >
+                              Knjigu izdao
+                            </th>
+                            <th class="px-4 py-4"></th>
+                          </tr>
+                        </thead>
+                        <tbody class="bg-white">
+                          @for (
+                            record of archivedReservations;
+                            track record.id
+                          ) {
+                            <tr
+                              class="hover:bg-gray-200 hover:shadow-md border-b-[1px] border-[#e4dfdf]"
+                            >
+                              <td class="px-4 py-3 whitespace-no-wrap">
+                                <label class="inline-flex items-center">
+                                  <input
+                                    type="checkbox"
+                                    class="form-checkbox"
+                                  />
+                                </label>
+                              </td>
+                              <td class="flex flex-row items-center px-4 py-3">
+                                <img
+                                  class="object-cover w-8 mr-2 h-11"
+                                  [src]="record.knjiga.photo"
+                                  alt=""
+                                />
+                                <a href="knjigaOsnovniDetalji.php">
+                                  <span class="font-medium text-center">{{
+                                    record.knjiga.title
+                                  }}</span>
+                                </a>
+                              </td>
+                              <td
+                                class="px-4 py-3 text-sm leading-5 whitespace-no-wrap"
+                              >
+                                {{ record.student.name }}
+                                {{ record.student.surname }}
+                              </td>
+                              <td
+                                class="px-4 py-3 text-sm leading-5 whitespace-no-wrap"
+                              >
+                                {{ record.borrow_date | customDate }}
+                              </td>
+                              <td
+                                class="px-4 py-3 text-sm leading-5 whitespace-no-wrap"
+                              >
+                                <div>
+                                  <span>{{
+                                    record.borrow_date | timeKept
+                                  }}</span>
+                                </div>
+                              </td>
+                              <td
+                                class="px-4 py-3 text-sm leading-5 whitespace-no-wrap"
+                              >
+                                {{ record.bibliotekar0.name }}
+                                {{ record.bibliotekar0.surname }}
+                              </td>
+                              <td
+                                class="px-6 py-3 text-sm leading-5 text-right whitespace-no-wrap"
+                              >
+                                <p
+                                  class="inline cursor-pointer text-[20px] py-[10px] px-[30px] border-gray-300 dotsIzdateKnjige hover:text-[#606FC7]"
+                                  (click)="toggleMenu(record.id)"
+                                >
+                                  <i class="fas fa-ellipsis-v"></i>
+                                </p>
+                                <div
+                                  class="relative z-10 transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 izdate-knjige z-50"
+                                  [ngClass]="{
+                                    hidden: openMenuId !== record.id,
+                                  }"
+                                >
+                                  <div
+                                    class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
+                                    aria-labelledby="headlessui-menu-button-1"
+                                    id="headlessui-menu-items-117"
+                                    role="menu"
+                                  >
+                                    <div class="py-1">
+                                      <a
+                                        [routerLink]="[
+                                          '/records/borrowed',
+                                          record.id,
+                                        ]"
+                                        tabindex="0"
+                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                        role="menuitem"
+                                      >
+                                        <i
+                                          class="far fa-file mr-[10px] ml-[5px] py-1"
+                                        ></i>
+                                        <span class="px-4 py-0"
+                                          >Pogledaj detalje</span
+                                        >
+                                      </a>
+
+                                      <button
+                                        (click)="writeOff(record.id)"
+                                        tabindex="0"
+                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                        role="menuitem"
+                                      >
+                                        <i
+                                          class="fas fa-level-up-alt mr-[14px] ml-[5px] py-1"
+                                        ></i>
+                                        <span class="px-4 py-0"
+                                          >Otpisi knjigu</span
+                                        >
+                                      </button>
+
+                                      <button
+                                        (click)="return(record.id)"
+                                        tabindex="0"
+                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                        role="menuitem"
+                                      >
+                                        <i
+                                          class="fas fa-redo-alt mr-[10px] ml-[5px] py-1"
+                                        ></i>
+                                        <span class="px-4 py-0"
+                                          >Vrati knjigu</span
+                                        >
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          }
+                        </tbody>
+                      </table>
+                    } @else {
+                      <h1 class="flex justify-center text-center">
+                        Loading...
+                      </h1>
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-tab>
   </mat-tab-group>
 </section>

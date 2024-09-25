@@ -17,6 +17,9 @@ import { BookDiscardComponent } from './components/book-discard/book-discard.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { RecordsSidebarComponent } from '../../@shared/records-sidebar/records-sidebar.component';
+import { TimeKeptPipe } from '../../time-kept.pipe';
+import { CustomDatePipe } from '../../custom-date.pipe';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,9 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
+    RecordsSidebarComponent,
+    TimeKeptPipe,
+    CustomDatePipe,
   ],
 })
 export class BookModule {}

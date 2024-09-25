@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { RecordType } from '../../models/record-type';
 import { RecordsData } from '../../models/records-data.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BorrowData } from '../../models/borrow-data.model';
 import { RecordsService } from '../../services/records.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-records-details',
@@ -19,6 +20,8 @@ export class RecordsDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private recordsService: RecordsService,
+    private router: Router,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
