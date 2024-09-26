@@ -120,17 +120,19 @@
                   <td
                     class="px-4 py-4 text-sm leading-5 text-blue-800 whitespace-no-wrap"
                   >
-                    <a href="aktivneRezervacije.php">{{ book.rSamples }}</a>
+                    <a routerLink="/records/reservations-active">{{
+                      book.rSamples
+                    }}</a>
                   </td>
                   <td
                     class="px-4 py-4 text-sm leading-5 text-blue-800 whitespace-no-wrap"
                   >
-                    <a href="izdateKnjige.php">{{ book.bSamples }}</a>
+                    <a routerLink="/records/borrowed">{{ book.bSamples }}</a>
                   </td>
                   <td
                     class="px-4 py-4 text-sm leading-5 text-blue-800 whitespace-no-wrap"
                   >
-                    <a href="knjigePrekoracenje.php">{{ book.fSamples }}</a>
+                    <a routerLink="/records/overdrafted">{{ book.fSamples }}</a>
                   </td>
                   <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">
                     {{ book.samples }}

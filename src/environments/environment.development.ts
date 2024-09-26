@@ -1,6 +1,6 @@
 export const environment = {
   apiAuthorsUrl: `https://biblioteka.simonovicp.com/api/authors`,
-  token: `Bearer 284|PHEIeCIe1tafFsrvwQ5s8n4hDrqf5FND9fg5hFHK`,
+  token: `Bearer 301|8owJhhfKfLKyCsP1DBskhPRPN8SCLsfZeyh9VBFr`,
   apiStoreAuthors: `https://biblioteka.simonovicp.com/api/authors/store`,
   apiUsersUrl: `https://biblioteka.simonovicp.com/api/users`,
   apiUsersStore: 'https://biblioteka.simonovicp.com/api/users/store',

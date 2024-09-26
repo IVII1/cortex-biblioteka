@@ -83,7 +83,7 @@ export class BookDetailComponent implements OnInit {
     });
   }
   return(id: number) {
-    this.bookService.writeOff({ toReturn: id }).subscribe({
+    this.bookService.return({ toReturn: id }).subscribe({
       next: (res) => {
         console.log(res);
         this.getRecordsData();

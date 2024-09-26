@@ -63,7 +63,7 @@
                         [src]="reservation.knjiga.photo"
                         alt=""
                       />
-                      <a href="knjigaOsnovniDetalji.php">
+                      <a [routerLink]="['/books', reservation.knjiga.id]">
                         <span class="font-medium text-center">{{
                           reservation.knjiga.title
                         }}</span>

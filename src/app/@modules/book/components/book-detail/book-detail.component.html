@@ -285,7 +285,7 @@
                                   [src]="borrow.knjiga.photo"
                                   alt=""
                                 />
-                                <a href="knjigaOsnovniDetalji.php">
+                                <a [routerLink]="['books', borrow.knjiga.id]">
                                   <span class="font-medium text-center">{{
                                     borrow.knjiga.title
                                   }}</span>
@@ -475,7 +475,7 @@
                                   [src]="record.knjiga.photo"
                                   alt=""
                                 />
-                                <a href="knjigaOsnovniDetalji.php">
+                                <a [routerLink]="['/books', book.id]">
                                   <span class="font-medium text-center">{{
                                     record.knjiga.title
                                   }}</span>
@@ -665,7 +665,7 @@
                                   [src]="record.knjiga.photo"
                                   alt=""
                                 />
-                                <a href="knjigaOsnovniDetalji.php">
+                                <a [routerLink]="['/books/', record.knjiga.id]">
                                   <span class="font-medium text-center">{{
                                     record.knjiga.title
                                   }}</span>
@@ -855,7 +855,7 @@
                                   [src]="record.knjiga.photo"
                                   alt=""
                                 />
-                                <a href="knjigaOsnovniDetalji.php">
+                                <a [routerLink]="['/books/', record.knjiga.id]">
                                   <span class="font-medium text-center">{{
                                     record.knjiga.title
                                   }}</span>
@@ -1048,7 +1048,7 @@
                                   [src]="record.knjiga.photo"
                                   alt=""
                                 />
-                                <a href="knjigaOsnovniDetalji.php">
+                                <a [routerLink]="['/books/', record.knjiga.id]">
                                   <span class="font-medium text-center">{{
                                     record.knjiga.title
                                   }}</span>
