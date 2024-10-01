@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Author } from '../../models/author.model';
 import { AuthorService } from '../../services/author.service';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-author-edit-add',
@@ -10,10 +11,11 @@ import { AuthorService } from '../../services/author.service';
   styleUrl: './author-edit-add.component.scss',
 })
 export class AuthorEditAddComponent {
-  author!: Author | null;
+  author = this.route.snapshot.data['author'] ?? new Author();
   form!: FormGroup;
   authorService = inject(AuthorService);
   errorMessage: string = '';
+  public Editor = ClassicEditor;
 
   constructor(
     private fb: FormBuilder,
@@ -22,7 +24,6 @@ export class AuthorEditAddComponent {
   ) {}
 
   ngOnInit(): void {
-    this.author = this.route.snapshot.data['author'] || null;
     this.initForm();
   }
 
@@ -30,16 +31,8 @@ export class AuthorEditAddComponent {
     this.form = this.fb.group({
       name: [this.author?.name ?? '', Validators.required],
       surname: [this.author?.surname ?? ''],
-      role_id: [this.author?.role ?? '', Validators.required],
-      email: [
-        this.author?.email ?? '',
-        [Validators.required, Validators.email],
-      ],
-      jmbg: [this.author?.jmbg ?? '', Validators.required],
-      username: [this.author?.username ?? '', Validators.required],
-      password: ['12345678', Validators.required],
-      password_confirmation: ['12345678', Validators.required],
-      photoPath: ['http://library.test/img/profile.jpg', Validators.required],
+      biography: [this.author?.bio ?? '', Validators.required],
+      image: ['http://library.test/img/profile.jpg', Validators.required],
     });
   }
 
@@ -47,11 +40,9 @@ export class AuthorEditAddComponent {
     if (this.form.valid) {
       this.authorService.save(this.form.value, this.author?.id).subscribe({
         next: () => {
-          this.router.navigate(['/students']);
+          this.router.navigate(['/authors']);
         },
-        error: () => {
-          console.log('Error saving author');
-        },
+        error: () => {},
       });
     } else {
       this.errorMessage = 'Form is invalid, please fill out all the fields.';

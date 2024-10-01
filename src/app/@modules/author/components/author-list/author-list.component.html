@@ -23,11 +23,6 @@
                   </label>
                 </td>
                 <td class="flex flex-row items-center px-4 py-3">
-                  <img
-                    class="object-cover w-8 mr-2 h-11"
-                    src="img/profileStudent.jpg"
-                    alt=""
-                  />
                   <a [routerLink]="[author.id]">
                     <span class="mr-2 font-medium text-center"
                       >{{ author.name }} {{ author.surname }}</span
@@ -45,7 +40,7 @@
                 >
                   <p
                     class="inline cursor-pointer text-[20px] py-[10px] px-[30px] border-gray-300 dots hover:text-[#606FC7]"
-                    (click)="toggleMenu(author.id)"
+                    (click)="toggleMenu(author.id!)"
                   >
                     <i class="fas fa-ellipsis-v"></i>
                   </p>
@@ -79,7 +74,7 @@
                           <span class="px-4 py-0">Edit Author</span>
                         </a>
                         <a
-                          (click)="deleteAuthor(author.id)"
+                          (click)="deleteAuthor(author.id!)"
                           tabindex="0"
                           class="clickable flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                           role="menuitem"

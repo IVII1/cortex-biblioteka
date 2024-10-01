@@ -83,9 +83,8 @@
       </div>
       <div class="mt-[40px]">
         <span class="text-gray-500">Opis</span>
-        <p class="font-medium max-w-[550px]">
-          {{ author.bio }}
-        </p>
+
+        <div [innerHTML]="author.bio" class="font-medium max-w-[550px]"></div>
       </div>
     </div>
   </div>

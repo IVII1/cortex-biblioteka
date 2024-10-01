@@ -8,6 +8,7 @@ import { AuthorEditAddComponent } from './components/author-edit-add/author-edit
 import { PageHeaderComponent } from '../../@shared/page-header/page-header.component';
 import { SearchAddNewComponent } from '../../@shared/search-add-new/search-add-new.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -19,10 +20,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     RouterModule,
     AuthorRoutingModule,
     CommonModule,
-
     PageHeaderComponent,
     SearchAddNewComponent,
     ReactiveFormsModule,
+    CKEditorModule,
   ],
 })
 export class AuthorModule {}

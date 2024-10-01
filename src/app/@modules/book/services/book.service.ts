@@ -2,7 +2,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Book } from '../models/book.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { Observable, forkJoin, map } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
@@ -11,7 +10,7 @@ import { environment } from 'src/environments/environment.development';
 })
 export class BookService {
   httpClient = inject(HttpClient);
-  router = inject(Router);
+
   delete(id: number): Observable<{ data: Book }> {
     const url = `${environment.apiBooks}/${id}/destroy`;
     const headers = new HttpHeaders().set('Authorization', environment.token);

@@ -42,9 +42,7 @@ export class BookDiscardComponent implements OnInit {
       next: (res) => {
         this.logs = [...res.data.prekoracene];
       },
-      error: (err) => {
-        console.log(err);
-      },
+      error: () => {},
     });
   }
 
@@ -74,7 +72,6 @@ export class BookDiscardComponent implements OnInit {
     );
   }
   onSubmit() {
-    console.log(this.bookDiscardForm.value);
     this.bookService.writeOff(this.bookDiscardForm.value).subscribe({
       next: () => {
         this.toastr.success('Returned Successfully!');

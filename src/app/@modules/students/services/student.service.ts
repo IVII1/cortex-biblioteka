@@ -1,19 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { DestroyRef, inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { Student } from '../models/student.model';
 import { map, Observable } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StudentService {
   students: Student[] = [];
-  destroyRef = inject(DestroyRef);
   httpClient = inject(HttpClient);
-  router = inject(Router);
+
   delete(id: number) {
     const url = `${environment.apiUsersUrl}${id}`;
     const headers = new HttpHeaders().set('Authorization', environment.token);

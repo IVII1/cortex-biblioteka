@@ -50,9 +50,7 @@ export class StudentEditAddComponent implements OnInit {
         next: () => {
           this.router.navigate(['/students']);
         },
-        error: () => {
-          console.log('Error saving student:');
-        },
+        error: () => {},
       });
     } else {
       this.errorMessage = 'Form is invalid, please fill out all the fields.';

@@ -39,9 +39,8 @@ export class BookListComponent implements OnInit {
         this.toastr.success('Book Deleted Successfully');
         this.router.navigate(['/books']);
       },
-      error: (err) => {
+      error: () => {
         this.toastr.error('Error Deleting Book');
-        console.log(err);
       },
     });
   }

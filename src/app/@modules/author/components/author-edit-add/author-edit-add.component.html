@@ -74,155 +74,25 @@
           </div>
 
           <div class="mt-[20px]">
-            <span>User Type</span>
-            <select
-              class="flex w-[90%] mt-2 px-2 py-2 border bg-gray-300 border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-              formControlName="role_id"
-            >
-              <option value="2">Autor</option>
-            </select>
-          </div>
-
-          <div class="mt-[20px]">
-            <span>JMBG <span class="text-red-500">*</span></span>
-            <input
-              type="text"
-              id="jmbgUcenikEdit"
-              formControlName="jmbg"
-              class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-            />
+            <span>Biography <span class="text-red-500">*</span></span>
+            <ckeditor
+              [editor]="Editor"
+              formControlName="biography"
+              class="flex w-[90%] mt-2"
+            ></ckeditor>
             <div
               *ngIf="
-                form.get('jmbg')?.invalid &&
-                (form.get('jmbg')?.dirty || form.get('jmbg')?.touched)
+                form.get('biography')?.invalid &&
+                (form.get('biography')?.dirty || form.get('biography')?.touched)
               "
             >
-              <small class="text-red-500">JMBG is required</small>
+              <small class="text-red-500">Biography is required</small>
             </div>
           </div>
 
-          <div class="mt-[20px]">
-            <span>E-mail <span class="text-red-500">*</span></span>
-            <input
-              type="email"
-              id="emailUcenikEdit"
-              formControlName="email"
-              class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-            />
-            <div
-              *ngIf="
-                form.get('email')?.invalid &&
-                (form.get('email')?.dirty || form.get('email')?.touched)
-              "
-            >
-              <small class="text-red-500">Valid email is required</small>
-            </div>
-          </div>
-
-          <div class="mt-[20px]">
-            <span>Username <span class="text-red-500">*</span></span>
-            <input
-              type="text"
-              id="usernameUcenikEdit"
-              formControlName="username"
-              class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-            />
-            <div
-              *ngIf="
-                form.get('username')?.invalid &&
-                (form.get('username')?.dirty || form.get('username')?.touched)
-              "
-            >
-              <small class="text-red-500">Username is required</small>
-            </div>
-          </div>
-
-          <div class="mt-[20px]">
-            <span>Password <span class="text-red-500">*</span></span>
-            <input
-              type="password"
-              id="pwUcenikEdit"
-              formControlName="password"
-              class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-            />
-            <div
-              *ngIf="
-                form.get('password')?.invalid &&
-                (form.get('password')?.dirty || form.get('password')?.touched)
-              "
-            >
-              <small class="text-red-500">Password is required</small>
-            </div>
-          </div>
-
-          <div class="mt-[20px]">
-            <span>Confirm Password <span class="text-red-500">*</span></span>
-            <input
-              type="password"
-              id="pw2UcenikEdit"
-              formControlName="password_confirmation"
-              class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-            />
-            <div
-              *ngIf="
-                form.get('repeatPassword')?.invalid &&
-                (form.get('repeatPassword')?.dirty ||
-                  form.get('repeatPassword')?.touched)
-              "
-            >
-              <small class="text-red-500">Please repeat the password</small>
-            </div>
-          </div>
           <div *ngIf="errorMessage" class="mt-[10px] text-red-600">
             <p class="text-xl">{{ errorMessage }}</p>
           </div>
-        </div>
-        <div class="mt-[20px]">
-          <span>Photo <span class="text-red-500">*</span></span>
-          <input
-            type="text"
-            formControlName="photoPath"
-            class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-          />
-          <div
-            *ngIf="
-              form.get('photoPath')?.invalid &&
-              (form.get('photoPath')?.dirty || form.get('photoPath')?.touched)
-            "
-          >
-            <small class="text-red-500">Photo is required</small>
-          </div>
-        </div>
-
-        <div class="mt-[50px]">
-          <label class="mt-6 cursor-pointer">
-            <div
-              id="empty-cover-art"
-              class="relative w-48 h-48 py-[48px] text-center border-2 border-gray-300 border-solid"
-            >
-              <div class="py-4">
-                <svg
-                  class="mx-auto feather feather-image mb-[15px]"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="40"
-                  height="40"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                  <polyline points="21 15 16 10 5 21"></polyline>
-                </svg>
-                <span class="px-4 py-2 mt-2 leading-normal">Add photo</span>
-                <input type="file" class="hidden" accept="image/*" />
-              </div>
-              <img class="absolute w-48 h-[188px] bottom-0" />
-            </div>
-          </label>
         </div>
       </div>
 

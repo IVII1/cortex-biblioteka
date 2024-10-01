@@ -49,9 +49,8 @@ export class BookDetailComponent implements OnInit {
         this.toastr.success('Book Deleted Successfully');
         this.router.navigate(['/books']);
       },
-      error: (err) => {
+      error: () => {
         this.toastr.error('Error Deleting Book');
-        console.log(err);
       },
     });
   }
@@ -65,7 +64,6 @@ export class BookDetailComponent implements OnInit {
         next: (res) => {
           this.borrows = res.borrows.data.izdate;
           this.overdrafts = res.borrows.data.prekoracene;
-          console.log(this.overdrafts);
           this.returns = res.borrows.data.vracene;
           this.activeReservations = res.reservations.data.active;
           this.archivedReservations = res.reservations.data.archive;
@@ -75,8 +73,7 @@ export class BookDetailComponent implements OnInit {
   }
   writeOff(id: number) {
     this.bookService.writeOff({ toWriteoff: id }).subscribe({
-      next: (res) => {
-        console.log(res);
+      next: () => {
         this.getRecordsData();
         this.router.navigate(['/records/borrowed']);
       },
@@ -84,8 +81,7 @@ export class BookDetailComponent implements OnInit {
   }
   return(id: number) {
     this.bookService.return({ toReturn: id }).subscribe({
-      next: (res) => {
-        console.log(res);
+      next: () => {
         this.getRecordsData();
         this.router.navigate(['/records/borrowed']);
       },

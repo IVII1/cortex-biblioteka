@@ -35,9 +35,7 @@ export class BookReturnComponent {
       next: (res) => {
         this.logs = [...res.data.prekoracene, ...res.data.izdate];
       },
-      error: (err) => {
-        console.log(err);
-      },
+      error: () => {},
     });
   }
 

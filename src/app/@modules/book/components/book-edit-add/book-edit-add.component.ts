@@ -39,7 +39,7 @@ export class BookEditAddComponent implements OnInit {
   book!: Book | null;
   allGenres: Genre[] = [];
   allCategories: Category[] = [];
-  allAuthors: Author[] = [];
+  allAuthors: (Author & { id: number })[] = [];
   allPublishers: Publisher[] = [];
   allScripts: Script[] = [];
   allFormats: Format[] = [];
@@ -113,7 +113,7 @@ export class BookEditAddComponent implements OnInit {
       next: () => {
         this.router.navigate(['books']);
       },
-      error: (err) => console.log('Error saving book', err),
+      error: () => {},
     });
   }
 
@@ -140,11 +140,18 @@ export class BookEditAddComponent implements OnInit {
   getAllAuthors() {
     this.authorService.all().subscribe({
       next: (response) => {
-        this.allAuthors = response.data;
+        this.allAuthors = response.data.filter(
+          (author): author is Author & { id: number } =>
+            typeof author.id === 'number',
+        );
       },
       error: (err) => console.error(err),
     });
   }
+  isCreatedAuthor(author: Author): author is Author & { id: number } {
+    return typeof author.id === 'number';
+  }
+
   getAllPublishers() {
     this.bookService.allPublishers().subscribe({
       next: (response) => {

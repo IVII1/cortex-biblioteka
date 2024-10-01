@@ -4,14 +4,13 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { Librarian } from '../models/librarian.model';
 import { Observable, map } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LibrarianService {
   httpClient = inject(HttpClient);
-  router = inject(Router);
+
   delete(id: number) {
     const url = `${environment.apiUsersUrl}${id}`;
     const headers = new HttpHeaders().set('Authorization', environment.token);

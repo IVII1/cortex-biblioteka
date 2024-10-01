@@ -31,6 +31,9 @@
               "src/assets/styles/styles.scss"
             ],
             "scripts": [],
+            "allowedCommonJsDependencies": [
+              "@ckeditor/ckeditor5-build-classic"
+            ],
             "browser": "src/main.ts"
           },
           "configurations": {

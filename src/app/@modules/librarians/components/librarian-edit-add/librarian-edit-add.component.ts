@@ -51,9 +51,7 @@ export class LibrarianEditAddComponent {
           next: () => {
             this.router.navigate(['/librarians']);
           },
-          error: () => {
-            console.log('Error saving librarian');
-          },
+          error: () => {},
         });
     } else {
       this.errorMessage = 'Form is invalid, please fill out all the fields.';
