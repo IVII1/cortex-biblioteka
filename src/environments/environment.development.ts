@@ -20,4 +20,5 @@ export const environment = {
   apiBooksReserve: 'https://biblioteka.simonovicp.com/api/books/reservations',
   apiBooksCancelReservation:
     'https://biblioteka.simonovicp.com/api/books/reservations/cancel',
+  apiLogin: 'https://biblioteka.simonovicp.com/api/login',
 };

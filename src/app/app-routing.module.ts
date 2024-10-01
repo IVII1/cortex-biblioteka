@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LayoutComponent } from './@modules/auth/layout/layout.component';
 import { AppLayoutComponent } from './@shared/layouts/app-layout/app-layout.component';
 
 const routes: Routes = [
@@ -49,6 +50,17 @@ const routes: Routes = [
           import('./@modules/records/records.module').then(
             (m) => m.RecordsModule,
           ),
+      },
+    ],
+  },
+  {
+    path: 'auth',
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./@modules/auth/auth.module').then((m) => m.AuthModule),
       },
     ],
   },

@@ -1,0 +1,56 @@
+<p>login works!</p>
+<form
+  class="px-12 pt-6 pb-4 mb-4 bg-white rounded shadow-lg"
+  [formGroup]="loginForm"
+  (ngSubmit)="onSubmit()"
+>
+  <!-- @csrf -->
+  <div class="flex justify-center py-2 mb-4 text-2xl text-gray-800 border-b-2">
+    Online Biblioteka
+  </div>
+  <div class="mb-4">
+    <label class="block mb-2 text-sm font-normal text-gray-700" for="username">
+      Username
+    </label>
+    <input
+      class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+      name="username"
+      required=""
+      autofocus=""
+      placeholder="Username"
+      formControlName="username"
+    />
+  </div>
+  <div class="mb-6">
+    <label class="block mb-2 text-sm font-normal text-gray-700" for="password">
+      Password
+    </label>
+    <input
+      class="w-full px-3 py-2 mb-3 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+      v-model="form.password"
+      type="password"
+      placeholder="Password"
+      name="password"
+      required=""
+      autocomplete="current-password"
+      formControlName="password"
+    />
+  </div>
+  <div class="flex items-center justify-between">
+    <button
+      class="inline-block px-4 py-2 text-white bg-blue-500 rounded shadow-lg btn-animation hover:bg-blue-600 focus:bg-blue-700"
+      type="submit"
+    >
+      Sign In
+    </button>
+    <a
+      class="inline-block text-sm font-normal text-blue-500 align-baseline hover:text-blue-800"
+      href="#"
+    >
+      Forgot Password?
+    </a>
+  </div>
+  <p class="text-xs text-center mt-[30px] text-gray-500">
+    ©2021 ICT Cortex. All rights reserved.
+  </p>
+</form>
