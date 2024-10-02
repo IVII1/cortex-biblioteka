@@ -1,7 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Student } from 'src/app/@modules/students/models/student.model';
 import { StudentService } from 'src/app/@modules/students/services/student.service';
@@ -67,5 +72,8 @@ export class BookBorrowComponent {
         .get(controlName)
         ?.setValue(formattedDate, { emitEvent: false });
     }
+  }
+  get student_id(): FormControl {
+    return this.borrowForm.get('student_id') as FormControl;
   }
 }

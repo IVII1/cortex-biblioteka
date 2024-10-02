@@ -1,6 +1,11 @@
 /* eslint-disable no-constant-binary-expression */
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Book } from '../../models/book.model';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -215,5 +220,48 @@ export class BookEditAddComponent implements OnInit {
   }
   onCancel() {
     this.router.navigate(['/books']);
+  }
+
+  get nazivKnjiga(): FormControl {
+    return this.bookForm.get('nazivKnjiga') as FormControl;
+  }
+  get categories(): FormControl {
+    return this.bookForm.get('categories') as FormControl;
+  }
+  get authors(): FormControl {
+    return this.bookForm.get('authors') as FormControl;
+  }
+  get izdavac(): FormControl {
+    return this.bookForm.get('izdavac') as FormControl;
+  }
+  get jezik(): FormControl {
+    return this.bookForm.get('jezik') as FormControl;
+  }
+  get knjigaKolicina(): FormControl {
+    return this.bookForm.get('knjigaKolicina') as FormControl;
+  }
+  get pismo(): FormControl {
+    return this.bookForm.get('pismo') as FormControl;
+  }
+  get povez(): FormControl {
+    return this.bookForm.get('povez') as FormControl;
+  }
+  get format(): FormControl {
+    return this.bookForm.get('format') as FormControl;
+  }
+  get isbn(): FormControl {
+    return this.bookForm.get('isbn') as FormControl;
+  }
+  get brStrana(): FormControl {
+    return this.bookForm.get('brStrana') as FormControl;
+  }
+  get kratki_sadrzaj(): FormControl {
+    return this.bookForm.get('kratki_sadrzaj') as FormControl;
+  }
+  get genres(): FormControl {
+    return this.bookForm.get('genres') as FormControl;
+  }
+  get godinaIzdavanja(): FormControl {
+    return this.bookForm.get('godinaIzdavanja') as FormControl;
   }
 }

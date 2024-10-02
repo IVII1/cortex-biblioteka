@@ -16,7 +16,7 @@ export class AuthorEditAddComponent {
   authorService = inject(AuthorService);
   errorMessage: string = '';
   public Editor = ClassicEditor;
-
+  formType!: string;
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -25,6 +25,7 @@ export class AuthorEditAddComponent {
 
   ngOnInit(): void {
     this.initForm();
+    this.checkFormType();
   }
 
   initForm(): void {
@@ -50,5 +51,12 @@ export class AuthorEditAddComponent {
   }
   onCancel() {
     this.router.navigate(['/authors']);
+  }
+  checkFormType() {
+    if (this.author.id === undefined) {
+      this.formType = 'Novi Autor';
+    } else {
+      this.formType = 'Izmijeni Autora';
+    }
   }
 }

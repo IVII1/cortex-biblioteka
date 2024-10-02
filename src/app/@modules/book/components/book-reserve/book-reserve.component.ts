@@ -4,7 +4,12 @@ import { Book } from '../../models/book.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StudentService } from 'src/app/@modules/students/services/student.service';
 import { Student } from 'src/app/@modules/students/models/student.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { BookService } from '../../services/book.service';
 import { ToastrService } from 'ngx-toastr';
@@ -70,5 +75,11 @@ export class BookReserveComponent implements OnInit {
         .get(controlName)
         ?.setValue(formattedDate, { emitEvent: false });
     }
+  }
+  get student_id(): FormControl {
+    return this.reserveForm.get('student_id') as FormControl;
+  }
+  get datumRezervisanja(): FormControl {
+    return this.reserveForm.get('datumRezervisanja') as FormControl;
   }
 }

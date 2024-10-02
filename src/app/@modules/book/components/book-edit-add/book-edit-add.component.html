@@ -13,7 +13,7 @@
                 <a
                   routerLink="/books"
                   class="text-[#2196f3] hover:text-blue-600"
-                  >All Books</a
+                  >Sve Knjige</a
                 >
               </li>
               <li><span class="mx-2">/</span></li>
@@ -36,32 +36,40 @@
               <div class="w-[50%]">
                 <div class="mt-[20px]">
                   <mat-form-field class="w-[90%]">
-                    <mat-label>Book Title</mat-label>
+                    <mat-label>Naslov</mat-label>
                     <input matInput formControlName="nazivKnjiga" required />
                     <mat-error
                       *ngIf="
-                        bookForm.get('nazivKnjiga')?.hasError('required') &&
-                        bookForm.get('nazivKnjiga')?.touched
+                        nazivKnjiga?.hasError('required') &&
+                        nazivKnjiga?.touched
                       "
                     >
-                      Book title is required
+                      Naslov knjige je obavezan
                     </mat-error>
                   </mat-form-field>
                 </div>
 
                 <div class="mt-[20px]">
                   <mat-form-field class="w-[90%]">
-                    <mat-label>Description</mat-label>
+                    <mat-label>Opis</mat-label>
                     <textarea
                       matInput
                       formControlName="kratki_sadrzaj"
                     ></textarea>
+                    <mat-error
+                      *ngIf="
+                        kratki_sadrzaj?.hasError('required') &&
+                        kratki_sadrzaj?.touched
+                      "
+                    >
+                      Opis je obavezan
+                    </mat-error>
                   </mat-form-field>
                 </div>
 
                 <div class="mt-[20px]">
                   <mat-form-field class="w-[90%]">
-                    <mat-label>Categories</mat-label>
+                    <mat-label>Kategorije</mat-label>
                     <mat-select formControlName="categories" multiple required>
                       <mat-option
                         *ngFor="let category of allCategories"
@@ -72,18 +80,17 @@
                     </mat-select>
                     <mat-error
                       *ngIf="
-                        bookForm.get('categories')?.hasError('required') &&
-                        bookForm.get('categories')?.touched
+                        categories.hasError('required') && categories?.touched
                       "
                     >
-                      At least one category is required
+                      Makar jedna kategorija je obavezna
                     </mat-error>
                   </mat-form-field>
                 </div>
 
                 <div class="mt-[20px]">
                   <mat-form-field class="w-[90%]">
-                    <mat-label>Genres</mat-label>
+                    <mat-label>Žanrovi</mat-label>
                     <mat-select formControlName="genres" multiple required>
                       <mat-option
                         *ngFor="let genre of allGenres"
@@ -93,10 +100,7 @@
                       </mat-option>
                     </mat-select>
                     <mat-error
-                      *ngIf="
-                        bookForm.get('genres')?.hasError('required') &&
-                        bookForm.get('genres')?.touched
-                      "
+                      *ngIf="genres.hasError('required') && genres?.touched"
                     >
                       At least one genre is required
                     </mat-error>
@@ -110,7 +114,7 @@
               <div class="w-[50%]">
                 <div class="mt-[20px]">
                   <mat-form-field class="w-[90%]">
-                    <mat-label>Authors</mat-label>
+                    <mat-label>Autori</mat-label>
                     <mat-select formControlName="authors" multiple required>
                       <mat-option
                         *ngFor="let author of allAuthors"
@@ -120,19 +124,16 @@
                       </mat-option>
                     </mat-select>
                     <mat-error
-                      *ngIf="
-                        bookForm.get('authors')?.hasError('required') &&
-                        bookForm.get('authors')?.touched
-                      "
+                      *ngIf="authors.hasError('required') && authors?.touched"
                     >
-                      At least one author is required
+                      Makar jedan autor je obavezan
                     </mat-error>
                   </mat-form-field>
                 </div>
 
                 <div class="mt-[20px]">
                   <mat-form-field class="w-[90%]">
-                    <mat-label>Publisher</mat-label>
+                    <mat-label>Izdavač</mat-label>
                     <mat-select formControlName="izdavac" required>
                       <mat-option
                         *ngFor="let publisher of allPublishers"
@@ -142,19 +143,16 @@
                       </mat-option>
                     </mat-select>
                     <mat-error
-                      *ngIf="
-                        bookForm.get('publisher')?.hasError('required') &&
-                        bookForm.get('publisher')?.touched
-                      "
+                      *ngIf="izdavac.hasError('required') && izdavac.touched"
                     >
-                      Publisher is required
+                      Izdavač je obavezan
                     </mat-error>
                   </mat-form-field>
                 </div>
 
                 <div class="mt-[20px]">
                   <mat-form-field class="w-[90%]">
-                    <mat-label>Language</mat-label>
+                    <mat-label>Jezik</mat-label>
                     <mat-select formControlName="jezik" required>
                       <mat-option
                         *ngFor="let language of allLanguages"
@@ -164,19 +162,16 @@
                       </mat-option>
                     </mat-select>
                     <mat-error
-                      *ngIf="
-                        bookForm.get('publisher')?.hasError('required') &&
-                        bookForm.get('publisher')?.touched
-                      "
+                      *ngIf="jezik.hasError('required') && jezik?.touched"
                     >
-                      Langauge is required
+                      Jezik je obavezan
                     </mat-error>
                   </mat-form-field>
                 </div>
 
                 <div class="mt-[20px]">
                   <mat-form-field class="w-[90%]">
-                    <mat-label>Publication Year</mat-label>
+                    <mat-label>Godina Izdavanja</mat-label>
                     <mat-select formControlName="godinaIzdavanja" required>
                       <mat-option
                         *ngFor="let year of yearRange(50)"
@@ -187,18 +182,18 @@
                     </mat-select>
                     <mat-error
                       *ngIf="
-                        bookForm.get('publicationYear')?.hasError('required') &&
-                        bookForm.get('publicationYear')?.touched
+                        godinaIzdavanja.hasError('required') &&
+                        godinaIzdavanja?.touched
                       "
                     >
-                      Publication year is required
+                      Godina izdavanja je obavezna
                     </mat-error>
                   </mat-form-field>
                 </div>
 
                 <div class="mt-[20px]">
                   <mat-form-field class="w-[45%]">
-                    <mat-label>Quantity</mat-label>
+                    <mat-label>Količina</mat-label>
                     <input
                       matInput
                       type="text"
@@ -208,19 +203,18 @@
                     />
                     <mat-error
                       *ngIf="
-                        bookForm.get('quantity')?.hasError('required') &&
-                        bookForm.get('quantity')?.touched
+                        knjigaKolicina.hasError('required') &&
+                        knjigaKolicina?.touched
                       "
                     >
-                      Quantity is required
+                      Količina je obavezna
                     </mat-error>
                     <mat-error
                       *ngIf="
-                        bookForm.get('quantity')?.hasError('min') &&
-                        bookForm.get('quantity')?.touched
+                        knjigaKolicina.hasError('min') && knjigaKolicina.touched
                       "
                     >
-                      Quantity must be 0 or greater
+                      Količina ne smije biti 0
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -236,7 +230,7 @@
             <div class="w-[50%] mb-[150px]">
               <div class="mt-[20px]">
                 <mat-form-field class="w-[45%]">
-                  <mat-label>Page Count</mat-label>
+                  <mat-label>Broj Strana</mat-label>
                   <input
                     matInput
                     type="text"
@@ -245,26 +239,20 @@
                     required
                   />
                   <mat-error
-                    *ngIf="
-                      bookForm.get('quantity')?.hasError('required') &&
-                      bookForm.get('quantity')?.touched
-                    "
+                    *ngIf="brStrana.hasError('required') && brStrana.touched"
                   >
-                    Page count is required
+                    Broj strana je obavezan
                   </mat-error>
                   <mat-error
-                    *ngIf="
-                      bookForm.get('pageCount')?.hasError('min') &&
-                      bookForm.get('pageCount')?.touched
-                    "
+                    *ngIf="brStrana.hasError('min') && brStrana?.touched"
                   >
-                    Quantity must be 1 or greater
+                    Broj strana mora biti veći od 1
                   </mat-error>
                 </mat-form-field>
               </div>
               <div class="mt-[20px]">
                 <mat-form-field class="w-[90%]">
-                  <mat-label>Script</mat-label>
+                  <mat-label>Pismo</mat-label>
                   <mat-select formControlName="pismo" required>
                     <mat-option
                       *ngFor="let script of allScripts"
@@ -274,18 +262,15 @@
                     </mat-option>
                   </mat-select>
                   <mat-error
-                    *ngIf="
-                      bookForm.get('psmo')?.hasError('required') &&
-                      bookForm.get('pismo')?.touched
-                    "
+                    *ngIf="pismo.hasError('required') && pismo?.touched"
                   >
-                    Script is required
+                    Pismo je obavezno
                   </mat-error>
                 </mat-form-field>
               </div>
               <div class="mt-[20px]">
                 <mat-form-field class="w-[90%]">
-                  <mat-label>Bookbind</mat-label>
+                  <mat-label>Povez</mat-label>
                   <mat-select formControlName="povez" required>
                     <mat-option
                       *ngFor="let bookbind of allBookbinds"
@@ -295,12 +280,9 @@
                     </mat-option>
                   </mat-select>
                   <mat-error
-                    *ngIf="
-                      bookForm.get('povez')?.hasError('required') &&
-                      bookForm.get('povez')?.touched
-                    "
+                    *ngIf="povez.hasError('required') && povez?.touched"
                   >
-                    Bookbind is required
+                    Povez je obavezan
                   </mat-error>
                 </mat-form-field>
               </div>
@@ -317,12 +299,9 @@
                     </mat-option>
                   </mat-select>
                   <mat-error
-                    *ngIf="
-                      bookForm.get('format')?.hasError('required') &&
-                      bookForm.get('format')?.touched
-                    "
+                    *ngIf="format?.hasError('required') && format?.touched"
                   >
-                    Format is required
+                    Format je obavezan
                   </mat-error>
                 </mat-form-field>
               </div>
@@ -331,13 +310,8 @@
                 <mat-form-field class="w-[90%]">
                   <mat-label>ISBN</mat-label>
                   <input matInput formControlName="isbn" required />
-                  <mat-error
-                    *ngIf="
-                      bookForm.get('isbn')?.hasError('required') &&
-                      bookForm.get('isbn')?.touched
-                    "
-                  >
-                    ISBN is required
+                  <mat-error *ngIf="isbn.hasError('required') && isbn?.touched">
+                    ISBN je obavezan
                   </mat-error>
                 </mat-form-field>
               </div>

@@ -77,7 +77,7 @@
           class="hover:text-blue-600 inline ml-[20px] pr-[10px]"
         >
           <i class="far fa-calendar-check mr-[3px]"></i>
-          Rezervisi knjigu
+          Rezerviši knjigu
         </a>
         <p
           class="inline cursor-pointer text-[25px] py-[10px] pl-[30px] border-l-[1px] border-[#e4dfdf] dotsRezervisiKnjigu hover:text-[#606FC7]"
@@ -110,7 +110,7 @@
                 role="menuitem"
               >
                 <i class="fa fa-trash mr-[5px] ml-[5px] py-1"></i>
-                <span class="px-4 py-0">Izbrisi knjigu</span>
+                <span class="px-4 py-0">Izbriši knjigu</span>
               </a>
             </div>
           </div>
@@ -140,12 +140,9 @@
                 </mat-option>
               </mat-select>
               <mat-error
-                *ngIf="
-                  borrowForm.get('student_id')?.hasError('required') &&
-                  borrowForm.get('student_id')?.touched
-                "
+                *ngIf="student_id.hasError('required') && student_id.touched"
               >
-                Student is required
+                Student je obavezan
               </mat-error>
             </mat-form-field>
           </div>
@@ -168,7 +165,7 @@
 
           <div class="mt-[20px]"></div>
           <mat-form-field>
-            <mat-label class="w-90%">Return Date</mat-label>
+            <mat-label class="w-90%">Datum Vraćanja</mat-label>
             <input
               matInput
               [matDatepicker]="picker1"
@@ -193,7 +190,7 @@
               type="button"
               class="btn-animation shadow-lg mr-[15px] w-[150px] focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]"
             >
-              Ponisti <i class="fas fa-times ml-[4px]"></i>
+              Poništi <i class="fas fa-times ml-[4px]"></i>
             </button>
             <button
               id="rezervisiKnjigu"

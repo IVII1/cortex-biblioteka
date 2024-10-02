@@ -6,7 +6,7 @@ import { AppLayoutComponent } from './@shared/layouts/app-layout/app-layout.comp
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'books',
+    redirectTo: 'auth',
     pathMatch: 'full',
   },
   {

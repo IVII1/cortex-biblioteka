@@ -39,20 +39,15 @@
       <div class="flex flex-row ml-[30px]">
         <div class="w-[50%] mb-[100px]">
           <div class="mt-[20px]">
-            <span> Name <span class="text-red-500">*</span></span>
+            <span> Ime <span class="text-red-500">*</span></span>
             <input
               type="text"
               id="full_name"
               formControlName="name"
               class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
             />
-            <div
-              *ngIf="
-                form.get('name')?.invalid &&
-                (form.get('name')?.dirty || form.get('fullName')?.touched)
-              "
-            >
-              <small class="text-red-500">Full name is required</small>
+            <div *ngIf="name.invalid && (name.dirty || name.touched)">
+              <small class="text-red-500">Ime je obacvezno</small>
             </div>
           </div>
           <div class="mt-[20px]">
@@ -65,11 +60,11 @@
             />
             <div
               *ngIf="
-                form.get('surname')?.invalid &&
+                surname.invalid &&
                 (form.get('surname')?.dirty || form.get('surname')?.touched)
               "
             >
-              <small class="text-red-500">Full name is required</small>
+              <small class="text-red-500">Prezime je obaveyn</small>
             </div>
           </div>
 
@@ -91,13 +86,8 @@
               formControlName="jmbg"
               class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
             />
-            <div
-              *ngIf="
-                form.get('jmbg')?.invalid &&
-                (form.get('jmbg')?.dirty || form.get('jmbg')?.touched)
-              "
-            >
-              <small class="text-red-500">JMBG is required</small>
+            <div *ngIf="jmbg?.invalid && (jmbg?.dirty || jmbg?.touched)">
+              <small class="text-red-500">JMBG je obavezan</small>
             </div>
           </div>
 
@@ -112,15 +102,15 @@
             <div
               *ngIf="
                 form.get('email')?.invalid &&
-                (form.get('email')?.dirty || form.get('email')?.touched)
+                (email.dirty || form.get('email')?.touched)
               "
             >
-              <small class="text-red-500">Valid email is required</small>
+              <small class="text-red-500">Ispravan email je obavezan</small>
             </div>
           </div>
 
           <div class="mt-[20px]">
-            <span>Username <span class="text-red-500">*</span></span>
+            <span> Korisničko ime <span class="text-red-500">*</span></span>
             <input
               type="text"
               id="usernameUcenikEdit"
@@ -128,17 +118,14 @@
               class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
             />
             <div
-              *ngIf="
-                form.get('username')?.invalid &&
-                (form.get('username')?.dirty || form.get('username')?.touched)
-              "
+              *ngIf="username.invalid && (username?.dirty || username?.touched)"
             >
-              <small class="text-red-500">Username is required</small>
+              <small class="text-red-500">Korisničko ime je obavezno</small>
             </div>
           </div>
 
           <div class="mt-[20px]">
-            <span>Password <span class="text-red-500">*</span></span>
+            <span>Šifra <span class="text-red-500">*</span></span>
             <input
               type="password"
               id="pwUcenikEdit"
@@ -148,15 +135,15 @@
             <div
               *ngIf="
                 form.get('password')?.invalid &&
-                (form.get('password')?.dirty || form.get('password')?.touched)
+                (password.dirty || password?.touched)
               "
             >
-              <small class="text-red-500">Password is required</small>
+              <small class="text-red-500">Šifra je obavezna</small>
             </div>
           </div>
 
           <div class="mt-[20px]">
-            <span>Confirm Password <span class="text-red-500">*</span></span>
+            <span>Potvrdi šifru <span class="text-red-500">*</span></span>
             <input
               type="password"
               id="pw2UcenikEdit"
@@ -165,33 +152,15 @@
             />
             <div
               *ngIf="
-                form.get('repeatPassword')?.invalid &&
-                (form.get('repeatPassword')?.dirty ||
-                  form.get('repeatPassword')?.touched)
+                password_confirmation.invalid &&
+                (password_confirmation?.dirty || password_confirmation?.touched)
               "
             >
-              <small class="text-red-500">Please repeat the password</small>
+              <small class="text-red-500">Šifre se ne podudaraju</small>
             </div>
             <div *ngIf="errorMessage" class="mt-[10px] text-red-600">
               <p class="text-xl">{{ errorMessage }}</p>
             </div>
-          </div>
-        </div>
-
-        <div class="mt-[20px]">
-          <span>Photo <span class="text-red-500">*</span></span>
-          <input
-            type="text"
-            formControlName="photoPath"
-            class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-          />
-          <div
-            *ngIf="
-              form.get('photoPath')?.invalid &&
-              (form.get('photoPath')?.dirty || form.get('photoPath')?.touched)
-            "
-          >
-            <small class="text-red-500">Photo is required</small>
           </div>
         </div>
       </div>
@@ -206,13 +175,13 @@
               type="button"
               class="btn-animation shadow-lg mr-[15px] w-[150px] focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]"
             >
-              Cancel<i class="fas fa-times ml-[4px]"></i>
+              Poništi<i class="fas fa-times ml-[4px]"></i>
             </button>
             <button
               type="submit"
               class="btn-animation shadow-lg w-[150px] disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50]"
             >
-              Save <i class="fas fa-check ml-[4px]"></i>
+              Sačuvaj <i class="fas fa-check ml-[4px]"></i>
             </button>
           </div>
         </div>

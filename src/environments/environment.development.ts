@@ -21,4 +21,5 @@ export const environment = {
   apiBooksCancelReservation:
     'https://biblioteka.simonovicp.com/api/books/reservations/cancel',
   apiLogin: 'https://biblioteka.simonovicp.com/api/login',
+  apiKey: 'Bearer b3Rvcmlub2xhcmluZ29sb2dpamE=',
 };

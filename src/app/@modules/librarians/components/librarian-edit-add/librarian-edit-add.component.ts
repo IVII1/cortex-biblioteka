@@ -1,6 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { Librarian } from '../../models/librarian.model';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LibrarianService } from '../../services/librarian.service';
 
@@ -59,5 +64,29 @@ export class LibrarianEditAddComponent {
   }
   onCancel() {
     this.router.navigate(['/librarians']);
+  }
+  get name(): FormControl {
+    return this.form.get('name') as FormControl;
+  }
+  get surname(): FormControl {
+    return this.form.get('surname') as FormControl;
+  }
+  get role_id(): FormControl {
+    return this.form.get('role_id') as FormControl;
+  }
+  get jmbg(): FormControl {
+    return this.form.get('jmbg') as FormControl;
+  }
+  get email(): FormControl {
+    return this.form.get('email') as FormControl;
+  }
+  get username(): FormControl {
+    return this.form.get('username') as FormControl;
+  }
+  get password(): FormControl {
+    return this.form.get('passowrd') as FormControl;
+  }
+  get password_confirmation(): FormControl {
+    return this.form.get('passowrd_confirmation') as FormControl;
   }
 }

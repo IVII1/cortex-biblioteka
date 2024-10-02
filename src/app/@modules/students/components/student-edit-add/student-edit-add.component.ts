@@ -1,6 +1,11 @@
 // eslint-disable no-constant-binary-expression
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Student } from '../../models/student.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StudentService } from '../../services/student.service';
@@ -58,5 +63,29 @@ export class StudentEditAddComponent implements OnInit {
   }
   onCancel() {
     this.router.navigate(['/students']);
+  }
+  get name(): FormControl {
+    return this.form.get('name') as FormControl;
+  }
+  get surname(): FormControl {
+    return this.form.get('surname') as FormControl;
+  }
+  get role_id(): FormControl {
+    return this.form.get('role_id') as FormControl;
+  }
+  get jmbg(): FormControl {
+    return this.form.get('jmbg') as FormControl;
+  }
+  get email(): FormControl {
+    return this.form.get('email') as FormControl;
+  }
+  get username(): FormControl {
+    return this.form.get('username') as FormControl;
+  }
+  get password(): FormControl {
+    return this.form.get('passowrd') as FormControl;
+  }
+  get password_confirmation(): FormControl {
+    return this.form.get('passowrd_confirmation') as FormControl;
   }
 }

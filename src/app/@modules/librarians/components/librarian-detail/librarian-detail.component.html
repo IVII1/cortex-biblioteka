@@ -14,7 +14,7 @@
                   routerLink="/librarians"
                   class="text-[#2196f3] hover:text-blue-600"
                 >
-                  Librarians
+                  BIBLIOTEKARI
                 </a>
               </li>
               <li>
@@ -25,7 +25,7 @@
                   [routerLink]="['librarians', librarian.id]"
                   class="text-[#2196f3] hover:text-blue-600"
                 >
-                  LIBRARIAN {{ librarian.id }}
+                  BIBLIOTEKAR {{ librarian.id }}
                 </a>
               </li>
             </ol>
@@ -35,14 +35,14 @@
       <div class="pt-[24px] pr-[30px]">
         <a href="#" class="inline hover:text-blue-600 show-modal">
           <i class="fas fa-redo-alt mr-[3px]"></i>
-          Reset Password
+          Resetuj šifru
         </a>
         <a
           [routerLink]="['/edit', librarian.id]"
           class="hover:text-blue-600 inline ml-[20px] pr-[10px]"
         >
           <i class="fas fa-edit mr-[3px]"></i>
-          Edit Librarian
+          Izmijeni Bibliotekara
         </a>
         <p
           class="inline cursor-pointer text-[25px] py-[10px] pl-[30px] border-l-[1px] border-gray-300 dotsLibrarianProfile hover:text-[#606FC7]"
@@ -67,7 +67,7 @@
                 role="menuitem"
               >
                 <i class="fa fa-trash mr-[5px] ml-[5px] py-1"></i>
-                <span class="px-4 py-0">Delete Librarian</span>
+                <span class="px-4 py-0">Izbriši Bibliotekara</span>
               </a>
             </div>
           </div>
@@ -86,7 +86,7 @@
           </p>
         </div>
         <div class="mt-[40px]">
-          <span class="text-gray-500">User Role</span>
+          <span class="text-gray-500">Tip korisnika</span>
           <p class="font-medium">{{ librarian.role }}</p>
         </div>
         <div class="mt-[40px]">
@@ -101,7 +101,7 @@
           >
         </div>
         <div class="mt-[40px]">
-          <span class="text-gray-500">Username</span>
+          <span class="text-gray-500">Korisničko ime</span>
           <p class="font-medium">{{ librarian.username }}</p>
         </div>
         <div class="mt-[40px]">

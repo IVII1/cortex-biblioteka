@@ -11,7 +11,7 @@ export class AuthService {
 
   login(data: any) {
     const url = `${environment.apiLogin}`;
-    const headers = new HttpHeaders().set('Authorization', environment.token);
+    const headers = new HttpHeaders().set('Authorization', environment.apiKey);
     return this.httpClient.post(url, data, { headers });
   }
 }
