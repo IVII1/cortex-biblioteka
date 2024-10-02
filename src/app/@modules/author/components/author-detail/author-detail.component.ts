@@ -13,4 +13,13 @@ export class AuthorDetailComponent implements OnInit {
   ngOnInit(): void {
     this.author = this.route.snapshot.data['author'];
   }
+  openMenuId: number | null = null;
+
+  toggleMenu(authorId: number) {
+    if (this.openMenuId === authorId) {
+      this.openMenuId = null;
+    } else {
+      this.openMenuId = authorId;
+    }
+  }
 }
