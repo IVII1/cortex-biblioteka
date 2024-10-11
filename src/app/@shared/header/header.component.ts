@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/@modules/auth/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -6,36 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  isSearchFormVisible = false;
-  showInfo = false;
-  showResults = false;
-  showFilters = false;
+  constructor(private authService: AuthService) {}
 
-  // Filters state
-  filters = {
-    knjige: true,
-    autori: true,
-    ucenici: true,
-    bibliotekari: true,
-  };
-
-  user = {
-    photoPath: 'path_to_user_photo',
-  };
-
-  toggleSearchForm() {
-    this.isSearchFormVisible = !this.isSearchFormVisible;
-  }
-
-  toggleFilters() {
-    this.showFilters = !this.showFilters;
-  }
-
-  toggleFilter(filterName: string) {
-    // this.filters[filterName] = !this.filters[filterName];
-  }
-
-  onSearchSubmit() {
-    // Handle search form submission
+  logout() {
+    this.authService.logout();
   }
 }

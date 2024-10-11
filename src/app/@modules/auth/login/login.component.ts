@@ -11,6 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  key!: string;
+  value!: string;
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -32,11 +34,19 @@ export class LoginComponent implements OnInit {
         console.log(res);
         this.router.navigate(['/books']);
         this.toastr.success('Welcome!');
+        this.key = 'token';
+        this.value = res.data.token;
+        console.log(this.value);
+
+        localStorage.setItem(this.key, this.value);
       },
       error: (err) => {
         console.log(err);
         this.toastr.error('Wrong credentials, please try again');
       },
     });
+  }
+  logout() {
+    localStorage.clear();
   }
 }

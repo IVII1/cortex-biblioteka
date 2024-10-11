@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
+import { Auth } from '../login/models/auth.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class AuthService {
   login(data: any) {
     const url = `${environment.apiLogin}`;
     const headers = new HttpHeaders().set('Authorization', environment.apiKey);
-    return this.httpClient.post(url, data, { headers });
+    return this.httpClient.post<Auth>(url, data, { headers });
   }
   logout() {
     localStorage.clear();
