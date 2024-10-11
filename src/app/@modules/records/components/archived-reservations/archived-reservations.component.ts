@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RecordsData } from '../../models/records-data.model';
 import { RecordsService } from '../../services/records.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { DateTime } from 'luxon';
 
@@ -44,10 +44,7 @@ export class ArchivedReservationsComponent implements OnInit {
   borrowBook(studentId: number, bookId: number) {
     {
       const url = `${environment.apiBooks}/${bookId}/izdaj`;
-      const headers = new HttpHeaders().set(
-        'Authorization',
-        `${environment.token}`,
-      );
+
       const formattedActionDate = DateTime.now().toFormat('MM/dd/yyyy');
       const fromattedReturnDate = DateTime.now()
         .plus({ days: 20 })
@@ -57,7 +54,7 @@ export class ArchivedReservationsComponent implements OnInit {
         datumIzdavanja: formattedActionDate,
         datumVracanja: fromattedReturnDate,
       };
-      this.httpClient.post(url, data, { headers }).subscribe({
+      this.httpClient.post(url, data).subscribe({
         next: () => {
           this.fetchData();
         },

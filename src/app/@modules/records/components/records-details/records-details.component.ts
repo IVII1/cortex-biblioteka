@@ -56,4 +56,13 @@ export class RecordsDetailsComponent implements OnInit {
       },
     });
   }
+  openMenuId: number | null = null;
+
+  toggleMenu(recordId: number) {
+    if (this.openMenuId === recordId) {
+      this.openMenuId = null;
+    } else {
+      this.openMenuId = recordId;
+    }
+  }
 }

@@ -83,9 +83,9 @@ export class StudentEditAddComponent implements OnInit {
     return this.form.get('username') as FormControl;
   }
   get password(): FormControl {
-    return this.form.get('passowrd') as FormControl;
+    return this.form.get('password') as FormControl;
   }
   get password_confirmation(): FormControl {
-    return this.form.get('passowrd_confirmation') as FormControl;
+    return this.form.get('password_confirmation') as FormControl;
   }
 }

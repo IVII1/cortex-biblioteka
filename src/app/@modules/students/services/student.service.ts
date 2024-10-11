@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { Student } from '../models/student.model';
@@ -14,36 +14,31 @@ export class StudentService {
 
   delete(id: number) {
     const url = `${environment.apiUsersUrl}${id}`;
-    const headers = new HttpHeaders().set('Authorization', environment.token);
-    this.httpClient.delete<{ data: Student[] }>(url, { headers }).subscribe({});
+
+    return this.httpClient.delete<{ data: Student[] }>(url);
   }
 
   get(id: string): Observable<Student> {
-    const headers = new HttpHeaders().set(`Authorization`, environment.token);
-
     return this.httpClient
       .get<{
         data: Student;
-      }>(`${environment.apiUsersUrl}/${id}`, { headers })
+      }>(`${environment.apiUsersUrl}/${id}`)
       .pipe(map((response) => response.data));
   }
   save(data: any, id?: number): Observable<Student> {
     if (id) {
       const url = `${environment.apiUsersUrl}/${id}`;
-      const headers = new HttpHeaders().set('Authorization', environment.token);
-      return this.httpClient.put<Student>(url, data, { headers });
+
+      return this.httpClient.put<Student>(url, data);
     } else {
       const url = `${environment.apiUsersStore}`;
-      const headers = new HttpHeaders().set('Authorization', environment.token);
-      return this.httpClient.post<Student>(url, data, { headers });
+
+      return this.httpClient.post<Student>(url, data);
     }
   }
   all(): Observable<{ data: Student[] }> {
     const url = `${environment.apiUsersUrl}`;
-    const headers = new HttpHeaders().set(
-      'Authorization',
-      `${environment.token}`,
-    );
-    return this.httpClient.get<{ data: Student[] }>(url, { headers });
+
+    return this.httpClient.get<{ data: Student[] }>(url);
   }
 }

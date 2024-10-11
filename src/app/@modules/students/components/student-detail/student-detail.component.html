@@ -4,7 +4,7 @@
     <div class="flex flex-row justify-between border-b-[1px] border-[#e4dfdf]">
       <div class="pl-[30px] py-[10px] flex flex-col">
         <div>
-          <h1>Pero Perovic</h1>
+          <h1>{{ student.name }} {{ student.surname }}</h1>
         </div>
         <div>
           <nav class="w-full rounded">
@@ -14,7 +14,7 @@
                   routerLink="/students"
                   class="text-[#2196f3] hover:text-blue-600"
                 >
-                  All Students
+                  Svi Studenti
                 </a>
               </li>
               <li>
@@ -32,22 +32,26 @@
       <div class="pt-[24px] pr-[30px]">
         <a href="#" class="inline hover:text-blue-600 show-modal">
           <i class="fas fa-redo-alt mr-[3px]"></i>
-          Reset Password
+          Resetuj Šifru
         </a>
         <a
           [routerLink]="['/students/edit', student.id]"
           class="hover:text-blue-600 inline ml-[20px] pr-[10px]"
         >
           <i class="fas fa-edit mr-[3px]"></i>
-          Edit
+          Izmijeni Učenika
         </a>
         <p
           class="inline cursor-pointer text-[25px] py-[10px] pl-[30px] border-l-[1px] border-gray-300 dotsStudentProfile hover:text-[#606FC7]"
+          (click)="toggleMenu(student.id)"
         >
           <i class="fas fa-ellipsis-v"></i>
         </p>
         <div
-          class="z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-student-profile"
+          class="z-10 transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-student-profile"
+          [ngClass]="{
+            hidden: openMenuId !== student.id,
+          }"
         >
           <div
             class="absolute right-0 w-56 mt-[10px] origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
@@ -56,29 +60,22 @@
             role="menu"
           >
             <div class="py-1">
-              <a
-                href="#"
+              <button
+                (click)="deleteStudent(student.id)"
                 tabindex="0"
                 class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                 role="menuitem"
               >
                 <i class="fa fa-trash mr-[5px] ml-[5px] py-1"></i>
-                <span class="px-4 py-0">Delete Student</span>
-              </a>
+                <span class="px-4 py-0">Izbriši Učenika</span>
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="border-b-[1px] py-4 text-gray-500 border-[#e4dfdf] pl-[30px]">
-    <a href="ucenikProfile.php" class="inline active-book-nav">
-      Essential Details
-    </a>
-    <a href="ucenikIzdate.php" class="inline ml-[70px] hover:text-blue-800">
-      Issued
-    </a>
-  </div>
+
   <div class="height-ucenikProfile pb-[30px] scroll">
     <!-- Space for content -->
     <div class="pl-[30px] section- mt-[20px]">

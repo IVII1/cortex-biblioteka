@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { Librarian } from '../models/librarian.model';
@@ -13,39 +13,28 @@ export class LibrarianService {
 
   delete(id: number) {
     const url = `${environment.apiUsersUrl}${id}`;
-    const headers = new HttpHeaders().set('Authorization', environment.token);
-    this.httpClient
-      .delete<{ data: Librarian[] }>(url, { headers })
-      .subscribe({});
+
+    this.httpClient.delete<{ data: Librarian[] }>(url).subscribe({});
   }
   get(id: string): Observable<Librarian> {
-    const headers = new HttpHeaders().set(`Authorization`, environment.token);
-
     return this.httpClient
       .get<{
         data: Librarian;
-      }>(`${environment.apiUsersUrl}/${id}`, { headers })
+      }>(`${environment.apiUsersUrl}/${id}`)
       .pipe(map((response) => response.data));
   }
   save(data: any, id?: number): Observable<Librarian> {
     if (id) {
       const url = `${environment.apiUsersUrl}/${id}`;
-      const headers = new HttpHeaders().set('Authorization', environment.token);
-      return this.httpClient.put<Librarian>(url, data, { headers });
+      return this.httpClient.put<Librarian>(url, data);
     } else {
       const url = `${environment.apiUsersStore}`;
-      const headers = new HttpHeaders().set('Authorization', environment.token);
-      return this.httpClient.post<Librarian>(url, data, { headers });
+      return this.httpClient.post<Librarian>(url, data, {});
     }
   }
   all() {
     const url = `${environment.apiUsersUrl}`;
-    const headers = new HttpHeaders().set(
-      'Authorization',
-      `${environment.token}`,
-    );
-    return this.httpClient.get<{ data: Librarian[] }>(url, {
-      headers,
-    });
+
+    return this.httpClient.get<{ data: Librarian[] }>(url);
   }
 }

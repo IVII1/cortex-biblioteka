@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Author } from '../models/author.model';
 import { environment } from 'src/environments/environment.development';
@@ -14,36 +14,29 @@ export class AuthorService {
 
   delete(id: number) {
     const url = `${environment.apiAuthorsUrl}${id}`;
-    const headers = new HttpHeaders().set('Authorization', environment.token);
-    this.httpClient.delete<{ data: Author[] }>(url, { headers }).subscribe({});
+
+    this.httpClient.delete<{ data: Author[] }>(url).subscribe({});
   }
   save(data: any, id?: number): Observable<Author> {
     if (id) {
       const url = `${environment.apiAuthorsUrl}/${id}`;
-      const headers = new HttpHeaders().set('Authorization', environment.token);
-      return this.httpClient.put<Author>(url, data, { headers });
+
+      return this.httpClient.put<Author>(url, data);
     } else {
       const url = `${environment.apiUsersStore}`;
-      const headers = new HttpHeaders().set('Authorization', environment.token);
-      return this.httpClient.post<Author>(url, data, { headers });
+
+      return this.httpClient.post<Author>(url, data);
     }
   }
 
   get(id: string): Observable<Author> {
-    const headers = new HttpHeaders().set(`Authorization`, environment.token);
-
     return this.httpClient
-      .get<{ data: Author }>(`${environment.apiAuthorsUrl}/${id}`, { headers })
+      .get<{ data: Author }>(`${environment.apiAuthorsUrl}/${id}`)
       .pipe(map((response) => response.data));
   }
   all() {
     const url = `${environment.apiAuthorsUrl}`;
-    const headers = new HttpHeaders().set(
-      'Authorization',
-      `${environment.token}`,
-    );
-    return this.httpClient.get<{ data: Author[] }>(url, {
-      headers,
-    });
+
+    return this.httpClient.get<{ data: Author[] }>(url);
   }
 }
