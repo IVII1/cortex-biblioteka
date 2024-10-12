@@ -31,8 +31,15 @@ export class StudentsComponent implements OnInit {
     }
   }
   deleteStudent(id: number) {
-    this.studentService.delete(id);
-    this.fetchData();
+    this.studentService.delete(id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.fetchData();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
   fetchData() {
     this.isLoading = true;

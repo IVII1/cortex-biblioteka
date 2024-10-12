@@ -47,11 +47,13 @@
         <p
           class="inline cursor-pointer text-[25px] py-[10px] pl-[30px] border-l-[1px] border-gray-300 dotsLibrarianProfile hover:text-[#606FC7]"
           id="dropdownStudent"
+          (click)="toggleMenu(librarian.id)"
         >
           <i class="fas fa-ellipsis-v"></i>
         </p>
         <div
-          class="z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-librarian-profile"
+          class="z-10 transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-librarian-profile"
+          [ngClass]="{ hidden: openMenuId !== librarian.id }"
         >
           <div
             class="absolute right-0 w-56 mt-[10px] origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
@@ -61,6 +63,7 @@
           >
             <div class="py-1">
               <a
+                (click)="deleteLibrarian(librarian.id)"
                 href="#"
                 tabindex="0"
                 class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"

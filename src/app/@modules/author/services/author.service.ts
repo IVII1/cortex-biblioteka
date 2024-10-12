@@ -13,9 +13,9 @@ export class AuthorService {
   httpClient = inject(HttpClient);
 
   delete(id: number) {
-    const url = `${environment.apiAuthorsUrl}${id}`;
+    const url = `${environment.apiAuthorsUrl}/${id}`;
 
-    this.httpClient.delete<{ data: Author[] }>(url).subscribe({});
+    return this.httpClient.delete<{ data: Author[] }>(url);
   }
   save(data: any, id?: number): Observable<Author> {
     if (id) {
@@ -23,7 +23,7 @@ export class AuthorService {
 
       return this.httpClient.put<Author>(url, data);
     } else {
-      const url = `${environment.apiUsersStore}`;
+      const url = `${environment.apiStoreAuthors}`;
 
       return this.httpClient.post<Author>(url, data);
     }

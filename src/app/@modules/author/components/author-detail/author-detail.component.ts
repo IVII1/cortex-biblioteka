@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Author } from '../../models/author.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthorService } from '../../services/author.service';
 
 @Component({
   selector: 'app-author-detail',
@@ -9,7 +10,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AuthorDetailComponent implements OnInit {
   author!: Author;
-  constructor(private route: ActivatedRoute) {}
+  authors!: Author[];
+  isLoading!: boolean;
+  constructor(
+    private route: ActivatedRoute,
+    private authorService: AuthorService,
+    private router: Router,
+  ) {}
   ngOnInit(): void {
     this.author = this.route.snapshot.data['author'];
   }
@@ -21,5 +28,22 @@ export class AuthorDetailComponent implements OnInit {
     } else {
       this.openMenuId = authorId;
     }
+  }
+  fetchData() {
+    this.isLoading = true;
+    this.authorService.all().subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.authors = res.data;
+      },
+    });
+  }
+  deleteAuthor(id: number) {
+    this.authorService.delete(id).subscribe({
+      next: () => {
+        this.fetchData();
+        this.router.navigate(['/authors']);
+      },
+    });
   }
 }

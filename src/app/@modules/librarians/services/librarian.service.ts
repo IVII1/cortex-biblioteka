@@ -12,9 +12,8 @@ export class LibrarianService {
   httpClient = inject(HttpClient);
 
   delete(id: number) {
-    const url = `${environment.apiUsersUrl}${id}`;
-
-    this.httpClient.delete<{ data: Librarian[] }>(url).subscribe({});
+    const url = `${environment.apiUsersUrl}/${id}`;
+    return this.httpClient.delete<{ data: Librarian[] }>(url);
   }
   get(id: string): Observable<Librarian> {
     return this.httpClient

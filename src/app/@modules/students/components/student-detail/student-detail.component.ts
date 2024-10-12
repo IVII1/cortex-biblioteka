@@ -30,6 +30,7 @@ export class StudentDetailComponent implements OnInit {
   deleteStudent(id: number) {
     this.studentService.delete(id).subscribe({
       next: () => this.router.navigate(['/students']),
+      error: (err) => console.log(err),
     });
   }
 }

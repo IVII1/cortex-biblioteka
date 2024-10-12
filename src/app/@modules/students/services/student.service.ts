@@ -13,8 +13,7 @@ export class StudentService {
   httpClient = inject(HttpClient);
 
   delete(id: number) {
-    const url = `${environment.apiUsersUrl}${id}`;
-
+    const url = `${environment.apiUsersUrl}/${id}`;
     return this.httpClient.delete<{ data: Student[] }>(url);
   }
 

@@ -41,7 +41,6 @@
         </p>
         <div
           class="z-10 transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-autor"
-          style="display: none"
           [ngClass]="{ hidden: openMenuId !== author.id }"
         >
           <div
@@ -61,13 +60,13 @@
                 <span class="px-4 py-0">Izmijeni autora</span>
               </a>
               <a
-                href="#"
+                (click)="deleteAuthor(author.id ?? 0)"
                 tabindex="0"
                 class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                 role="menuitem"
               >
                 <i class="fa fa-trash mr-[5px] ml-[5px] py-1"></i>
-                <span class="px-4 py-0"></span>
+                <span class="px-4 py-0">Izbriši Autora</span>
               </a>
             </div>
           </div>

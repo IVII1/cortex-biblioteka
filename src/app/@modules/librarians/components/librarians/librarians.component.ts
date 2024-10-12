@@ -32,8 +32,14 @@ export class LibrariansComponent implements OnInit {
     }
   }
   deleteLibrarian(id: number) {
-    this.librarianService.delete(id);
-    this.fetchData();
+    this.librarianService.delete(id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.fetchData();
+        this.router.navigate(['/librarians']);
+      },
+      error: (err) => console.log(err),
+    });
   }
   fetchData() {
     this.isLoading = true;
