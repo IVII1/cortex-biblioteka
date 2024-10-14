@@ -74,11 +74,11 @@ export class BookDiscardComponent implements OnInit {
   onSubmit() {
     this.bookService.writeOff(this.bookDiscardForm.value).subscribe({
       next: () => {
-        this.toastr.success('Returned Successfully!');
+        this.toastr.success('Uspjesno Vraćeno');
         this.bookDiscarded();
       },
       error: () => {
-        this.toastr.error('Action Unsuccessful');
+        this.toastr.error('Neuspješno');
       },
     });
   }

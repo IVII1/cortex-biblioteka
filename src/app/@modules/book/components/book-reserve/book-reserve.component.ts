@@ -60,10 +60,10 @@ export class BookReserveComponent implements OnInit {
       next: (response) => {
         this.reservation = response;
         this.router.navigate(['/books']);
-        this.toastr.success('Reservation Made Sucessfully');
+        this.toastr.success('Rezervacija Uspješna');
       },
       error: () => {
-        this.toastr.error('Reservation Failed');
+        this.toastr.error('Rezervacija Neuspješna');
       },
     });
   }

@@ -7,11 +7,12 @@ import {
   Validators,
   FormControl,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Student } from 'src/app/@modules/students/models/student.model';
 import { StudentService } from 'src/app/@modules/students/services/student.service';
 import { Book } from '../../models/book.model';
 import { BookService } from '../../services/book.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-book-borrow',
@@ -31,6 +32,8 @@ export class BookBorrowComponent {
     private fb: FormBuilder,
     private datePipe: DatePipe,
     private bookService: BookService,
+    private toastr: ToastrService,
+    private router: Router,
   ) {}
   ngOnInit(): void {
     this.book = this.route.snapshot.data['book'];
@@ -61,7 +64,11 @@ export class BookBorrowComponent {
   }
   onSubmit() {
     this.bookService.borrow(this.book.id, this.borrowForm.value).subscribe({
-      next: (response) => (this.borrowEvent = response),
+      next: (response) => {
+        this.borrowEvent = response;
+        this.toastr.success('Izdavanje Uspješno');
+        this.router.navigate(['/books']);
+      },
     });
   }
 

@@ -67,11 +67,11 @@ export class BookReturnComponent {
   onSubmit() {
     this.bookService.return(this.bookReturnForm.value).subscribe({
       next: () => {
-        this.toastr.success('Returned Successfully!');
+        this.toastr.success('Uspješno Vraćeno');
         this.bookReturned();
       },
       error: () => {
-        this.toastr.error('Action Unsuccessful');
+        this.toastr.error('Akcija Neuspješna');
       },
     });
   }
